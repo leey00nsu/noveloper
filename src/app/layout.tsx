@@ -1,3 +1,5 @@
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
@@ -21,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={pretendard.className}>{children}</body>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body className={pretendard.className}>
+        <MantineProvider>{children}</MantineProvider>
+      </body>
     </html>
   );
 }
