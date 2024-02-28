@@ -1,0 +1,28 @@
+{
+  "singleQuote": true,
+  "useTabs": false,
+  "trailingComma": "all",
+  "semi": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@/src/app/(.*)$",
+    "^@/src/components/(.*)$",
+    "^@/src/actions/(.*)$",
+    "^@/src/libs/(.*)$",
+    "^@/src/plugins/(.*)$",
+    "^@/src/hooks/(.*)$",
+    "^@/src/store/(.*)$",
+    "^@/src/types/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}
