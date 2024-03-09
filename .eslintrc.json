@@ -9,6 +9,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/jsx-props-no-spreading": "off", // for Mantine
     "react/function-component-definition": [
       2,
       { "namedComponents": ["arrow-function", "function-declaration"] }

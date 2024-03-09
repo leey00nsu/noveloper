@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import './globals.css';
+import Providers from './providers';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
+  headings: {
+    fontFamily: pretendard.style.fontFamily,
+  },
   fontSizes: {
     xs: '0.75rem',
     sm: '0.875rem',
@@ -46,12 +50,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <ColorSchemeScript />
       </head>
       <body className={pretendard.className}>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <Providers>{children}</Providers>
+        </MantineProvider>
       </body>
     </html>
   );

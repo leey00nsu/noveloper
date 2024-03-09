@@ -14,7 +14,13 @@ const LandingHeader = () => {
             <Link href="/pricing">요금제</Link>
           </Group>
           <Group>
-            <Button radius="xl" variant="outline" color="gray.9">
+            <Button
+              component={Link}
+              href="/auth/signin"
+              radius="xl"
+              variant="outline"
+              color="gray.9"
+            >
               로그인
             </Button>
           </Group>

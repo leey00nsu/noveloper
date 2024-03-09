@@ -1,5 +1,6 @@
-import { Box, Button, Center, Group, Stack, Text } from '@mantine/core';
+import { Box, Button, Center, Group, Stack, Text, Title } from '@mantine/core';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -13,12 +14,12 @@ const Hero = () => {
       <Center className="h-full w-full">
         <Stack hiddenFrom="xl" gap={30}>
           <Stack>
-            <Text ta="center" className="text-5xl" fw={700}>
+            <Title order={2} ta="center" className="text-5xl">
               AI 기반 소설 창작 플랫폼
-            </Text>
-            <Text ta="center" className="text-5xl" fw={700}>
+            </Title>
+            <Title order={2} ta="center" className="text-5xl">
               Noveloper
-            </Text>
+            </Title>
           </Stack>
 
           <Stack>
@@ -29,7 +30,14 @@ const Hero = () => {
           </Stack>
 
           <Group justify="center">
-            <Button radius="xl" variant="outline" color="gray.9" size="lg">
+            <Button
+              component={Link}
+              href="/auth/signin"
+              radius="xl"
+              variant="outline"
+              color="gray.9"
+              size="lg"
+            >
               로그인
             </Button>
           </Group>
@@ -43,12 +51,12 @@ const Hero = () => {
         >
           <Stack gap={30}>
             <Stack>
-              <Text className="text-5xl" fw={700}>
+              <Title order={2} className="text-5xl">
                 AI 기반 소설 창작 플랫폼
-              </Text>
-              <Text className="text-5xl" fw={700}>
+              </Title>
+              <Title order={2} className="text-5xl">
                 Noveloper
-              </Text>
+              </Title>
             </Stack>
 
             <Stack>
@@ -59,7 +67,14 @@ const Hero = () => {
             </Stack>
 
             <Group>
-              <Button radius="xl" variant="outline" color="gray.9" size="lg">
+              <Button
+                component={Link}
+                href="/auth/signin"
+                radius="xl"
+                variant="outline"
+                color="gray.9"
+                size="lg"
+              >
                 로그인
               </Button>
             </Group>
