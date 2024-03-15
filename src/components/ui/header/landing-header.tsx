@@ -6,9 +6,9 @@ import Logo from '../logo/logo';
 const LandingHeader = () => {
   return (
     <header>
-      <Container h={60} size="lg">
+      <Container className="h-[60px]" size="lg">
         <Group justify="space-between" align="center" className="h-full">
-          <Logo />
+          <Logo color="black" />
           <Group visibleFrom="xs">
             <Link href="/about">서비스 소개</Link>
             <Link href="/pricing">요금제</Link>

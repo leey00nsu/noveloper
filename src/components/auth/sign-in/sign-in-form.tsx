@@ -16,9 +16,9 @@ import { FaGithub } from 'react-icons/fa';
 
 const SignInForm = () => {
   return (
-    <Center className="h-[calc(100vh-60px)] ">
-      <Stack p={30}>
-        <Title order={2} ta="center" mb={30}>
+    <Center className="h-[calc(100vh-60px)">
+      <Stack className="p-8">
+        <Title order={2} className="mb-8 text-center">
           Welcome back to Noveloper!
         </Title>
 
@@ -30,34 +30,32 @@ const SignInForm = () => {
         <PasswordInput
           label="비밀번호"
           placeholder="비밀번호를 입력해주세요"
-          mt="md"
           size="md"
+          className="mt-md"
         />
         <Button
           radius="xl"
           variant="outline"
           color="gray.9"
           fullWidth
-          mt="md"
           size="lg"
+          className="mt-md"
         >
           로그인
         </Button>
 
-        <Text ta="center" mt="md">
+        <Text className="mt-md text-center">
           계정이 없으신가요?{' '}
           <Text
             component={Link}
             href="/auth/signup"
-            ta="center"
-            mt="md"
-            fw={700}
+            className="mt-md text-center font-bold"
           >
             가입하기
           </Text>
         </Text>
 
-        <Divider my="xs" label="또는" labelPosition="center" />
+        <Divider label="또는" labelPosition="center" className="my-xs" />
 
         <Button
           onClick={() => signIn('github')}

@@ -12,18 +12,18 @@ const Hero = () => {
       className="h-[800px] bg-cover bg-center bg-no-repeat p-20"
     >
       <Center className="h-full w-full">
-        <Stack hiddenFrom="xl" gap={30}>
+        <Stack hiddenFrom="xl" className="gap-8">
           <Stack>
-            <Title order={2} ta="center" className="text-5xl">
+            <Title order={2} className="text-center text-5xl">
               AI 기반 소설 창작 플랫폼
             </Title>
-            <Title order={2} ta="center" className="text-5xl">
+            <Title order={2} className="text-center text-5xl">
               Noveloper
             </Title>
           </Stack>
 
           <Stack>
-            <Text size="xl" c="gray.9" fw={500}>
+            <Text className="text-xl font-medium text-gray-900">
               AI와 함께하는 소설 쓰기, 당신의 이야기를 더욱 특별하게
               만들어보세요.
             </Text>
@@ -60,7 +60,7 @@ const Hero = () => {
             </Stack>
 
             <Stack>
-              <Text size="xl" c="gray.9" fw={500}>
+              <Text className="text-xl font-medium text-gray-900">
                 AI와 함께하는 소설 쓰기, 당신의 이야기를 더욱 특별하게
                 만들어보세요.
               </Text>
