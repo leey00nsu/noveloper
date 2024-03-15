@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: ['selector', '[data-mantine-color-scheme="dark"]'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,8 +9,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        xs: '0.75rem',
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+      },
       // open color palette
       colors: {
+        foreground: 'var(--mantine-color-text)',
+        background: 'var(--mantine-color-body)',
         gray: {
           '50': '#f8f9fa',
           '100': '#f1f3f5',

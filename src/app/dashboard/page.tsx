@@ -1,15 +1,10 @@
-'use client';
-
-import AppContainer from '@/components/ui/container/app-container';
-import { Button } from '@mantine/core';
-import { signOut, useSession } from 'next-auth/react';
+import Sidebar from '@/components/dashboard/sidebar/sidebar';
+import { Group } from '@mantine/core';
 
 export default function Page() {
-  const { data: session } = useSession();
   return (
-    <AppContainer>
-      <div>logined as {session?.user?.email}</div>
-      <Button onClick={() => signOut()}>Log out</Button>
-    </AppContainer>
+    <Group className="h-svh">
+      <Sidebar />
+    </Group>
   );
 }
