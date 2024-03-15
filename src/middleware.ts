@@ -25,5 +25,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [...WITH_AUTH_LIST, ...WITHOUT_AUTH_LIST],
+  matcher: '/:path*',
 };
