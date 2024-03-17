@@ -3,19 +3,20 @@
 import Home from '@/components/dashboard/content/home/home';
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
-import tw from '@/libs/tw';
 import { useViewportSize } from '@mantine/hooks';
 import { useState } from 'react';
 import { Panel, PanelGroup } from 'react-resizable-panels';
 
-interface DashboardGroupProps {
-  defaultLayout: number[];
-}
+import Loader from '../ui/loader/loader';
+import Toolbar from './toolbar/toolbar';
 
 const MIN_SIDEBAR_SIZE = 260;
+const MIN_TOOLBAR_SIZE = 260;
 
-const DashboardGroup = ({ defaultLayout }: DashboardGroupProps) => {
+const DashboardGroup = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(false);
+
   const { width: viewPortWidth } = useViewportSize();
 
   const onLayout = (sizes: number[]) => {
@@ -24,9 +25,18 @@ const DashboardGroup = ({ defaultLayout }: DashboardGroupProps) => {
 
   // Sidebar의 최소 사이즈에 대한 퍼센트를 설정합니다.
   const minSidebarSize = Math.min(
-    defaultLayout[0],
-    (MIN_SIDEBAR_SIZE / viewPortWidth) * 100,
+    Number(((MIN_SIDEBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
   );
+
+  const minToolbarSize = Math.min(
+    Number(((MIN_TOOLBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
+  );
+
+  const minMainSize = 100 - minSidebarSize - minToolbarSize;
+
+  if (minMainSize < 0) {
+    return <Loader fullScreen />;
+  }
 
   return (
     <PanelGroup
@@ -43,26 +53,45 @@ const DashboardGroup = ({ defaultLayout }: DashboardGroupProps) => {
             collapsible
             collapsedSize={1}
             minSize={minSidebarSize}
-            defaultSize={defaultLayout[0]}
-            maxSize={30}
+            defaultSize={minSidebarSize}
+            maxSize={25}
             onCollapse={() => {
               setIsSidebarCollapsed(true);
             }}
             onExpand={() => {
               setIsSidebarCollapsed(false);
             }}
-            className={tw(
-              isSidebarCollapsed && 'transition-all duration-300 ease-in-out',
-            )}
           >
             <Sidebar isCollapsed={isSidebarCollapsed} />
           </Panel>
           <PanelResizeHandle />
         </>
       )}
-      <Panel id="main" order={2} defaultSize={defaultLayout[1]}>
+      <Panel id="main" order={2} defaultSize={minMainSize}>
         <Home />
       </Panel>
+      {viewPortWidth > 1024 && (
+        <>
+          <PanelResizeHandle />
+          <Panel
+            id="toolbar"
+            order={3}
+            collapsible
+            collapsedSize={1}
+            minSize={minToolbarSize}
+            defaultSize={minToolbarSize}
+            maxSize={25}
+            onCollapse={() => {
+              setIsToolbarCollapsed(true);
+            }}
+            onExpand={() => {
+              setIsToolbarCollapsed(false);
+            }}
+          >
+            <Toolbar isCollapsed={isToolbarCollapsed} />
+          </Panel>
+        </>
+      )}
     </PanelGroup>
   );
 };
