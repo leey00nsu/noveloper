@@ -4,7 +4,11 @@ import { AppShell } from '@mantine/core';
 
 import LandingHeader from '../header/landing-header';
 
-const AppContainer = ({ children }: { children: React.ReactNode }) => {
+interface AppContainerProps {
+  children: React.ReactNode;
+}
+
+const AppContainer = ({ children }: AppContainerProps) => {
   return (
     <AppShell
       header={{

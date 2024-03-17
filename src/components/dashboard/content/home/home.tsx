@@ -9,7 +9,7 @@ const Home = () => {
   ];
 
   return (
-    <Box className="h-full w-[800px]">
+    <Box className="h-full w-full">
       <Center className="h-full w-full">
         <Stack>
           <Title order={2} className="mt-sm text-center">
