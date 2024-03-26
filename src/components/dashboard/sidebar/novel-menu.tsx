@@ -1,6 +1,7 @@
-import { Accordion, Button, Stack } from '@mantine/core';
+import { Accordion, Button, Stack, Text } from '@mantine/core';
 
 const NovelMenu = () => {
+  const MOCK_NOVEL_TITLE = '소설 제목';
   const MOCK_ACCORDIANS = [
     { label: '인물', items: ['인물 관리', '인물 관계도'] },
     { label: '회차', items: ['회차 관리', '타임라인'] },
@@ -9,6 +10,9 @@ const NovelMenu = () => {
 
   return (
     <Accordion multiple defaultValue={[]} className="p-sm">
+      <Text className="px-md text-sm font-bold text-gray-600">
+        {MOCK_NOVEL_TITLE}
+      </Text>
       {MOCK_ACCORDIANS.map((accordion) => (
         <Accordion.Item
           key={accordion.label}
