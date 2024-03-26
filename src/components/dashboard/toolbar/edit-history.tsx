@@ -16,7 +16,7 @@ const EditHistory = () => {
   ];
 
   return (
-    <Stack className="p-sm">
+    <Stack className="p-sm ">
       <Text className="px-md text-sm font-bold text-gray-600">수정 목록</Text>
       {MOCK_HISTORY.map((history) => (
         <Button
@@ -31,7 +31,7 @@ const EditHistory = () => {
             selectedHistory === history.label && 'bg-gray-800',
           )}
         >
-          <Text className="max-w-[150px]" truncate="end">
+          <Text truncate className="text-start">
             {history.label}
           </Text>
         </Button>

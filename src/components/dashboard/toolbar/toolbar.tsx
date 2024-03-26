@@ -19,6 +19,7 @@ const Toolbar = ({ isCollapsed }: ToolbarProps) => {
         classNames={{
           scrollbar: '!bg-gray-900',
           thumb: '!bg-white/40',
+          viewport: '[&>div]:!block', // https://github.com/mantinedev/mantine/issues/4941
         }}
       >
         <EditHistory />

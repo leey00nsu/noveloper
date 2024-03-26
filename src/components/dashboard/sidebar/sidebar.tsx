@@ -25,9 +25,11 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
 
       <ScrollArea
         className="h-full"
+        scrollbars="y"
         classNames={{
           scrollbar: '!bg-gray-900',
           thumb: '!bg-white/40',
+          viewport: '[&>div]:!block', // https://github.com/mantinedev/mantine/issues/4941
         }}
       >
         <SystemMenu />
