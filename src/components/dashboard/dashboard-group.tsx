@@ -24,17 +24,18 @@ const DashboardGroup = () => {
   };
 
   // Sidebar의 최소 사이즈에 대한 퍼센트를 설정합니다.
-  const minSidebarSize = Math.min(
-    Number(((MIN_SIDEBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
+  const minSidebarSize = Number(
+    ((MIN_SIDEBAR_SIZE / viewPortWidth) * 100).toFixed(2),
   );
 
-  const minToolbarSize = Math.min(
-    Number(((MIN_TOOLBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
+  const minToolbarSize = Number(
+    ((MIN_TOOLBAR_SIZE / viewPortWidth) * 100).toFixed(2),
   );
 
-  const minMainSize = 100 - minSidebarSize - minToolbarSize;
+  const minMainSize =
+    viewPortWidth > 1024 ? 100 - minSidebarSize - minToolbarSize : 100;
 
-  if (minMainSize < 0) {
+  if (!viewPortWidth) {
     return <Loader fullScreen />;
   }
 
