@@ -6,6 +6,7 @@ import { Box, Center, Divider, ScrollArea, Stack } from '@mantine/core';
 import NovelMenu from './novel-menu';
 import SystemMenu from './system-menu';
 import ThemeSwitch from './theme-switch';
+import TokenStatus from './token-status';
 import UserInfo from './user-info';
 
 interface SidebarProps {
@@ -21,6 +22,7 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
         <Logo color="white" />
       </Center>
 
+      <TokenStatus />
       <ThemeSwitch />
 
       <ScrollArea
