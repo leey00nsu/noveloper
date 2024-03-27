@@ -1,6 +1,5 @@
 'use client';
 
-import Home from '@/components/dashboard/content/home/home';
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
 import { useViewportSize } from '@mantine/hooks';
@@ -13,7 +12,7 @@ import Toolbar from './toolbar/toolbar';
 const MIN_SIDEBAR_SIZE = 260;
 const MIN_TOOLBAR_SIZE = 260;
 
-const DashboardGroup = () => {
+const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(false);
 
@@ -69,7 +68,7 @@ const DashboardGroup = () => {
         </>
       )}
       <Panel id="main" order={2} defaultSize={minMainSize}>
-        <Home />
+        {children}
       </Panel>
       {viewPortWidth > 1024 && (
         <>

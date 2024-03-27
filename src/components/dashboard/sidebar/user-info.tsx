@@ -1,8 +1,9 @@
 import { Avatar, Box, Group, Stack, Text } from '@mantine/core';
+import Link from 'next/link';
 
 const UserInfo = () => {
   return (
-    <Box className="p-sm">
+    <Box href="/dashboard/profile" component={Link} className="p-sm">
       <Group
         grow
         preventGrowOverflow={false}

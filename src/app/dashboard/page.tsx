@@ -1,10 +1,5 @@
-import DashboardGroup from '@/components/dashboard/dashboard-group';
-import { Box } from '@mantine/core';
+import Home from '@/components/dashboard/content/home/home';
 
 export default function Page() {
-  return (
-    <Box className="h-dvh">
-      <DashboardGroup />
-    </Box>
-  );
+  return <Home />;
 }

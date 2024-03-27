@@ -1,4 +1,5 @@
 import { Box, Button, Center, Stack, Text, Title } from '@mantine/core';
+import Link from 'next/link';
 import { BsFolderPlus, BsLightbulb } from 'react-icons/bs';
 import { MdArrowOutward } from 'react-icons/md';
 
@@ -23,6 +24,8 @@ const Home = () => {
           <Stack className="gap-sm">
             {MOCK_CONTENTS.map((content) => (
               <Button
+                href="/dashboard/guide"
+                component={Link}
                 key={content.label}
                 size="lg"
                 variant="light"
