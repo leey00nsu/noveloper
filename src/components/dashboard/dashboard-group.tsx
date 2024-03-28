@@ -45,7 +45,7 @@ const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
       className="h-full"
       onLayout={onLayout}
     >
-      {viewPortWidth > 1024 && (
+      {viewPortWidth >= 1024 && (
         <>
           <Panel
             id="sidebar"
@@ -67,10 +67,12 @@ const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
           <PanelResizeHandle />
         </>
       )}
+
       <Panel id="main" order={2} defaultSize={minMainSize}>
         {children}
       </Panel>
-      {viewPortWidth > 1024 && (
+
+      {viewPortWidth >= 1024 && (
         <>
           <PanelResizeHandle />
           <Panel

@@ -1,5 +1,4 @@
-import DashboardGroup from '@/components/dashboard/dashboard-group';
-import { Box } from '@mantine/core';
+import DashboardContainer from '@/components/ui/container/dashboard-container';
 import React from 'react';
 
 const Layout = ({
@@ -11,9 +10,7 @@ const Layout = ({
 }) => {
   return (
     <>
-      <Box className="h-dvh">
-        <DashboardGroup>{children}</DashboardGroup>
-      </Box>
+      <DashboardContainer>{children}</DashboardContainer>
       {modal}
     </>
   );
