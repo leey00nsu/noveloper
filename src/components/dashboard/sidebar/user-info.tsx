@@ -5,13 +5,16 @@ const UserInfo = () => {
   return (
     <Box href="/dashboard/profile" component={Link} className="p-sm">
       <Group
-        grow
-        preventGrowOverflow={false}
         wrap="nowrap"
         className="rounded bg-gray-800 p-sm"
         justify="space-between"
       >
-        <Avatar src={null} color="white">
+        <Avatar
+          src={null}
+          classNames={{
+            placeholder: 'bg-gray-700 text-gray-600',
+          }}
+        >
           TN
         </Avatar>
         <Stack className="gap-0 overflow-hidden">
