@@ -1,7 +1,8 @@
 'use client';
 
 import Logo from '@/components/ui/logo/logo';
-import { Box, Center, Divider, ScrollArea, Stack } from '@mantine/core';
+import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
+import { Box, Center, Divider, Stack } from '@mantine/core';
 
 import NovelMenu from './novel-menu';
 import SystemMenu from './system-menu';
@@ -25,19 +26,11 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
       <TokenStatus />
       <ThemeSwitch />
 
-      <ScrollArea
-        className="h-full"
-        scrollbars="y"
-        classNames={{
-          scrollbar: '!bg-gray-900',
-          thumb: '!bg-white/40',
-          viewport: '[&>div]:!block', // https://github.com/mantinedev/mantine/issues/4941
-        }}
-      >
+      <ThemeScrollArea className="h-full" scrollbars="y">
         <SystemMenu />
-        <Divider color="gray.7" className="my-sm" />
+        <Divider className="my-sm border-gray-700" />
         <NovelMenu />
-      </ScrollArea>
+      </ThemeScrollArea>
 
       <UserInfo />
     </Stack>

@@ -1,6 +1,7 @@
 'use client';
 
-import { Box, ScrollArea, Stack } from '@mantine/core';
+import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
+import { Box, Stack } from '@mantine/core';
 
 import EditHistory from './edit-history';
 
@@ -13,17 +14,9 @@ const Toolbar = ({ isCollapsed }: ToolbarProps) => {
 
   return (
     <Stack className="h-full w-full bg-gray-900">
-      <ScrollArea
-        scrollbars="y"
-        className="h-full"
-        classNames={{
-          scrollbar: '!bg-gray-900',
-          thumb: '!bg-white/40',
-          viewport: '[&>div]:!block', // https://github.com/mantinedev/mantine/issues/4941
-        }}
-      >
+      <ThemeScrollArea className="h-full" scrollbars="y">
         <EditHistory />
-      </ScrollArea>
+      </ThemeScrollArea>
     </Stack>
   );
 };

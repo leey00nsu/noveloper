@@ -3,11 +3,12 @@
 import DashboardGroup from '@/components/dashboard/dashboard-group';
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import Toolbar from '@/components/dashboard/toolbar/toolbar';
-import { AppShell, Drawer } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 import { useState } from 'react';
 
 import DashboardHeader from '../header/dashboard-header';
-import ScrollArea from '../scroll-area/scroll-area';
+import ThemeDrawer from '../mantine-ui/theme-drawer';
+import ScrollArea from '../mantine-ui/theme-scroll-area';
 
 interface DashboardContainerProps {
   children: React.ReactNode;
@@ -35,32 +36,25 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
         <DashboardHeader openSidebar={openSidebar} openToolbar={openToolbar} />
       </AppShell.Header>
 
-      <Drawer
+      <ThemeDrawer
         hiddenFrom="lg"
+        position="left"
         opened={isSidebarCollapsed}
         onClose={closeSidebar}
-        classNames={{
-          header: '!bg-gray-900',
-          body: 'p-0 h-full',
-        }}
         scrollAreaComponent={ScrollArea}
       >
         <Sidebar />
-      </Drawer>
+      </ThemeDrawer>
 
-      <Drawer
+      <ThemeDrawer
         hiddenFrom="lg"
         position="right"
         opened={isToolbarCollapsed}
         onClose={closeToolbar}
-        classNames={{
-          header: '!bg-gray-900',
-          body: 'p-0 h-full',
-        }}
         scrollAreaComponent={ScrollArea}
       >
         <Toolbar />
-      </Drawer>
+      </ThemeDrawer>
 
       <AppShell.Main className="h-dvh">
         <DashboardGroup>{children}</DashboardGroup>
