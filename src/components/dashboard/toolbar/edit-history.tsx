@@ -31,7 +31,7 @@ const EditHistory = () => {
             selectedHistory === history.label && 'bg-gray-800',
           )}
         >
-          <Text truncate className="text-start">
+          <Text component="span" truncate className="text-start">
             {history.label}
           </Text>
         </Button>
