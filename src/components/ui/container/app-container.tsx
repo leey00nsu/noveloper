@@ -19,7 +19,7 @@ const AppContainer = ({ children }: AppContainerProps) => {
         <LandingHeader />
       </AppShell.Header>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main className="h-dvh">{children}</AppShell.Main>
     </AppShell>
   );
 };

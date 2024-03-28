@@ -16,7 +16,7 @@ import { FaGithub } from 'react-icons/fa';
 
 const SignInForm = () => {
   return (
-    <Center className="h-[calc(100vh-60px)">
+    <Center className="h-full">
       <Stack className="p-8">
         <Title order={2} className="mb-8 text-center">
           Welcome back to Noveloper!
