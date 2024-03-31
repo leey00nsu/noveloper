@@ -13,25 +13,17 @@ const DashboardHeader = ({
   openToolbar,
 }: DashboardHeaderProps) => {
   return (
-    <header>
-      <Container className="h-[60px]" size="lg">
-        <Group justify="space-between" align="center" className="h-full">
-          <ActionIcon
-            onClick={openSidebar}
-            className="bg-gray-900 hover:bg-gray-800"
-          >
-            <IoSettingsOutline />
-          </ActionIcon>
-          <Logo color="black" />
-          <ActionIcon
-            onClick={openToolbar}
-            className="bg-gray-900 hover:bg-gray-800"
-          >
-            <IoMenuOutline />
-          </ActionIcon>
-        </Group>
-      </Container>
-    </header>
+    <Container className="h-[60px]" size="lg">
+      <Group justify="space-between" align="center" className="h-full">
+        <ActionIcon onClick={openSidebar}>
+          <IoSettingsOutline />
+        </ActionIcon>
+        <Logo color="black" />
+        <ActionIcon onClick={openToolbar}>
+          <IoMenuOutline />
+        </ActionIcon>
+      </Group>
+    </Container>
   );
 };
 
