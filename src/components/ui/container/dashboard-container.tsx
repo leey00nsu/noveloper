@@ -15,13 +15,13 @@ interface DashboardContainerProps {
 }
 
 const DashboardContainer = ({ children }: DashboardContainerProps) => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(true);
 
-  const openSidebar = () => setIsSidebarCollapsed(true);
-  const closeSidebar = () => setIsSidebarCollapsed(false);
-  const openToolbar = () => setIsToolbarCollapsed(true);
-  const closeToolbar = () => setIsToolbarCollapsed(false);
+  const openSidebar = () => setIsSidebarCollapsed(false);
+  const closeSidebar = () => setIsSidebarCollapsed(true);
+  const openToolbar = () => setIsToolbarCollapsed(false);
+  const closeToolbar = () => setIsToolbarCollapsed(true);
 
   return (
     <AppShell
@@ -39,7 +39,7 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
       <ThemeDrawer
         hiddenFrom="lg"
         position="left"
-        opened={isSidebarCollapsed}
+        opened={!isSidebarCollapsed}
         onClose={closeSidebar}
         scrollAreaComponent={ScrollArea}
       >
@@ -49,7 +49,7 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
       <ThemeDrawer
         hiddenFrom="lg"
         position="right"
-        opened={isToolbarCollapsed}
+        opened={!isToolbarCollapsed}
         onClose={closeToolbar}
         scrollAreaComponent={ScrollArea}
       >
