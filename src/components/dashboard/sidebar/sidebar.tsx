@@ -26,7 +26,7 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
       <TokenStatus />
       <ThemeSwitch />
 
-      <ThemeScrollArea className="h-full" scrollbars="y">
+      <ThemeScrollArea ignoreTheme className="h-full" scrollbars="y">
         <SystemMenu />
         <Divider className="my-sm border-gray-700" />
         <NovelMenu />

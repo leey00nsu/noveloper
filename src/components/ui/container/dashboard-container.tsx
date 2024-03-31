@@ -8,7 +8,6 @@ import { useState } from 'react';
 
 import DashboardHeader from '../header/dashboard-header';
 import ThemeDrawer from '../mantine-ui/theme-drawer';
-import ScrollArea from '../mantine-ui/theme-scroll-area';
 
 interface DashboardContainerProps {
   children: React.ReactNode;
@@ -41,7 +40,6 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
         position="left"
         opened={!isSidebarCollapsed}
         onClose={closeSidebar}
-        scrollAreaComponent={ScrollArea}
       >
         <Sidebar />
       </ThemeDrawer>
@@ -51,7 +49,6 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
         position="right"
         opened={!isToolbarCollapsed}
         onClose={closeToolbar}
-        scrollAreaComponent={ScrollArea}
       >
         <Toolbar />
       </ThemeDrawer>

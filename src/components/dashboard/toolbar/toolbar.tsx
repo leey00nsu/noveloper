@@ -14,7 +14,7 @@ const Toolbar = ({ isCollapsed }: ToolbarProps) => {
 
   return (
     <Stack className="h-full w-full bg-gray-900">
-      <ThemeScrollArea className="h-full" scrollbars="y">
+      <ThemeScrollArea ignoreTheme className="h-full" scrollbars="y">
         <EditHistory />
       </ThemeScrollArea>
     </Stack>

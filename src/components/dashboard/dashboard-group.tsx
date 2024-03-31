@@ -63,13 +63,13 @@ const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
       >
         <Sidebar isCollapsed={isSidebarCollapsed} />
       </Panel>
-      <PanelResizeHandle />
+      <PanelResizeHandle classNames="hidden lg:block" />
 
       <Panel id="main" order={2} defaultSize={minMainSize}>
         {children}
       </Panel>
 
-      <PanelResizeHandle />
+      <PanelResizeHandle classNames="hidden lg:block" />
       <Panel
         id="toolbar"
         order={3}
