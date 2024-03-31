@@ -45,9 +45,9 @@ const ProfileModal = () => {
             defaultValue="프로필"
             orientation="vertical"
             classNames={{
-              root: 'gap-md flex-col lg:flex-row',
+              root: 'gap-md flex-col lg:flex-row w-full',
               tab: 'data-[active]:bg-gray-300 data-[active]:dark:bg-gray-700',
-              panel: 'grow',
+              panel: 'min-w-0',
               tabLabel: 'text-foreground',
               tabSection: 'text-foreground',
             }}

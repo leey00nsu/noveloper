@@ -8,7 +8,7 @@ import NovelMenu from './novel-menu';
 import SystemMenu from './system-menu';
 import ThemeSwitch from './theme-switch';
 import TokenStatus from './token-status';
-import UserInfo from './user-info';
+import UserMenu from './user-menu';
 
 interface SidebarProps {
   isCollapsed?: boolean;
@@ -32,7 +32,7 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
         <NovelMenu />
       </ThemeScrollArea>
 
-      <UserInfo />
+      <UserMenu />
     </Stack>
   );
 };

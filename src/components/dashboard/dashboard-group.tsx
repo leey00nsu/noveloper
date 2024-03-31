@@ -45,55 +45,49 @@ const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
       className="h-full"
       onLayout={onLayout}
     >
-      {viewPortWidth >= 1024 && (
-        <>
-          <Panel
-            id="sidebar"
-            order={1}
-            collapsible
-            collapsedSize={1}
-            minSize={minSidebarSize}
-            defaultSize={minSidebarSize}
-            maxSize={25}
-            onCollapse={() => {
-              setIsSidebarCollapsed(true);
-            }}
-            onExpand={() => {
-              setIsSidebarCollapsed(false);
-            }}
-          >
-            <Sidebar isCollapsed={isSidebarCollapsed} />
-          </Panel>
-          <PanelResizeHandle />
-        </>
-      )}
+      <Panel
+        id="sidebar"
+        order={1}
+        collapsible
+        collapsedSize={1}
+        minSize={minSidebarSize}
+        defaultSize={minSidebarSize}
+        maxSize={25}
+        onCollapse={() => {
+          setIsSidebarCollapsed(true);
+        }}
+        onExpand={() => {
+          setIsSidebarCollapsed(false);
+        }}
+        className="hidden lg:block"
+      >
+        <Sidebar isCollapsed={isSidebarCollapsed} />
+      </Panel>
+      <PanelResizeHandle />
 
       <Panel id="main" order={2} defaultSize={minMainSize}>
         {children}
       </Panel>
 
-      {viewPortWidth >= 1024 && (
-        <>
-          <PanelResizeHandle />
-          <Panel
-            id="toolbar"
-            order={3}
-            collapsible
-            collapsedSize={1}
-            minSize={minToolbarSize}
-            defaultSize={minToolbarSize}
-            maxSize={25}
-            onCollapse={() => {
-              setIsToolbarCollapsed(true);
-            }}
-            onExpand={() => {
-              setIsToolbarCollapsed(false);
-            }}
-          >
-            <Toolbar isCollapsed={isToolbarCollapsed} />
-          </Panel>
-        </>
-      )}
+      <PanelResizeHandle />
+      <Panel
+        id="toolbar"
+        order={3}
+        collapsible
+        collapsedSize={1}
+        minSize={minToolbarSize}
+        defaultSize={minToolbarSize}
+        maxSize={25}
+        onCollapse={() => {
+          setIsToolbarCollapsed(true);
+        }}
+        onExpand={() => {
+          setIsToolbarCollapsed(false);
+        }}
+        className="hidden lg:block"
+      >
+        <Toolbar isCollapsed={isToolbarCollapsed} />
+      </Panel>
     </PanelGroup>
   );
 };

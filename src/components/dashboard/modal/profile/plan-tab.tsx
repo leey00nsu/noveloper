@@ -44,7 +44,7 @@ const PlanTab = () => {
         <Fragment key={plan.name}>
           <Stack className="grow">
             <Text className="text-xl font-bold ">{plan.name}</Text>
-            <Text className="text-lg text-gray-900">{plan.price}원 / 달</Text>
+            <Text className="text-lg ">{plan.price}원 / 달</Text>
             {MOCK_CURRENT_PLAN === plan.name && (
               <Button disabled color="blue">
                 현재 플랜
