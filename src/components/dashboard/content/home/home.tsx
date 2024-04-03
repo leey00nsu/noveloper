@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <Box className="h-full w-full">
       <Center className="h-full w-full">
-        <Stack>
+        <Stack className="w-full max-w-xl">
           <Title order={2} className="mt-sm text-center">
             Noveloper에 오신 것을 환영합니다!
           </Title>

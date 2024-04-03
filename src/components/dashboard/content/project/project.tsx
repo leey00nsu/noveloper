@@ -10,6 +10,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
+import Link from 'next/link';
 import { FaSearch } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
 
@@ -72,7 +73,9 @@ const Project = () => {
               placeholder="프로젝트를 검색해보세요."
               className="grow"
             />
-            <Button>새로운 프로젝트 생성</Button>
+            <Button component={Link} href="/dashboard/new-project">
+              새로운 프로젝트 생성
+            </Button>
           </Group>
 
           <SimpleGrid
