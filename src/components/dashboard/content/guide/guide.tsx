@@ -1,11 +1,7 @@
-import { Box, Center } from '@mantine/core';
+import ContentWrapper from '../common/content-wrapper';
 
 const Guide = () => {
-  return (
-    <Box className="h-full w-full">
-      <Center className="h-full w-full">Guide</Center>
-    </Box>
-  );
+  return <ContentWrapper>Guide</ContentWrapper>;
 };
 
 export default Guide;

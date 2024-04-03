@@ -1,7 +1,5 @@
-import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 import {
   ActionIcon,
-  Box,
   Button,
   Card,
   Group,
@@ -13,6 +11,8 @@ import {
 import Link from 'next/link';
 import { FaSearch } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
+
+import ContentWrapper from '../common/content-wrapper';
 
 const MOCK_PROJECTS = [
   {
@@ -64,42 +64,40 @@ const MOCK_PROJECTS = [
 
 const Project = () => {
   return (
-    <Box className="h-full w-full p-sm">
-      <ThemeScrollArea className="h-full" scrollbars="y">
-        <Stack className="p-sm">
-          <Group>
-            <TextInput
-              leftSection={<FaSearch />}
-              placeholder="프로젝트를 검색해보세요."
-              className="grow"
-            />
-            <Button component={Link} href="/dashboard/new-project">
-              새로운 프로젝트 생성
-            </Button>
-          </Group>
+    <ContentWrapper>
+      <Stack className="h-full w-full p-sm">
+        <Group>
+          <TextInput
+            leftSection={<FaSearch />}
+            placeholder="프로젝트를 검색해보세요."
+            className="grow"
+          />
+          <Button component={Link} href="/dashboard/new-project">
+            새로운 프로젝트 생성
+          </Button>
+        </Group>
 
-          <SimpleGrid
-            cols={{
-              xs: 1,
-              lg: 2,
-            }}
-          >
-            {MOCK_PROJECTS.map((project) => (
-              <Card withBorder key={project.id}>
-                <Group wrap="nowrap" justify="space-between">
-                  <Text truncate="end">{project.name}</Text>
-                  <ActionIcon color="gray" variant="subtle">
-                    <FaEllipsis />
-                  </ActionIcon>
-                </Group>
+        <SimpleGrid
+          cols={{
+            xs: 1,
+            lg: 2,
+          }}
+        >
+          {MOCK_PROJECTS.map((project) => (
+            <Card withBorder key={project.id}>
+              <Group wrap="nowrap" justify="space-between">
+                <Text truncate="end">{project.name}</Text>
+                <ActionIcon color="gray" variant="subtle">
+                  <FaEllipsis />
+                </ActionIcon>
+              </Group>
 
-                <Text className="text-sm">{project.updatedAt} 수정됨</Text>
-              </Card>
-            ))}
-          </SimpleGrid>
-        </Stack>
-      </ThemeScrollArea>
-    </Box>
+              <Text className="text-sm">{project.updatedAt} 수정됨</Text>
+            </Card>
+          ))}
+        </SimpleGrid>
+      </Stack>
+    </ContentWrapper>
   );
 };
 
