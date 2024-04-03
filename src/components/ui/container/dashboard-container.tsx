@@ -1,6 +1,6 @@
 'use client';
 
-import DashboardGroup from '@/components/dashboard/dashboard-group';
+import DashboardPanelGroup from '@/components/dashboard/dashboard-panel-group';
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import Toolbar from '@/components/dashboard/toolbar/toolbar';
 import { AppShell } from '@mantine/core';
@@ -54,7 +54,7 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
       </ThemeDrawer>
 
       <AppShell.Main className="h-dvh">
-        <DashboardGroup>{children}</DashboardGroup>
+        <DashboardPanelGroup>{children}</DashboardPanelGroup>
       </AppShell.Main>
     </AppShell>
   );

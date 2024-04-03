@@ -12,7 +12,7 @@ import Toolbar from './toolbar/toolbar';
 const MIN_SIDEBAR_SIZE = 260;
 const MIN_TOOLBAR_SIZE = 260;
 
-const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
+const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(false);
 
@@ -92,4 +92,4 @@ const DashboardGroup = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default DashboardGroup;
+export default DashboardPanelGroup;
