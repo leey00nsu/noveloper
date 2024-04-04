@@ -21,11 +21,22 @@ const MOCK_JANRES = [
   '공포',
 ];
 
+const MOCK_FORM = {
+  name: '',
+  author: '',
+  janres: [],
+  synopsis: '',
+};
+
 interface NewProjectFormProps {
-  onNext: () => void;
+  onNext: Function;
 }
 
 const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
+  const submitHandler = () => {
+    onNext(MOCK_FORM);
+  };
+
   return (
     <Stack className="h-full w-full p-sm">
       <Title order={2}>작품의 기본정보를 입력해주세요</Title>
@@ -59,7 +70,7 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
       </Stack>
 
       <Stack align="center">
-        <Button onClick={onNext}>작품 생성</Button>
+        <Button onClick={submitHandler}>작품 생성</Button>
       </Stack>
     </Stack>
   );

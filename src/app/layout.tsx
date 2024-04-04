@@ -1,4 +1,5 @@
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
@@ -55,7 +56,10 @@ export default function RootLayout({
       </head>
       <body className={pretendard.className}>
         <MantineProvider theme={theme}>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Notifications zIndex={1000} />
+            {children}
+          </Providers>
         </MantineProvider>
       </body>
     </html>

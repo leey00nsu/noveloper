@@ -9,6 +9,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "import/prefer-default-export": "off", // for route Handlers
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off", // for Mantine
     "react/function-component-definition": [
