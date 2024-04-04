@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 /**
  * 해당 단계의 컴포넌트를 렌더링 하는 Funnel 패턴을 사용할 수 있게 해주는 Hook입니다.
@@ -8,17 +8,23 @@ import React, { useState } from 'react';
 const useFunnel = <T extends string>(steps: T[]) => {
   const [step, setStep] = useState<T>(steps[0]);
 
-  const Step = ({ name, children }: { name: T; children: React.ReactNode }) => {
-    return name === step ? children : null;
-  };
+  const StepComponent = useCallback(
+    ({ name, children }: { name: T; children: React.ReactNode }) => {
+      return name === step ? children : null;
+    },
+    [step],
+  );
 
-  const Funnel = ({ children }: { children: React.ReactNode }) => {
-    return children;
-  };
+  const FunnelComponent = useCallback(
+    ({ children }: { children: React.ReactNode }) => {
+      return children;
+    },
+    [],
+  );
 
-  Funnel.Step = Step;
+  const Funnel = Object.assign(FunnelComponent, { Step: StepComponent });
 
-  return { Funnel, step, setStep };
+  return { Funnel, setStep, step };
 };
 
 export default useFunnel;
