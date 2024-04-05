@@ -1,11 +1,7 @@
-import {
-  Button,
-  Stack,
-  TagsInput,
-  TextInput,
-  Textarea,
-  Title,
-} from '@mantine/core';
+import { CreateProjectRequest, CreateProjectSchema } from '@/types/project';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Stack, TagsInput, TextInput, Title } from '@mantine/core';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 const MOCK_JANRES = [
   '판타지',
@@ -21,56 +17,92 @@ const MOCK_JANRES = [
   '공포',
 ];
 
-const MOCK_FORM = {
-  name: '',
-  author: '',
-  janres: [],
-  synopsis: '',
-};
-
 interface NewProjectFormProps {
   onNext: Function;
 }
 
 const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
-  const submitHandler = () => {
-    onNext(MOCK_FORM);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateProjectRequest>({
+    resolver: zodResolver(CreateProjectSchema),
+  });
+
+  const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
+    onNext(data);
   };
 
   return (
-    <Stack className="h-full w-full p-sm">
+    <Stack component="form" className="h-full w-full p-sm">
       <Title order={2}>작품의 기본정보를 입력해주세요</Title>
 
       <Stack>
-        <TextInput
-          withAsterisk
-          label="작품 제목"
-          description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
-          placeholder="작품 제목을 입력해주세요."
+        <Controller
+          defaultValue=""
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              withAsterisk
+              label="작품 제목"
+              description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
+              placeholder="작품 제목을 입력해주세요."
+              error={errors.name?.message}
+            />
+          )}
         />
-        <TextInput
-          withAsterisk
-          label="작가 이름"
-          description="작가 이름은 1자 이상 50자 이하로 입력해주세요."
-          placeholder="작가 이름을 입력해주세요."
+        <Controller
+          defaultValue=""
+          control={control}
+          name="author"
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              withAsterisk
+              label="작가 이름"
+              description="작가 이름은 1자 이상 50자 이하로 입력해주세요."
+              placeholder="작가 이름을 입력해주세요."
+              error={errors.author?.message}
+            />
+          )}
         />
-        <TagsInput
-          withAsterisk
-          label="장르"
-          placeholder="장르를 선택하거나 입력해주세요."
-          data={MOCK_JANRES}
+        <Controller
+          defaultValue={[]}
+          control={control}
+          name="janres"
+          render={({ field }) => (
+            <TagsInput
+              {...field}
+              withAsterisk
+              label="장르"
+              placeholder="장르를 선택하거나 입력해주세요."
+              data={MOCK_JANRES}
+              error={errors.janres?.message}
+            />
+          )}
         />
-        <Textarea
-          withAsterisk
-          label="시놉시스"
-          autosize
-          description="시놉시스는 1자 이상 200자 이하로 입력해주세요."
-          placeholder="시놉시스를 입력해주세요."
+        <Controller
+          defaultValue=""
+          control={control}
+          name="synopsis"
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              withAsterisk
+              label="시놉시스"
+              description="시놉시스는 1자 이상 200자 이하로 입력해주세요."
+              placeholder="시놉시스를 입력해주세요."
+              error={errors.synopsis?.message}
+            />
+          )}
         />
       </Stack>
 
       <Stack align="center">
-        <Button onClick={submitHandler}>작품 생성</Button>
+        <Button onClick={handleSubmit(submitHandler)}>작품 생성</Button>
       </Stack>
     </Stack>
   );

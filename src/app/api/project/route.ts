@@ -11,7 +11,7 @@ const mockCreateProject = async (success: boolean) => {
       success,
       message,
     },
-    2000,
+    1000,
   );
 };
 
