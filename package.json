@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -13,10 +14,12 @@
     "@mantine/core": "^7.6.1",
     "@mantine/hooks": "^7.6.1",
     "@mantine/notifications": "^7.7.1",
+    "@prisma/client": "^5.12.1",
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.42.0",
     "@tanstack/react-query": "^5.28.14",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "next": "14.1.0",
-    "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
@@ -46,6 +49,7 @@
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "prisma": "^5.12.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

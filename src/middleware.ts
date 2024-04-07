@@ -1,29 +1,22 @@
-import { getToken } from 'next-auth/jwt';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
-const WITH_AUTH_LIST = ['/dashboard']; // 로그인이 되어있을 때 접근 가능한 루트
-const WITHOUT_AUTH_LIST = ['/', '/auth/signin']; // 로그인이 되어있지 않을 때 접근 가능한 루트
+import { updateSession } from './libs/supabase/middleware';
 
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req });
+  const response = await updateSession(req);
 
-  const isLogin = !!token;
-
-  if (WITHOUT_AUTH_LIST.includes(req.nextUrl.pathname)) {
-    if (isLogin) {
-      return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
-    }
-  }
-
-  if (WITH_AUTH_LIST.includes(req.nextUrl.pathname)) {
-    if (!isLogin) {
-      return NextResponse.redirect(new URL('/', req.nextUrl));
-    }
-  }
-
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
-  matcher: '/:path*',
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 };

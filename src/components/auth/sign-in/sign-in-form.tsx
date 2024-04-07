@@ -1,5 +1,6 @@
 'use client';
 
+import { signInWithGithub } from '@/actions/supabase/sign-in-with-github';
 import {
   Button,
   Center,
@@ -10,7 +11,6 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
 
@@ -58,7 +58,7 @@ const SignInForm = () => {
         <Divider label="또는" labelPosition="center" className="my-xs" />
 
         <Button
-          onClick={() => signIn('github')}
+          onClick={signInWithGithub}
           radius="xl"
           leftSection={<FaGithub />}
           variant="outline"
