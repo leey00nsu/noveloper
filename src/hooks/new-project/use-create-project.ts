@@ -7,14 +7,16 @@ interface UseCreateProjectProps {
 }
 
 const useCreateProject = ({ onSuccess, onError }: UseCreateProjectProps) => {
-  const mutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (project: CreateProjectRequest) => {
       const response = await fetch('/api/project', {
         method: 'POST',
         body: JSON.stringify(project),
       });
 
-      return response.json();
+      const data = await response.json();
+
+      return data;
     },
     onSuccess(response: CreateProjectResponse) {
       if (response.success) {
@@ -26,7 +28,7 @@ const useCreateProject = ({ onSuccess, onError }: UseCreateProjectProps) => {
     onError() {},
   });
 
-  return { mutation };
+  return { mutate, isPending };
 };
 
 export default useCreateProject;

@@ -10,7 +10,7 @@ import NewProjectForm from './new-project-form';
 
 const NewProject = () => {
   const { Funnel, setStep } = useFunnel(['form', 'success']);
-  const { mutation } = useCreateProject({
+  const { mutate, isPending } = useCreateProject({
     onSuccess: (response) => {
       setStep('success');
 
@@ -29,10 +29,10 @@ const NewProject = () => {
   });
 
   return (
-    <ContentWrapper showLoader={mutation.isPending}>
+    <ContentWrapper showLoader={isPending}>
       <Funnel>
         <Funnel.Step name="form">
-          <NewProjectForm onNext={mutation.mutate} />
+          <NewProjectForm onNext={mutate} />
         </Funnel.Step>
         <Funnel.Step name="success">
           <CreatingSuccess />

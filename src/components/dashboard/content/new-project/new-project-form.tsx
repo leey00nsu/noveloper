@@ -42,7 +42,7 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
         <Controller
           defaultValue=""
           control={control}
-          name="name"
+          name="title"
           render={({ field }) => (
             <TextInput
               {...field}
@@ -50,7 +50,7 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
               label="작품 제목"
               description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
               placeholder="작품 제목을 입력해주세요."
-              error={errors.name?.message}
+              error={errors.title?.message}
             />
           )}
         />

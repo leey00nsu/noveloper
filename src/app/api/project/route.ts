@@ -1,29 +1,16 @@
-import mockResponse from '@/actions/mock-response';
+import { createProject } from '@/actions/supabase/create-project';
+import { getProjects } from '@/actions/supabase/get-projects';
 import { NextResponse } from 'next/server';
 
-const mockCreateProject = async (success: boolean) => {
-  const message = success
-    ? '프로젝트가 성공적으로 생성되었습니다.'
-    : '프로젝트 생성에 실패했습니다.';
+export async function POST(request: Request) {
+  const body = await request.json();
+  const response = await createProject(body);
 
-  return mockResponse(
-    {
-      success,
-      message,
-    },
-    1000,
-  );
-};
+  return NextResponse.json(response);
+}
 
-export async function POST() {
-  const res = await mockCreateProject(true);
+export async function GET() {
+  const response = await getProjects();
 
-  return NextResponse.json(
-    {
-      ...res,
-    },
-    {
-      status: res.success ? 201 : 400,
-    },
-  );
+  return NextResponse.json(response);
 }

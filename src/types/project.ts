@@ -1,9 +1,10 @@
+import { Projects } from '@prisma/client';
 import { z } from 'zod';
 
-import { DefaultResponse } from './action';
+import { ApiResponse } from './api';
 
 export const CreateProjectSchema = z.object({
-  name: z
+  title: z
     .string()
     .trim()
     .min(1, { message: '작품 제목은 1자 이상 50자 이하로 입력해주세요.' })
@@ -30,4 +31,6 @@ export const CreateProjectSchema = z.object({
 
 export type CreateProjectRequest = z.infer<typeof CreateProjectSchema>;
 
-export interface CreateProjectResponse extends DefaultResponse {}
+export interface CreateProjectResponse extends ApiResponse<null> {}
+
+export interface ProjectListResponse extends ApiResponse<Projects[]> {}

@@ -1,11 +1,7 @@
-'use server';
-
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/libs/prisma';
 import { User } from '@supabase/supabase-js';
 
 export const findOrInsertUser = async (user: User) => {
-  const prisma = new PrismaClient();
-
   try {
     const userData = await prisma.users.findUnique({
       where: {
