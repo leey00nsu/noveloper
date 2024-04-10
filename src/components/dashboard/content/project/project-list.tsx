@@ -1,12 +1,24 @@
-'use client';
-
-import useGetProjects from '@/hooks/project/use-get-projects';
+import { getProjects } from '@/services/supabase/get-projects';
 import { SimpleGrid } from '@mantine/core';
 
 import ProjectCard from './project-card';
 
-const ProjectList = () => {
-  const { projects } = useGetProjects();
+const ProjectListSkeleton = () => {
+  return (
+    <SimpleGrid
+      cols={{
+        xs: 1,
+        lg: 2,
+      }}
+    >
+      <ProjectCard.Skeleton />
+      <ProjectCard.Skeleton />
+    </SimpleGrid>
+  );
+};
+
+const ProjectList = async () => {
+  const { data: projects } = await getProjects();
 
   return (
     <SimpleGrid
@@ -15,12 +27,13 @@ const ProjectList = () => {
         lg: 2,
       }}
     >
-      {!projects && <ProjectCard.Skeleton />}
       {projects?.map((project) => (
         <ProjectCard key={project.id} project={project} />
       ))}
     </SimpleGrid>
   );
 };
+
+ProjectList.Skeleton = ProjectListSkeleton;
 
 export default ProjectList;

@@ -1,5 +1,6 @@
 import { Button, Group, Stack, TextInput } from '@mantine/core';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 import ContentWrapper from '../common/content-wrapper';
@@ -20,7 +21,9 @@ const Project = () => {
           </Button>
         </Group>
 
-        <ProjectList />
+        <Suspense fallback={<ProjectList.Skeleton />}>
+          <ProjectList />
+        </Suspense>
       </Stack>
     </ContentWrapper>
   );

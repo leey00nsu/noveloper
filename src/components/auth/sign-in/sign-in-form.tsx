@@ -1,6 +1,6 @@
 'use client';
 
-import { signInWithGithub } from '@/actions/supabase/sign-in-with-github';
+import { signInWithGithub } from '@/services/supabase/sign-in-with-github';
 import {
   Button,
   Center,

@@ -1,5 +1,6 @@
 import { ActionIcon, Card, Group, Skeleton, Text } from '@mantine/core';
 import { Projects } from '@prisma/client';
+import Link from 'next/link';
 import { FaEllipsis } from 'react-icons/fa6';
 
 interface ProjectCardProps {
@@ -23,7 +24,15 @@ const ProjectCardSkeleton = () => {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Card withBorder className="h-32">
+    <Card
+      component={Link}
+      href={`/dashboard/project/${project.id}`}
+      withBorder
+      className="h-32"
+      classNames={{
+        root: 'hover:bg-gray-100 dark:hover:bg-gray-800',
+      }}
+    >
       <Group wrap="nowrap" justify="space-between">
         <Text truncate="end">{project.title}</Text>
         <ActionIcon color="gray" variant="subtle">

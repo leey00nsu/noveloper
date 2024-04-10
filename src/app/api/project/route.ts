@@ -1,5 +1,5 @@
-import { createProject } from '@/actions/supabase/create-project';
-import { getProjects } from '@/actions/supabase/get-projects';
+import { createProject } from '@/services/supabase/create-project';
+import { getProjects } from '@/services/supabase/get-projects';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {

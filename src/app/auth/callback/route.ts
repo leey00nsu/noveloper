@@ -1,5 +1,5 @@
-import { findOrInsertUser } from '@/actions/supabase/find-or-insert-user';
 import { createClient } from '@/libs/supabase/server';
+import { findOrInsertUser } from '@/services/supabase/find-or-insert-user';
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
@@ -21,9 +21,9 @@ export const GET = async (request: Request) => {
       return NextResponse.redirect(`${origin}`);
     }
 
-    const { error: findOrInsertUserError } = await findOrInsertUser(data.user);
+    const { data: user } = await findOrInsertUser(data.user);
 
-    if (findOrInsertUserError) {
+    if (!user) {
       // TODO: find or insert user error
       return NextResponse.redirect(`${origin}`);
     }

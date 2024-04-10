@@ -1,8 +1,7 @@
 import prisma from '@/libs/prisma';
 import { createClient } from '@/libs/supabase/server';
-import { CreateProjectRequest } from '@/types/project';
 
-export const createProject = async (project: CreateProjectRequest) => {
+export const getUserData = async () => {
   const supabase = createClient();
 
   try {
@@ -24,22 +23,13 @@ export const createProject = async (project: CreateProjectRequest) => {
       throw new Error('사용자 정보가 없습니다. 다시 시도해주세요.');
     }
 
-    await prisma.projects.create({
-      data: {
-        user_id: user.id,
-        title: project.title,
-        janres: project.janres,
-        author: project.author,
-        synopsis: project.synopsis,
-      },
-    });
-
     return {
+      data: userData,
       success: true,
-      status: 201,
-      message: '프로젝트가 생성되었습니다.',
+      status: 200,
+      message: '유저 정보를 성공적으로 불러왔습니다.',
     };
   } catch (error: any) {
-    return { success: false, status: 400, message: error.message };
+    throw new Error(error.message);
   }
 };
