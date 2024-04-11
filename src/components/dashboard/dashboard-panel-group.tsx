@@ -10,6 +10,9 @@ import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
 import Loader from '../ui/loader/loader';
 import Toolbar from './toolbar/toolbar';
 
+const COLLAPSED_SIZE_PERCENT = 1;
+const MAX_SIDEBAR_PERCENT = 25;
+const MAX_TOOLBAR_PERCENT = 25;
 const MIN_SIDEBAR_SIZE = 260;
 const MIN_TOOLBAR_SIZE = 260;
 
@@ -19,21 +22,16 @@ const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
 
   const { width: viewPortWidth } = useViewportSize();
 
-  const onLayout = (sizes: number[]) => {
-    document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`;
-  };
-
   // Sidebar의 최소 사이즈에 대한 퍼센트를 설정합니다.
-  const minSidebarSize = Number(
-    ((MIN_SIDEBAR_SIZE / viewPortWidth) * 100).toFixed(2),
+  const minSidebarSize = Math.min(
+    MAX_SIDEBAR_PERCENT,
+    Number(((MIN_SIDEBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
   );
 
-  const minToolbarSize = Number(
-    ((MIN_TOOLBAR_SIZE / viewPortWidth) * 100).toFixed(2),
+  const minToolbarSize = Math.min(
+    MAX_TOOLBAR_PERCENT,
+    Number(((MIN_TOOLBAR_SIZE / viewPortWidth) * 100).toFixed(2)),
   );
-
-  const minMainSize =
-    viewPortWidth > 1024 ? 100 - minSidebarSize - minToolbarSize : 100;
 
   if (!viewPortWidth) {
     return <Loader fullScreen />;
@@ -44,16 +42,14 @@ const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
       autoSaveId="persistence"
       direction="horizontal"
       className="h-full"
-      onLayout={onLayout}
     >
       <Panel
         id="sidebar"
         order={1}
         collapsible
-        collapsedSize={1}
+        collapsedSize={COLLAPSED_SIZE_PERCENT}
         minSize={minSidebarSize}
-        defaultSize={minSidebarSize}
-        maxSize={25}
+        maxSize={MAX_SIDEBAR_PERCENT}
         onCollapse={() => {
           setIsSidebarCollapsed(true);
         }}
@@ -66,7 +62,7 @@ const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
       </Panel>
       <PanelResizeHandle classNames="hidden lg:block" />
 
-      <Panel id="main" order={2} defaultSize={minMainSize}>
+      <Panel id="main" order={2}>
         {children}
       </Panel>
 
@@ -75,10 +71,9 @@ const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
         id="toolbar"
         order={3}
         collapsible
-        collapsedSize={1}
+        collapsedSize={COLLAPSED_SIZE_PERCENT}
         minSize={minToolbarSize}
-        defaultSize={minToolbarSize}
-        maxSize={25}
+        maxSize={MAX_TOOLBAR_PERCENT}
         onCollapse={() => {
           setIsToolbarCollapsed(true);
         }}

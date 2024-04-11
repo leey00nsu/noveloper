@@ -27,7 +27,7 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
     <AppShell
       header={{
         height: {
-          xs: 60,
+          base: 60,
           lg: 0,
         },
       }}
