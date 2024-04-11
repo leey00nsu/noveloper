@@ -1,17 +1,20 @@
+'use client';
+
+import useGetProjectById from '@/hooks/project/use-get-project-by-id';
 import { Title } from '@mantine/core';
-import { Projects } from '@prisma/client';
+import { useParams } from 'next/navigation';
 
 import ContentWrapper from '../common/content-wrapper';
 
-interface ProjectHomeProps {
-  project: Projects;
-}
+const ProjectHome = () => {
+  const { projectId } = useParams();
 
-const ProjectHome = ({ project }: ProjectHomeProps) => {
+  const { project } = useGetProjectById(projectId as string);
+
   return (
     <ContentWrapper>
       <Title order={2} className="mt-sm text-center">
-        {project.title}
+        {project?.title}
       </Title>
     </ContentWrapper>
   );

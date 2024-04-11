@@ -1,10 +1,8 @@
-'use client';
-
 import Logo from '@/components/ui/logo/logo';
 import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 import { Box, Center, Divider, Stack } from '@mantine/core';
 
-import NovelMenu from './novel-menu';
+import ProjectMenu from './project-menu';
 import SystemMenu from './system-menu';
 import ThemeSwitch from './theme-switch';
 import TokenStatus from './token-status';
@@ -29,7 +27,7 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
       <ThemeScrollArea ignoreTheme className="h-full" scrollbars="y">
         <SystemMenu />
         <Divider className="my-sm border-gray-700" />
-        <NovelMenu />
+        <ProjectMenu />
       </ThemeScrollArea>
 
       <UserMenu />

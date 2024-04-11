@@ -1,17 +1,26 @@
-import { Accordion, Button, Stack, Text } from '@mantine/core';
+'use client';
 
-const NovelMenu = () => {
-  const MOCK_NOVEL_TITLE = '소설 제목';
-  const MOCK_ACCORDIANS = [
-    { label: '인물', items: ['인물 관리', '인물 관계도'] },
-    { label: '회차', items: ['회차 관리', '타임라인'] },
-    { label: '설정', items: ['작품 정보', '배경 관리', '고유 명사 설정'] },
-  ];
+import useGetProjectById from '@/hooks/project/use-get-project-by-id';
+import { Accordion, Button, Stack, Text } from '@mantine/core';
+import { useParams } from 'next/navigation';
+
+const MOCK_ACCORDIANS = [
+  { label: '인물', items: ['인물 관리', '인물 관계도'] },
+  { label: '회차', items: ['회차 관리', '타임라인'] },
+  { label: '설정', items: ['작품 정보', '배경 관리', '고유 명사 설정'] },
+];
+
+const ProjectMenu = () => {
+  const { projectId } = useParams();
+
+  const { project } = useGetProjectById(projectId as string);
+
+  if (!project) return null;
 
   return (
     <Accordion multiple defaultValue={[]} className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">
-        {MOCK_NOVEL_TITLE}
+        {project?.title}
       </Text>
       {MOCK_ACCORDIANS.map((accordion) => (
         <Accordion.Item
@@ -43,4 +52,4 @@ const NovelMenu = () => {
   );
 };
 
-export default NovelMenu;
+export default ProjectMenu;
