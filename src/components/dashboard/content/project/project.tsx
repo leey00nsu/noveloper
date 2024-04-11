@@ -17,7 +17,7 @@ const Project = () => {
             className="grow"
           />
           <ProjectListRefreshButton />
-          <Button component={Link} href="/dashboard/new-project">
+          <Button component={Link} href="/dashboard/project/new">
             새로운 프로젝트 생성
           </Button>
         </Group>
