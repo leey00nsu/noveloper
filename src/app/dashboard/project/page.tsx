@@ -1,4 +1,4 @@
-import Project from '@/components/dashboard/content/project/project';
+import ProjectList from '@/components/dashboard/content/project/project-list';
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 import { getProjects } from '@/services/supabase/get-projects';
 import { ProjectsResponse } from '@/types/project';
@@ -29,7 +29,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Project />;
+      <ProjectList />;
     </HydrationBoundary>
   );
 }

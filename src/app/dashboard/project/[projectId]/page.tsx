@@ -1,4 +1,5 @@
-import ProjectHome from '@/components/dashboard/content/project/project-home';
+import ProjectHome from '@/components/dashboard/content/project/project-id/project-home';
+import { projectQueryKeys } from '@/hooks/project/use-project-service';
 import { getProjectById } from '@/services/supabase/get-project-by-id';
 import { ProjectResponse } from '@/types/project';
 import {
@@ -23,7 +24,7 @@ export default async function Page({
     }
 
     await queryClient.fetchQuery<ProjectResponse>({
-      queryKey: ['project', params.projectId],
+      queryKey: projectQueryKeys.project(params.projectId),
       queryFn: async () => {
         const data = await getProjectById(params.projectId);
         return data;
