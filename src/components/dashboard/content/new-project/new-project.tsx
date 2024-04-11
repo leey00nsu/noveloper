@@ -1,6 +1,6 @@
 'use client';
 
-import useCreateProject from '@/hooks/new-project/use-create-project';
+import { useCreateProject } from '@/hooks/project/use-project-service';
 import useFunnel from '@/hooks/use-funnel';
 import { notifications } from '@mantine/notifications';
 

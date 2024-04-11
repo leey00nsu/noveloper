@@ -1,6 +1,6 @@
 'use client';
 
-import useGetProjectById from '@/hooks/project/use-get-project-by-id';
+import { useGetProjectById } from '@/hooks/project/use-project-service';
 import { Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
