@@ -1,5 +1,6 @@
-import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 import { Box, Center } from '@mantine/core';
+
+import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 
 import LoaderModal from '../../modal/loader/loader-modal';
 

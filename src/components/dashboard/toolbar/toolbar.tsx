@@ -1,7 +1,8 @@
 'use client';
 
-import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 import { Box, Stack } from '@mantine/core';
+
+import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 
 import EditHistory from './edit-history';
 

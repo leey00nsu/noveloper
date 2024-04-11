@@ -1,5 +1,6 @@
-import UserInfo from '@/components/ui/user-info/user-info';
 import { Button, Divider, Group, Select, Stack, Text } from '@mantine/core';
+
+import UserInfo from '@/components/ui/user-info/user-info';
 
 const SUPPORT_LANGUAGES = ['한국어', '영어'];
 

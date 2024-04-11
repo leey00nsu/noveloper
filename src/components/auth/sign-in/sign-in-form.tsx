@@ -1,6 +1,5 @@
 'use client';
 
-import { signInWithGithub } from '@/services/supabase/sign-in-with-github';
 import {
   Button,
   Center,
@@ -13,6 +12,8 @@ import {
 } from '@mantine/core';
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
+
+import { signInWithGithub } from '@/services/supabase/sign-in-with-github';
 
 const SignInForm = () => {
   return (

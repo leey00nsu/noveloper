@@ -1,10 +1,11 @@
+import { useMutation, useQuery } from '@tanstack/react-query';
+
 import {
   CreateProjectRequest,
   CreateProjectResponse,
   ProjectResponse,
   ProjectsResponse,
 } from '@/types/project';
-import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const projectQueryKeys = {
   projects: ['projects'],

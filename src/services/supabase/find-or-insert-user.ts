@@ -1,5 +1,6 @@
-import prisma from '@/libs/prisma';
 import { User } from '@supabase/supabase-js';
+
+import prisma from '@/libs/prisma';
 
 export const findOrInsertUser = async (user: User) => {
   try {

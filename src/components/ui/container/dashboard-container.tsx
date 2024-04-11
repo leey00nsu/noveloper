@@ -1,10 +1,11 @@
 'use client';
 
+import { AppShell } from '@mantine/core';
+import { useState } from 'react';
+
 import DashboardPanelGroup from '@/components/dashboard/dashboard-panel-group';
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import Toolbar from '@/components/dashboard/toolbar/toolbar';
-import { AppShell } from '@mantine/core';
-import { useState } from 'react';
 
 import DashboardHeader from '../header/dashboard-header';
 import ThemeDrawer from '../mantine-ui/theme-drawer';

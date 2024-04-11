@@ -1,5 +1,6 @@
-import tw from '@/libs/tw';
 import { ScrollArea, ScrollAreaProps } from '@mantine/core';
+
+import tw from '@/libs/tw';
 
 interface ThemeScrollAreaProps extends ScrollAreaProps {
   children: React.ReactNode;

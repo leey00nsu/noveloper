@@ -1,7 +1,8 @@
 'use client';
 
-import { useGetProjects } from '@/hooks/project/use-project-service';
 import { SimpleGrid } from '@mantine/core';
+
+import { useGetProjects } from '@/hooks/project/use-project-service';
 
 import ProjectCard from './project-card';
 

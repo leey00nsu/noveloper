@@ -1,6 +1,7 @@
-import UserInfo from '@/components/ui/user-info/user-info';
 import { Box } from '@mantine/core';
 import Link from 'next/link';
+
+import UserInfo from '@/components/ui/user-info/user-info';
 
 const UserMenu = () => {
   return (

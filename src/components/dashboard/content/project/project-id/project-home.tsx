@@ -1,8 +1,9 @@
 'use client';
 
-import { useGetProjectById } from '@/hooks/project/use-project-service';
 import { Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
+
+import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 import ContentWrapper from '../../common/content-wrapper';
 

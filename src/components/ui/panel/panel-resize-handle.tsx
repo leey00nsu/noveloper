@@ -1,6 +1,7 @@
-import tw from '@/libs/tw';
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { PanelResizeHandle as OriginalHandle } from 'react-resizable-panels';
+
+import tw from '@/libs/tw';
 
 interface PanelResizeHandleProps {
   classNames?: string;

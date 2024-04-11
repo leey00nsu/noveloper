@@ -1,10 +1,11 @@
 'use client';
 
-import Sidebar from '@/components/dashboard/sidebar/sidebar';
-import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
 import { useViewportSize } from '@mantine/hooks';
 import { useState } from 'react';
 import { Panel, PanelGroup } from 'react-resizable-panels';
+
+import Sidebar from '@/components/dashboard/sidebar/sidebar';
+import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
 
 import Loader from '../ui/loader/loader';
 import Toolbar from './toolbar/toolbar';

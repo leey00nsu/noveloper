@@ -1,9 +1,10 @@
 'use client';
 
-import { projectQueryKeys } from '@/hooks/project/use-project-service';
 import { ActionIcon } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { IoMdRefresh } from 'react-icons/io';
+
+import { projectQueryKeys } from '@/hooks/project/use-project-service';
 
 const ProjectListRefreshButton = () => {
   const queryClient = useQueryClient();

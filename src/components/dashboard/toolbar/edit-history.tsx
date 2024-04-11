@@ -1,9 +1,10 @@
 'use client';
 
-import tw from '@/libs/tw';
 import { Button, Stack, Text } from '@mantine/core';
 import { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
+
+import tw from '@/libs/tw';
 
 const EditHistory = () => {
   const [selectedHistory, setSelectedHistory] = useState('');

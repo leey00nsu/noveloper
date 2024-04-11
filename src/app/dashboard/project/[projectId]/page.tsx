@@ -1,13 +1,17 @@
-import ProjectHome from '@/components/dashboard/content/project/project-id/project-home';
-import { projectQueryKeys } from '@/hooks/project/use-project-service';
-import { getProjectById } from '@/services/supabase/get-project-by-id';
-import { ProjectResponse } from '@/types/project';
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
 import { redirect } from 'next/navigation';
+
+import ProjectHome from '@/components/dashboard/content/project/project-id/project-home';
+
+import { getProjectById } from '@/services/supabase/get-project-by-id';
+
+import { projectQueryKeys } from '@/hooks/project/use-project-service';
+
+import { ProjectResponse } from '@/types/project';
 
 export default async function Page({
   params,

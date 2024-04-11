@@ -1,8 +1,9 @@
 'use client';
 
-import { useGetProjectById } from '@/hooks/project/use-project-service';
 import { Accordion, Button, Stack, Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
+
+import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 const MOCK_ACCORDIANS = [
   { label: '인물', items: ['인물 관리', '인물 관계도'] },

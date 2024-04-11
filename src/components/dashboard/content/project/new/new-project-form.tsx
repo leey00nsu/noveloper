@@ -1,7 +1,8 @@
-import { CreateProjectRequest, CreateProjectSchema } from '@/types/project';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, TagsInput, TextInput, Title } from '@mantine/core';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import { CreateProjectRequest, CreateProjectSchema } from '@/types/project';
 
 const MOCK_JANRES = [
   '판타지',

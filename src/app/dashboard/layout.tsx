@@ -1,5 +1,6 @@
-import DashboardContainer from '@/components/ui/container/dashboard-container';
 import React from 'react';
+
+import DashboardContainer from '@/components/ui/container/dashboard-container';
 
 const Layout = ({
   children,

@@ -1,6 +1,7 @@
-import tw from '@/libs/tw';
 import { Avatar, Group, Stack, Text } from '@mantine/core';
 import { createContext, useContext } from 'react';
+
+import tw from '@/libs/tw';
 
 interface UserInfoProps {
   userName: string;

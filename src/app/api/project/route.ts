@@ -1,7 +1,8 @@
+import { NextRequest, NextResponse } from 'next/server';
+
 import { createProject } from '@/services/supabase/create-project';
 import { getProjectById } from '@/services/supabase/get-project-by-id';
 import { getProjects } from '@/services/supabase/get-projects';
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   const body = await request.json();

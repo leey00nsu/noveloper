@@ -1,6 +1,7 @@
+import { Box, Center, Divider, Stack } from '@mantine/core';
+
 import Logo from '@/components/ui/logo/logo';
 import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
-import { Box, Center, Divider, Stack } from '@mantine/core';
 
 import ProjectMenu from './project-menu';
 import SystemMenu from './system-menu';
