@@ -1,8 +1,12 @@
 'use client';
 
 import { useViewportSize } from '@mantine/hooks';
-import { useState } from 'react';
-import { Panel, PanelGroup } from 'react-resizable-panels';
+import { useRef, useState } from 'react';
+import {
+  ImperativePanelHandle,
+  Panel,
+  PanelGroup,
+} from 'react-resizable-panels';
 
 import Sidebar from '@/components/dashboard/sidebar/sidebar';
 import PanelResizeHandle from '@/components/ui/panel/panel-resize-handle';
@@ -17,10 +21,29 @@ const MIN_SIDEBAR_SIZE = 260;
 const MIN_TOOLBAR_SIZE = 260;
 
 const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [isToolbarCollapsed, setIsToolbarCollapsed] = useState(false);
+  const [, setLayout] = useState([25, 50, 25]);
+  const sidebarRef = useRef<ImperativePanelHandle>(null);
+  const toolbarRef = useRef<ImperativePanelHandle>(null);
 
   const { width: viewPortWidth } = useViewportSize();
+
+  const toggleSidebar = () => {
+    const sideBar = sidebarRef.current;
+    if (sideBar?.isCollapsed()) {
+      sideBar.expand();
+    } else {
+      sideBar?.collapse();
+    }
+  };
+
+  const toggleToolbar = () => {
+    const toolbar = toolbarRef.current;
+    if (toolbar?.isCollapsed()) {
+      toolbar.expand();
+    } else {
+      toolbar?.collapse();
+    }
+  };
 
   // Sidebar의 최소 사이즈에 대한 퍼센트를 설정합니다.
   const minSidebarSize = Math.min(
@@ -44,45 +67,45 @@ const DashboardPanelGroup = ({ children }: { children: React.ReactNode }) => {
       className="h-full"
     >
       <Panel
+        ref={sidebarRef}
         id="sidebar"
         order={1}
         collapsible
         collapsedSize={COLLAPSED_SIZE_PERCENT}
         minSize={minSidebarSize}
         maxSize={MAX_SIDEBAR_PERCENT}
-        onCollapse={() => {
-          setIsSidebarCollapsed(true);
-        }}
-        onExpand={() => {
-          setIsSidebarCollapsed(false);
-        }}
         className="hidden lg:block"
+        onResize={(size) => setLayout((prev) => [size, prev[1], prev[2]])}
       >
-        <Sidebar isCollapsed={isSidebarCollapsed} />
+        <Sidebar isCollapsed={sidebarRef.current?.isCollapsed()} />
       </Panel>
-      <PanelResizeHandle classNames="hidden lg:block" />
+      <PanelResizeHandle
+        tooltipPosition="right"
+        onClick={toggleSidebar}
+        classNames="hidden lg:block"
+      />
 
       <Panel id="main" order={2}>
         {children}
       </Panel>
 
-      <PanelResizeHandle classNames="hidden lg:block" />
+      <PanelResizeHandle
+        tooltipPosition="left"
+        onClick={toggleToolbar}
+        classNames="hidden lg:block"
+      />
       <Panel
+        ref={toolbarRef}
         id="toolbar"
         order={3}
         collapsible
         collapsedSize={COLLAPSED_SIZE_PERCENT}
         minSize={minToolbarSize}
         maxSize={MAX_TOOLBAR_PERCENT}
-        onCollapse={() => {
-          setIsToolbarCollapsed(true);
-        }}
-        onExpand={() => {
-          setIsToolbarCollapsed(false);
-        }}
         className="hidden lg:block"
+        onResize={(size) => setLayout((prev) => [prev[0], prev[1], size])}
       >
-        <Toolbar isCollapsed={isToolbarCollapsed} />
+        <Toolbar isCollapsed={toolbarRef.current?.isCollapsed()} />
       </Panel>
     </PanelGroup>
   );
