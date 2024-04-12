@@ -6,34 +6,30 @@ import { FaTrash } from 'react-icons/fa';
 
 import tw from '@/libs/tw';
 
-const EditHistory = () => {
-  const [selectedHistory, setSelectedHistory] = useState('');
+import { useGetHistories } from '@/hooks/history/use-history-service';
 
-  const MOCK_HISTORY = [
-    { label: '작품 정보 수정' },
-    { label: '인물 정보 수정' },
-    { label: '회차 정보 수정' },
-    { label: '배경 정보 수정 배경 정보 수정 배경 정보 수정' },
-  ];
+const EditHistory = () => {
+  const { histories } = useGetHistories();
+  const [selectedHistory, setSelectedHistory] = useState('');
 
   return (
     <Stack className="p-sm ">
-      <Text className="px-md text-sm font-bold text-gray-600">수정 목록</Text>
-      {MOCK_HISTORY.map((history) => (
+      <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
+      {histories?.map((history) => (
         <Button
-          onClick={() => setSelectedHistory(history.label)}
-          key={history.label}
+          onClick={() => setSelectedHistory(history.id)}
+          key={history.id}
           variant="transparent"
           justify="space-between"
           color="white"
-          rightSection={selectedHistory === history.label && <FaTrash />}
+          rightSection={selectedHistory === history.id && <FaTrash />}
           className={tw(
             'px-md hover:bg-gray-800',
-            selectedHistory === history.label && 'bg-gray-800',
+            selectedHistory === history.id && 'bg-gray-800',
           )}
         >
           <Text component="span" truncate className="text-start">
-            {history.label}
+            {history.title}
           </Text>
         </Button>
       ))}

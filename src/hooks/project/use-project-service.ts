@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
   CreateProjectRequest,
@@ -6,6 +6,8 @@ import {
   ProjectResponse,
   ProjectsResponse,
 } from '@/types/project';
+
+import { historyQueryKeys } from '../history/use-history-service';
 
 export const projectQueryKeys = {
   projects: ['projects'],
@@ -21,6 +23,8 @@ export const useCreateProject = ({
   onSuccess,
   onError,
 }: UseCreateProjectProps) => {
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (project: CreateProjectRequest) => {
       const response = await fetch('/api/project', {
@@ -35,6 +39,14 @@ export const useCreateProject = ({
     onSuccess(response: CreateProjectResponse) {
       if (response.success) {
         onSuccess(response);
+
+        // project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: projectQueryKeys.projects,
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.histories,
+        });
       } else {
         onError(response);
       }
