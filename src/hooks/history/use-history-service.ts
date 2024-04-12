@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { GetHistoriesResponse, GetHistoryResponse } from '@/types/history';
+import { GetHistoriesResponse } from '@/types/history';
 
 export const historyQueryKeys = {
   histories: ['histories'],
@@ -28,12 +28,12 @@ export const useGetHistories = () => {
   return { histories: result?.data, isLoading, isFetching };
 };
 
-export const useGetHistoryById = (projectId: string) => {
+export const useGetHistoriesById = (projectId: string) => {
   const {
     data: result,
     isLoading,
     isFetching,
-  } = useQuery<GetHistoryResponse>({
+  } = useQuery<GetHistoriesResponse>({
     queryKey: historyQueryKeys.history(projectId),
     enabled: !!projectId,
     queryFn: async () => {
@@ -47,5 +47,5 @@ export const useGetHistoryById = (projectId: string) => {
     },
   });
 
-  return { project: result?.data, isLoading, isFetching };
+  return { histories: result?.data, isLoading, isFetching };
 };

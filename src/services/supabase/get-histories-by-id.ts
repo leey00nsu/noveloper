@@ -2,11 +2,11 @@ import prisma from '@/libs/prisma';
 
 import { getUserData } from './get-user-data';
 
-export const getHistoryById = async (projectId: string) => {
+export const getHistoriesById = async (projectId: string) => {
   try {
     const { data: user } = await getUserData();
 
-    const history = await prisma.histories.findFirst({
+    const history = await prisma.histories.findMany({
       where: {
         user_id: user.id,
         project_id: projectId,
@@ -21,7 +21,7 @@ export const getHistoryById = async (projectId: string) => {
       data: history,
       success: true,
       status: 200,
-      message: '히스토리를 성공적으로 불러왔습니다.',
+      message: '히스토리 목록을 성공적으로 불러왔습니다.',
     };
   } catch (error: any) {
     throw new Error(error.message);
