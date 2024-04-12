@@ -1,7 +1,9 @@
-import { ActionIcon, Card, Group, Skeleton, Text } from '@mantine/core';
+import { ActionIcon, Card, Group, Text } from '@mantine/core';
 import { Projects } from '@prisma/client';
 import Link from 'next/link';
 import { FaEllipsis } from 'react-icons/fa6';
+
+import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
 interface ProjectCardProps {
   project: Projects;
@@ -11,13 +13,13 @@ const ProjectCardSkeleton = () => {
   return (
     <Card withBorder className="h-32">
       <Group wrap="nowrap" justify="space-between">
-        <Skeleton className="h-4" />
+        <ThemeSkeleton className="h-4" />
         <ActionIcon color="gray" variant="subtle">
           <FaEllipsis />
         </ActionIcon>
       </Group>
 
-      <Skeleton className="h-full" />
+      <ThemeSkeleton className="h-full" />
     </Card>
   );
 };

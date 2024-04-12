@@ -11,13 +11,25 @@ import {
 
 import TimeLineItem from './time-line-item';
 
+const TimeLineListSkeleton = () => {
+  return (
+    <Stack className="p-sm">
+      <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
+
+      <TimeLineItem.Skeleton />
+      <TimeLineItem.Skeleton />
+    </Stack>
+  );
+};
+
 const TimeLineList = () => {
   const { projectId } = useParams();
 
-  const { histories } = useGetHistories();
-  const { histories: filteredHistories } = useGetHistoriesById(
-    projectId as string,
-  );
+  const { histories, isLoading: isHistoriesLoading } = useGetHistories();
+  const {
+    histories: filteredHistories,
+    isLoading: isFilteredHistoriesLoading,
+  } = useGetHistoriesById(projectId as string);
   const [selectedHistory, setSelectedHistory] = useState('');
 
   const selectHistory = (historyId: string) => {
@@ -25,6 +37,10 @@ const TimeLineList = () => {
   };
 
   const showingHistories = projectId ? filteredHistories : histories;
+
+  if (isHistoriesLoading || isFilteredHistoriesLoading) {
+    return <TimeLineListSkeleton />;
+  }
 
   return (
     <Stack className="p-sm">
