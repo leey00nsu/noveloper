@@ -7,6 +7,7 @@ export default async function mockResponse(
   const response = await new Promise<ApiResponse<null>>((resolve) => {
     setTimeout(() => {
       resolve({
+        data: null,
         status: success ? 200 : 400,
         success,
         message,
