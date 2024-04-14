@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { fetcher } from '@/libs/fetcher';
+
 import {
   CreateProjectRequest,
   CreateProjectResponse,
@@ -26,16 +28,13 @@ export const useCreateProject = ({
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (project: CreateProjectRequest) => {
-      const response = await fetch('/api/project', {
+    mutationFn: (project: CreateProjectRequest) =>
+      fetcher({
+        url: `/api/project`,
         method: 'POST',
         body: JSON.stringify(project),
-      });
+      }),
 
-      const data = await response.json();
-
-      return data;
-    },
     onSuccess(response: CreateProjectResponse) {
       if (response.success) {
         onSuccess(response);
@@ -64,15 +63,7 @@ export const useGetProjects = () => {
     isFetching,
   } = useQuery<GetProjectsResponse>({
     queryKey: projectQueryKeys.projects,
-    queryFn: async () => {
-      const response = await fetch(`/api/project`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
+    queryFn: () => fetcher({ url: `/api/project`, method: 'GET' }),
   });
 
   return { projects: result?.data, isLoading, isFetching };
@@ -86,15 +77,8 @@ export const useGetProjectById = (projectId: string) => {
   } = useQuery<GetProjectResponse>({
     queryKey: projectQueryKeys.project(projectId),
     enabled: !!projectId,
-    queryFn: async () => {
-      const response = await fetch(`/api/project?id=${projectId}`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
+    queryFn: () =>
+      fetcher({ url: `/api/project?id=${projectId}`, method: 'GET' }),
   });
 
   return { project: result?.data, isLoading, isFetching };

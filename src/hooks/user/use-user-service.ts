@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { fetcher } from '@/libs/fetcher';
+
 import { GetUserResponse } from '@/types/user';
 
 export const userQueryKeys = {
@@ -13,15 +15,7 @@ export const useGetUser = () => {
     isFetching,
   } = useQuery<GetUserResponse>({
     queryKey: userQueryKeys.user,
-    queryFn: async () => {
-      const response = await fetch(`/api/user`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
+    queryFn: () => fetcher({ url: `/api/user`, method: 'GET' }),
   });
 
   return { user: result?.data, isLoading, isFetching };

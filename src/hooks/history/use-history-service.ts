@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { fetcher } from '@/libs/fetcher';
+
 import { GetHistoriesResponse } from '@/types/history';
 
 export const historyQueryKeys = {
@@ -14,15 +16,7 @@ export const useGetHistories = () => {
     isFetching,
   } = useQuery<GetHistoriesResponse>({
     queryKey: historyQueryKeys.histories,
-    queryFn: async () => {
-      const response = await fetch(`/api/history`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
+    queryFn: () => fetcher({ url: '/api/history', method: 'GET' }),
   });
 
   return { histories: result?.data, isLoading, isFetching };
@@ -36,15 +30,8 @@ export const useGetHistoriesById = (projectId: string) => {
   } = useQuery<GetHistoriesResponse>({
     queryKey: historyQueryKeys.history(projectId),
     enabled: !!projectId,
-    queryFn: async () => {
-      const response = await fetch(`/api/history?id=${projectId}`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
+    queryFn: () =>
+      fetcher({ url: `/api/history?id=${projectId}`, method: 'GET' }),
   });
 
   return { histories: result?.data, isLoading, isFetching };
