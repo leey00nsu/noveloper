@@ -4,6 +4,8 @@ import prisma from '@/libs/prisma';
 
 import { GetUserResponse } from '@/types/user';
 
+import { PLANS } from '@/constants/plan/plan';
+
 export const findOrInsertUser = async (
   user: User,
 ): Promise<GetUserResponse> => {
@@ -26,8 +28,8 @@ export const findOrInsertUser = async (
     data: {
       id: user.id,
       user_name: user.user_metadata.full_name,
-      token: 0,
-      plan_id: 0,
+      token: PLANS.FREE.token,
+      plan_id: 'FREE',
     },
   });
 

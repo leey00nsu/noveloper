@@ -27,6 +27,7 @@ export const createProject = async (
   await createHistory({
     projectId: created.id,
     title: `${project.title} 생성`,
+    content: `${project.title} 프로젝트가 생성되었습니다.`,
   });
 
   return {

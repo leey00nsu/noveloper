@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Plan {
+  FREE
+  PLUS
+  PREMIUM
+}
+
 model Projects {
   id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title      String      @db.VarChar
@@ -24,7 +30,7 @@ model Users {
   created_at DateTime    @default(now()) @db.Timestamptz(6)
   user_name  String      @db.VarChar
   token      Int         @db.SmallInt
-  plan_id    Int         @db.SmallInt
+  plan_id    Plan        @default(FREE)
   projects   Projects[]
   Histories  Histories[]
 }
@@ -32,6 +38,7 @@ model Users {
 model Histories {
   id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title      String   @db.VarChar
+  content    String   @db.VarChar
   user_id    String   @db.Uuid
   project_id String   @db.Uuid
   created_at DateTime @default(now()) @db.Timestamptz(6)

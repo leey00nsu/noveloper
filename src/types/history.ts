@@ -5,6 +5,7 @@ import { ApiResponse } from './api';
 export interface CreateHistoryRequest {
   projectId: string;
   title: string;
+  content: string;
 }
 
 export interface CreateHistoryResponse extends ApiResponse<Histories> {}

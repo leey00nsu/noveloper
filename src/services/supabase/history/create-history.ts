@@ -14,6 +14,7 @@ export const createHistory = async (
       user_id: user.id,
       project_id: request.projectId,
       title: request.title,
+      content: request.content,
     },
   });
 
