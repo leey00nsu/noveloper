@@ -7,6 +7,8 @@ import {
   CreateProjectResponse,
   GetProjectResponse,
   GetProjectsResponse,
+  UpdateProjectRequest,
+  UpdateProjectResponse,
 } from '@/types/project';
 
 import { historyQueryKeys } from '../history/use-history-service';
@@ -45,6 +47,46 @@ export const useCreateProject = ({
         });
         queryClient.invalidateQueries({
           queryKey: historyQueryKeys.histories,
+        });
+      } else {
+        onError(response);
+      }
+    },
+    onError() {},
+  });
+
+  return { mutate, isPending };
+};
+
+interface UseUpdateProjectProps {
+  onSuccess: (response: UpdateProjectResponse) => void;
+  onError: (response: UpdateProjectResponse) => void;
+}
+
+export const useUpdateProject = ({
+  onSuccess,
+  onError,
+}: UseUpdateProjectProps) => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (project: UpdateProjectRequest) =>
+      fetcher({
+        url: `/api/project`,
+        method: 'PATCH',
+        body: JSON.stringify(project),
+      }),
+
+    onSuccess(response: UpdateProjectResponse) {
+      if (response.success) {
+        onSuccess(response);
+
+        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: projectQueryKeys.project(response.data.id),
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.history(response.data.id),
         });
       } else {
         onError(response);

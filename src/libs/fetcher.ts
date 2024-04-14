@@ -1,6 +1,6 @@
 interface FetcherProps {
   url: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   headers?: HeadersInit;
   body?: BodyInit;
 }

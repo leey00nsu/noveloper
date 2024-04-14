@@ -34,3 +34,7 @@ export type CreateProjectRequest = z.infer<typeof CreateProjectSchema>;
 export interface CreateProjectResponse extends ApiResponse<null> {}
 export interface GetProjectsResponse extends ApiResponse<Projects[]> {}
 export interface GetProjectResponse extends ApiResponse<Projects> {}
+export interface UpdateProjectRequest extends CreateProjectRequest {
+  projectId: string;
+}
+export interface UpdateProjectResponse extends ApiResponse<Projects> {}
