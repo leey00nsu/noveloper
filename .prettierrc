@@ -17,6 +17,7 @@
     "^@/hooks/(.*)$",
     "^@/store/(.*)$",
     "^@/types/(.*)$",
+    "^@/constants/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,
