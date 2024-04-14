@@ -3,21 +3,16 @@ import { createContext, useContext } from 'react';
 
 import tw from '@/libs/tw';
 
-interface UserInfoProps {
-  userName: string;
-  userEmail: string;
-  src?: string;
-  children?: React.ReactNode;
-  ignoreTheme?: boolean;
-  truncate?: boolean;
-}
+import ThemeSkeleton from '../mantine-ui/theme-skeleton';
 
 const IgnoreThemeContext = createContext<boolean | undefined>(undefined);
 
-const UserAvatar = ({
-  userName,
-  src,
-}: Pick<UserInfoProps, 'userName' | 'src'>) => {
+interface UserAvatarProps {
+  userName?: string;
+  src?: string;
+}
+
+const UserAvatar = ({ userName, src }: UserAvatarProps) => {
   const ignoreTheme = useContext(IgnoreThemeContext);
 
   return (
@@ -27,17 +22,32 @@ const UserAvatar = ({
         placeholder: tw(ignoreTheme && 'bg-gray-700 text-gray-600'),
       }}
     >
-      {!src && userName.slice(0, 1)}
+      {!src && userName && userName.slice(0, 1)}
     </Avatar>
   );
 };
 
-const UserProfile = ({
-  userName,
-  userEmail,
-  truncate,
-}: Pick<UserInfoProps, 'userName' | 'userEmail' | 'truncate'>) => {
+interface UserProfileProps {
+  userName?: string;
+  userEmail?: string;
+  truncate?: boolean;
+}
+
+const UserProfileSkeleton = () => {
   const ignoreTheme = useContext(IgnoreThemeContext);
+
+  return (
+    <Stack className="w-full gap-0">
+      <ThemeSkeleton ignoreTheme={ignoreTheme} className="h-6" />
+      <ThemeSkeleton ignoreTheme={ignoreTheme} className="h-6" />
+    </Stack>
+  );
+};
+
+const UserProfile = ({ userName, userEmail, truncate }: UserProfileProps) => {
+  const ignoreTheme = useContext(IgnoreThemeContext);
+
+  if (!userName || !userEmail) return <UserProfileSkeleton />;
 
   return (
     <Stack className="min-w-0 gap-0">
@@ -57,10 +67,12 @@ const UserProfile = ({
   );
 };
 
-const UserInfo = ({
-  children,
-  ignoreTheme,
-}: Pick<UserInfoProps, 'children' | 'ignoreTheme'>) => {
+interface UserInfoProps {
+  children?: React.ReactNode;
+  ignoreTheme?: boolean;
+}
+
+const UserInfo = ({ children, ignoreTheme }: UserInfoProps) => {
   return (
     <IgnoreThemeContext.Provider value={ignoreTheme}>
       <Group

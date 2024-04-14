@@ -2,16 +2,21 @@ import { Button, Divider, Group, Select, Stack, Text } from '@mantine/core';
 
 import UserInfo from '@/components/ui/user-info/user-info';
 
+import { useGetUser } from '@/hooks/user/use-user-service';
+
 const SUPPORT_LANGUAGES = ['한국어', '영어'];
 
 const ProfilTab = () => {
+  const { user } = useGetUser();
+
   return (
     <Stack className="p-sm ">
       <UserInfo>
-        <UserInfo.Avatar userName="Test Name" />
+        <UserInfo.Avatar userName={user?.user_name} />
         <UserInfo.Profile
-          userName="Test Name"
-          userEmail="testName@testName.com"
+          truncate
+          userName={user?.user_name}
+          userEmail={user?.user_name}
         />
       </UserInfo>
 

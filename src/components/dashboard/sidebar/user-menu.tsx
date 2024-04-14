@@ -3,15 +3,19 @@ import Link from 'next/link';
 
 import UserInfo from '@/components/ui/user-info/user-info';
 
+import { useGetUser } from '@/hooks/user/use-user-service';
+
 const UserMenu = () => {
+  const { user } = useGetUser();
+
   return (
     <Box href="/dashboard/profile" component={Link} className="p-sm">
       <UserInfo ignoreTheme>
-        <UserInfo.Avatar userName="User" />
+        <UserInfo.Avatar userName={user?.user_name} />
         <UserInfo.Profile
           truncate
-          userName="User"
-          userEmail="testName@testName.com"
+          userName={user?.user_name}
+          userEmail={user?.user_name}
         />
       </UserInfo>
     </Box>
