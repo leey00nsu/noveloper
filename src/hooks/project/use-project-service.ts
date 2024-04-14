@@ -3,8 +3,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   CreateProjectRequest,
   CreateProjectResponse,
-  ProjectResponse,
-  ProjectsResponse,
+  GetProjectResponse,
+  GetProjectsResponse,
 } from '@/types/project';
 
 import { historyQueryKeys } from '../history/use-history-service';
@@ -62,7 +62,7 @@ export const useGetProjects = () => {
     data: result,
     isLoading,
     isFetching,
-  } = useQuery<ProjectsResponse>({
+  } = useQuery<GetProjectsResponse>({
     queryKey: projectQueryKeys.projects,
     queryFn: async () => {
       const response = await fetch(`/api/project`, {
@@ -83,7 +83,7 @@ export const useGetProjectById = (projectId: string) => {
     data: result,
     isLoading,
     isFetching,
-  } = useQuery<ProjectResponse>({
+  } = useQuery<GetProjectResponse>({
     queryKey: projectQueryKeys.project(projectId),
     enabled: !!projectId,
     queryFn: async () => {

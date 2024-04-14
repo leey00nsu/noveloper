@@ -11,7 +11,7 @@ import { getProjectById } from '@/services/supabase/get-project-by-id';
 
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 
-import { ProjectResponse } from '@/types/project';
+import { GetProjectResponse } from '@/types/project';
 
 export default async function Page({
   params,
@@ -27,7 +27,7 @@ export default async function Page({
       throw new Error('프로젝트ID가 없습니다.');
     }
 
-    await queryClient.fetchQuery<ProjectResponse>({
+    await queryClient.fetchQuery<GetProjectResponse>({
       queryKey: projectQueryKeys.project(params.projectId),
       queryFn: async () => {
         const data = await getProjectById(params.projectId);
