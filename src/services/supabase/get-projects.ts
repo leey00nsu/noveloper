@@ -1,8 +1,10 @@
 import prisma from '@/libs/prisma';
 
+import { GetProjectsResponse } from '@/types/project';
+
 import { getUserData } from './get-user-data';
 
-export const getProjects = async () => {
+export const getProjects = async (): Promise<GetProjectsResponse> => {
   const { data: user } = await getUserData();
 
   const projects = await prisma.projects.findMany({

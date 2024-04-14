@@ -7,6 +7,6 @@ export interface CreateHistoryRequest {
   title: string;
 }
 
-export interface CreateHistoryResponse extends ApiResponse<null> {}
+export interface CreateHistoryResponse extends ApiResponse<Histories> {}
 export interface GetHistoriesResponse extends ApiResponse<Histories[]> {}
 export interface GetHistoryResponse extends ApiResponse<Histories> {}

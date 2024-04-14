@@ -31,7 +31,7 @@ export const CreateProjectSchema = z.object({
 
 export type CreateProjectRequest = z.infer<typeof CreateProjectSchema>;
 
-export interface CreateProjectResponse extends ApiResponse<null> {}
+export interface CreateProjectResponse extends ApiResponse<Projects> {}
 export interface GetProjectsResponse extends ApiResponse<Projects[]> {}
 export interface GetProjectResponse extends ApiResponse<Projects> {}
 export interface UpdateProjectRequest extends CreateProjectRequest {

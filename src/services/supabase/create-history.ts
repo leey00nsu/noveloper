@@ -1,10 +1,12 @@
 import prisma from '@/libs/prisma';
 
-import { CreateHistoryRequest } from '@/types/history';
+import { CreateHistoryRequest, CreateHistoryResponse } from '@/types/history';
 
 import { getUserData } from './get-user-data';
 
-export const createHistory = async (request: CreateHistoryRequest) => {
+export const createHistory = async (
+  request: CreateHistoryRequest,
+): Promise<CreateHistoryResponse> => {
   const { data: user } = await getUserData();
 
   const created = await prisma.histories.create({
@@ -20,6 +22,7 @@ export const createHistory = async (request: CreateHistoryRequest) => {
   }
 
   return {
+    data: created,
     success: true,
     status: 201,
     message: '히스토리가 생성되었습니다.',

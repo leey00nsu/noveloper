@@ -1,7 +1,9 @@
 import prisma from '@/libs/prisma';
 import { createClient } from '@/libs/supabase/server';
 
-export const getUserData = async () => {
+import { GetUserResponse } from '@/types/user';
+
+export const getUserData = async (): Promise<GetUserResponse> => {
   const supabase = createClient();
 
   const {

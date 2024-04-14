@@ -2,7 +2,11 @@ import { User } from '@supabase/supabase-js';
 
 import prisma from '@/libs/prisma';
 
-export const findOrInsertUser = async (user: User) => {
+import { GetUserResponse } from '@/types/user';
+
+export const findOrInsertUser = async (
+  user: User,
+): Promise<GetUserResponse> => {
   const userData = await prisma.users.findUnique({
     where: {
       id: user.id,

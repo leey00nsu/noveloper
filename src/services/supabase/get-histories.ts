@@ -1,8 +1,10 @@
 import prisma from '@/libs/prisma';
 
+import { GetHistoriesResponse } from '@/types/history';
+
 import { getUserData } from './get-user-data';
 
-export const getHistories = async () => {
+export const getHistories = async (): Promise<GetHistoriesResponse> => {
   const { data: user } = await getUserData();
 
   const histories = await prisma.histories.findMany({

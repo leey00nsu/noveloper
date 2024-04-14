@@ -1,11 +1,13 @@
 import prisma from '@/libs/prisma';
 
-import { CreateProjectRequest } from '@/types/project';
+import { CreateProjectRequest, CreateProjectResponse } from '@/types/project';
 
 import { createHistory } from './create-history';
 import { getUserData } from './get-user-data';
 
-export const createProject = async (project: CreateProjectRequest) => {
+export const createProject = async (
+  project: CreateProjectRequest,
+): Promise<CreateProjectResponse> => {
   const { data: user } = await getUserData();
 
   const created = await prisma.projects.create({
@@ -28,6 +30,7 @@ export const createProject = async (project: CreateProjectRequest) => {
   });
 
   return {
+    data: created,
     success: true,
     status: 201,
     message: '프로젝트가 생성되었습니다.',
