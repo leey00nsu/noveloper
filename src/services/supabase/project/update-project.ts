@@ -2,7 +2,7 @@ import prisma from '@/libs/prisma';
 
 import { UpdateProjectRequest, UpdateProjectResponse } from '@/types/project';
 
-import { createHistory } from './create-history';
+import { createHistory } from '../history/create-history';
 
 export const updateProject = async (
   project: UpdateProjectRequest,

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getUserData } from '@/services/supabase/get-user-data';
+import { getUserData } from '@/services/supabase/user/get-user-data';
 
 export async function GET() {
   const response = await getUserData();

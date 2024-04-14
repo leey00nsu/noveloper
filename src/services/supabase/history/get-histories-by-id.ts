@@ -2,7 +2,7 @@ import prisma from '@/libs/prisma';
 
 import { GetHistoriesResponse } from '@/types/history';
 
-import { getUserData } from './get-user-data';
+import { getUserData } from '../user/get-user-data';
 
 export const getHistoriesById = async (
   projectId: string,

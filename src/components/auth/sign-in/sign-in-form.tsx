@@ -13,7 +13,7 @@ import {
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
 
-import { signInWithGithub } from '@/services/supabase/sign-in-with-github';
+import { signInWithGithub } from '@/services/supabase/user/sign-in-with-github';
 
 const SignInForm = () => {
   return (

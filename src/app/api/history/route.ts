@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getHistories } from '@/services/supabase/get-histories';
-import { getHistoriesById } from '@/services/supabase/get-histories-by-id';
+import { getHistories } from '@/services/supabase/history/get-histories';
+import { getHistoriesById } from '@/services/supabase/history/get-histories-by-id';
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;

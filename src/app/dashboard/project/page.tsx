@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 
 import ProjectList from '@/components/dashboard/content/project/project-list';
 
-import { getProjects } from '@/services/supabase/get-projects';
+import { getProjects } from '@/services/supabase/project/get-projects';
 
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 

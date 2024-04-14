@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { findOrInsertUser } from '@/services/supabase/find-or-insert-user';
+import { findOrInsertUser } from '@/services/supabase/user/find-or-insert-user';
 
 import { createClient } from '@/libs/supabase/server';
 

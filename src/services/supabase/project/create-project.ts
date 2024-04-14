@@ -2,8 +2,8 @@ import prisma from '@/libs/prisma';
 
 import { CreateProjectRequest, CreateProjectResponse } from '@/types/project';
 
-import { createHistory } from './create-history';
-import { getUserData } from './get-user-data';
+import { createHistory } from '../history/create-history';
+import { getUserData } from '../user/get-user-data';
 
 export const createProject = async (
   project: CreateProjectRequest,
