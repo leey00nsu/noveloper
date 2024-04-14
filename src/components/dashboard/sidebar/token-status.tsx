@@ -4,7 +4,7 @@ import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
 import { useGetUser } from '@/hooks/user/use-user-service';
 
-const MOCK_TOKEN_MAX = 100;
+import { PLANS } from '@/constants/plan/plan';
 
 const TokenStatusSkeleton = () => {
   return (
@@ -25,10 +25,10 @@ const TokenStatus = () => {
     <Box className="px-md">
       <Text className="text-sm font-bold text-gray-600">토큰</Text>
       <Text className="text-base text-white">
-        {user.token} / {MOCK_TOKEN_MAX}
+        {user.token} / {PLANS[user.plan_id].token}
       </Text>
       <Progress
-        value={(user.token / MOCK_TOKEN_MAX) * 100}
+        value={(user.token / PLANS[user.plan_id].token) * 100}
         size="lg"
         radius="xl"
         className="mt-md"

@@ -11,8 +11,6 @@ const PlanTab = () => {
 
   if (!user) return null;
 
-  const currentPlan = user.plan_id as string;
-
   return (
     <Flex className="flex-col justify-between gap-sm p-sm lg:flex-row">
       {Object.values(PLANS).map((plan, index) => (
@@ -20,12 +18,12 @@ const PlanTab = () => {
           <Stack className="grow">
             <Text className="text-xl font-bold ">{plan.name}</Text>
             <Text className="text-lg ">{plan.price}원 / 달</Text>
-            {currentPlan.toLowerCase() === plan.name.toLowerCase() && (
+            {user.plan_id.toLowerCase() === plan.name.toLowerCase() && (
               <Button disabled color="blue">
                 현재 플랜
               </Button>
             )}
-            {currentPlan.toLowerCase() !== plan.name.toLowerCase() && (
+            {user.plan_id.toLowerCase() !== plan.name.toLowerCase() && (
               <Button color="teal.7">{plan.name} 업그레이드</Button>
             )}
             <List icon={<FaCheckCircle className="text-green-600" />}>
