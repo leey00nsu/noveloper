@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 
 import { getUserData } from '@/services/supabase/user/get-user-data';
 
-export async function GET() {
-  const response = await getUserData();
+import { catchResponseError } from '@/libs/response-catch-error';
 
-  return NextResponse.json(response);
+export async function GET() {
+  const response = await catchResponseError(getUserData());
+
+  return NextResponse.json(response, {
+    status: response.status,
+  });
 }

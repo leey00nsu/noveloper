@@ -3,16 +3,20 @@ import prisma from '@/libs/prisma';
 import { UpdateProjectRequest, UpdateProjectResponse } from '@/types/project';
 
 import { createHistory } from '../history/create-history';
+import { getUserData } from '../user/get-user-data';
 import { getProjectById } from './get-project-by-id';
 
 export const updateProject = async (
   project: UpdateProjectRequest,
 ): Promise<UpdateProjectResponse> => {
+  const { data: user } = await getUserData();
+
   const { data: pastProject } = await getProjectById(project.projectId);
 
   const updated = await prisma.projects.update({
     where: {
       id: project.projectId,
+      userId: user.id,
     },
     data: {
       title: project.title,
