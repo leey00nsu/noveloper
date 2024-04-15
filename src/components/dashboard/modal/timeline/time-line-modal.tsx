@@ -15,6 +15,10 @@ const TimeLineModal = ({
   selectedHistory,
 }: TimeLineModalProps) => {
   const contents = selectedHistory?.content.split('\\n');
+  const time = new Intl.DateTimeFormat('ko', {
+    dateStyle: 'full',
+    timeStyle: 'medium',
+  }).format(selectedHistory?.createdAt);
 
   return (
     <Modal.Root size="80%" centered opened={isOpen} onClose={closeModal}>
@@ -27,6 +31,7 @@ const TimeLineModal = ({
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body className="overflow-hidden p-md">
+          <Text className="text-sm font-light">{time}</Text>
           {contents?.map((content) => <Text key={content}>{content}</Text>)}
         </Modal.Body>
       </Modal.Content>
