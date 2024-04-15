@@ -9,6 +9,7 @@ import {
   useGetHistoriesById,
 } from '@/hooks/history/use-history-service';
 
+import TimeLineModal from '../../modal/timeline/time-line-modal';
 import TimeLineItem from './time-line-item';
 
 const TimeLineListSkeleton = () => {
@@ -30,13 +31,25 @@ const TimeLineList = () => {
     histories: filteredHistories,
     isLoading: isFilteredHistoriesLoading,
   } = useGetHistoriesById(projectId as string);
-  const [selectedHistory, setSelectedHistory] = useState('');
+  const [selectedHistoryId, setSelectedHistoryId] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const selectHistory = (historyId: string) => {
-    setSelectedHistory(historyId);
+  const selectHistoryId = (historyId: string) => {
+    setSelectedHistoryId(historyId);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const showingHistories = projectId ? filteredHistories : histories;
+
+  const selectedHistory = showingHistories?.find(
+    (history) => history.id === selectedHistoryId,
+  );
 
   if (isHistoriesLoading || isFilteredHistoriesLoading) {
     return <TimeLineListSkeleton />;
@@ -45,12 +58,18 @@ const TimeLineList = () => {
   return (
     <Stack className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
+      <TimeLineModal
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        selectedHistory={selectedHistory}
+      />
       {showingHistories?.map((history) => (
         <TimeLineItem
-          history={history}
           key={history.id}
-          selectHistory={selectHistory}
-          selectedHistory={selectedHistory}
+          history={history}
+          selectHistoryId={selectHistoryId}
+          selectedHistoryId={selectedHistoryId}
+          openModal={openModal}
         />
       ))}
     </Stack>

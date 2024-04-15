@@ -1,15 +1,17 @@
 import { Button, Text } from '@mantine/core';
 import { Histories } from '@prisma/client';
-import { FaTrash } from 'react-icons/fa';
 
 import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
 import tw from '@/libs/tw';
 
+import TimeLineMenu from './time-line-menu';
+
 interface TimeLineItemProps {
   history: Histories;
-  selectedHistory: string;
-  selectHistory: (historyId: string) => void;
+  selectedHistoryId: string;
+  selectHistoryId: (historyId: string) => void;
+  openModal: () => void;
 }
 
 const TimeLineItemSkeleton = () => {
@@ -18,20 +20,24 @@ const TimeLineItemSkeleton = () => {
 
 const TimeLineItem = ({
   history,
-  selectHistory,
-  selectedHistory,
+  selectHistoryId,
+  selectedHistoryId,
+  openModal,
 }: TimeLineItemProps) => {
   return (
     <Button
-      onClick={() => selectHistory(history.id)}
-      key={history.id}
+      onClick={() => selectHistoryId(history.id)}
       variant="transparent"
       justify="space-between"
       color="white"
-      rightSection={selectedHistory === history.id && <FaTrash />}
+      rightSection={
+        selectedHistoryId === history.id && (
+          <TimeLineMenu openModal={openModal} />
+        )
+      }
       className={tw(
         'px-md hover:bg-gray-800',
-        selectedHistory === history.id && 'bg-gray-800',
+        selectedHistoryId === history.id && 'bg-gray-800',
       )}
     >
       <Text component="span" truncate className="text-start">
