@@ -1,3 +1,7 @@
+import { ApiResponse } from '@/types/api';
+
+import { convertDateObject } from './convert-date-object';
+
 interface FetcherProps {
   url: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -5,7 +9,7 @@ interface FetcherProps {
   body?: BodyInit;
 }
 
-export const fetcher = async ({
+export const fetcher = async <T>({
   url,
   method = 'GET',
   headers,
@@ -17,7 +21,12 @@ export const fetcher = async ({
     body,
   });
 
-  const data = await response.json();
+  const data: ApiResponse<T> = await response.json();
 
-  return data;
+  const converted = convertDateObject(data.data);
+
+  return {
+    ...data,
+    data: converted,
+  };
 };

@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  DefaultError,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { fetcher } from '@/libs/fetcher';
 
@@ -29,15 +34,18 @@ export const useCreateProject = ({
 }: UseCreateProjectProps) => {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (project: CreateProjectRequest) =>
+  const { mutate, isPending } = useMutation<
+    CreateProjectResponse,
+    DefaultError,
+    CreateProjectRequest
+  >({
+    mutationFn: (project) =>
       fetcher({
         url: `/api/project`,
         method: 'POST',
         body: JSON.stringify(project),
       }),
-
-    onSuccess(response: CreateProjectResponse) {
+    onSuccess(response) {
       if (response.success) {
         onSuccess(response);
 
@@ -69,15 +77,19 @@ export const useUpdateProject = ({
 }: UseUpdateProjectProps) => {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (project: UpdateProjectRequest) =>
+  const { mutate, isPending } = useMutation<
+    UpdateProjectResponse,
+    DefaultError,
+    UpdateProjectRequest
+  >({
+    mutationFn: (project) =>
       fetcher({
         url: `/api/project`,
         method: 'PATCH',
         body: JSON.stringify(project),
       }),
 
-    onSuccess(response: UpdateProjectResponse) {
+    onSuccess(response) {
       if (response.success) {
         onSuccess(response);
 
