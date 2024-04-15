@@ -27,9 +27,9 @@ export const findOrInsertUser = async (
   const created = await prisma.users.create({
     data: {
       id: user.id,
-      user_name: user.user_metadata.full_name,
+      userName: user.user_metadata.full_name,
       token: PLANS.FREE.token,
-      plan_id: 'FREE',
+      plan: 'FREE',
     },
   });
 

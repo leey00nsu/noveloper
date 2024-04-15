@@ -9,7 +9,7 @@ export const getHistories = async (): Promise<GetHistoriesResponse> => {
 
   const histories = await prisma.histories.findMany({
     where: {
-      user_id: user.id,
+      userId: user.id,
     },
   });
 

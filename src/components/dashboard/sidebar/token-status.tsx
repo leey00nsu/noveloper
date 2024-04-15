@@ -25,10 +25,10 @@ const TokenStatus = () => {
     <Box className="px-md">
       <Text className="text-sm font-bold text-gray-600">토큰</Text>
       <Text className="text-base text-white">
-        {user.token} / {PLANS[user.plan_id].token}
+        {user.token} / {PLANS[user.plan].token}
       </Text>
       <Progress
-        value={(user.token / PLANS[user.plan_id].token) * 100}
+        value={(user.token / PLANS[user.plan].token) * 100}
         size="lg"
         radius="xl"
         className="mt-md"

@@ -18,12 +18,12 @@ const PlanTab = () => {
           <Stack className="grow">
             <Text className="text-xl font-bold ">{plan.name}</Text>
             <Text className="text-lg ">{plan.price}원 / 달</Text>
-            {user.plan_id.toLowerCase() === plan.name.toLowerCase() && (
+            {user.plan.toLowerCase() === plan.name.toLowerCase() && (
               <Button disabled color="blue">
                 현재 플랜
               </Button>
             )}
-            {user.plan_id.toLowerCase() !== plan.name.toLowerCase() && (
+            {user.plan.toLowerCase() !== plan.name.toLowerCase() && (
               <Button color="teal.7">{plan.name} 업그레이드</Button>
             )}
             <List icon={<FaCheckCircle className="text-green-600" />}>

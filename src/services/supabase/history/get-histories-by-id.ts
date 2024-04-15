@@ -11,8 +11,8 @@ export const getHistoriesById = async (
 
   const history = await prisma.histories.findMany({
     where: {
-      user_id: user.id,
-      project_id: projectId,
+      userId: user.id,
+      projectId,
     },
   });
 

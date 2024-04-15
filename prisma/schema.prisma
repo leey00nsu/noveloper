@@ -14,34 +14,34 @@ enum Plan {
 }
 
 model Projects {
-  id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title      String      @db.VarChar
-  author     String      @db.VarChar
-  created_at DateTime    @default(now()) @db.Timestamptz(6)
-  synopsis   String      @db.VarChar
-  janres     String[]    @db.VarChar
-  user_id    String      @db.Uuid
-  users      Users       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Histories  Histories[]
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title     String      @db.VarChar
+  author    String      @db.VarChar
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  synopsis  String      @db.VarChar
+  janres    String[]    @db.VarChar
+  userId    String      @map("user_id") @db.Uuid
+  users     Users       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Histories Histories[]
 }
 
 model Users {
-  id         String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at DateTime    @default(now()) @db.Timestamptz(6)
-  user_name  String      @db.VarChar
-  token      Int         @db.SmallInt
-  plan_id    Plan        @default(FREE)
-  projects   Projects[]
-  Histories  Histories[]
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  userName  String      @map("user_name") @db.VarChar
+  token     Int         @db.SmallInt
+  plan      Plan        @default(FREE)
+  projects  Projects[]
+  Histories Histories[]
 }
 
 model Histories {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title      String   @db.VarChar
-  content    String   @db.VarChar
-  user_id    String   @db.Uuid
-  project_id String   @db.Uuid
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  users      Users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  projects   Projects @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title     String   @db.VarChar
+  content   String   @db.VarChar
+  userId    String   @map("user_id") @db.Uuid
+  projectId String   @map("project_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects  Projects @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

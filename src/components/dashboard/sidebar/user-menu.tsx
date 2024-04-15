@@ -11,11 +11,11 @@ const UserMenu = () => {
   return (
     <Box href="/dashboard/profile" component={Link} className="p-sm">
       <UserInfo ignoreTheme>
-        <UserInfo.Avatar userName={user?.user_name} />
+        <UserInfo.Avatar userName={user?.userName} />
         <UserInfo.Profile
           truncate
-          userName={user?.user_name}
-          userEmail={user?.user_name}
+          userName={user?.userName}
+          userEmail={user?.userName}
         />
       </UserInfo>
     </Box>

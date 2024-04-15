@@ -12,11 +12,11 @@ const ProfilTab = () => {
   return (
     <Stack className="p-sm ">
       <UserInfo>
-        <UserInfo.Avatar userName={user?.user_name} />
+        <UserInfo.Avatar userName={user?.userName} />
         <UserInfo.Profile
           truncate
-          userName={user?.user_name}
-          userEmail={user?.user_name}
+          userName={user?.userName}
+          userEmail={user?.userName}
         />
       </UserInfo>
 

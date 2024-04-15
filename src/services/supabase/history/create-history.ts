@@ -11,8 +11,8 @@ export const createHistory = async (
 
   const created = await prisma.histories.create({
     data: {
-      user_id: user.id,
-      project_id: request.projectId,
+      userId: user.id,
+      projectId: request.projectId,
       title: request.title,
       content: request.content,
     },

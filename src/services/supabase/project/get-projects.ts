@@ -9,7 +9,7 @@ export const getProjects = async (): Promise<GetProjectsResponse> => {
 
   const projects = await prisma.projects.findMany({
     where: {
-      user_id: user.id,
+      userId: user.id,
     },
   });
 

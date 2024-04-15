@@ -11,7 +11,7 @@ export const getProjectById = async (
 
   const project = await prisma.projects.findFirst({
     where: {
-      user_id: user.id,
+      userId: user.id,
       id: projectId,
     },
   });

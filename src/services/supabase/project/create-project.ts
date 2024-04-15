@@ -12,7 +12,7 @@ export const createProject = async (
 
   const created = await prisma.projects.create({
     data: {
-      user_id: user.id,
+      userId: user.id,
       title: project.title,
       janres: project.janres,
       author: project.author,
