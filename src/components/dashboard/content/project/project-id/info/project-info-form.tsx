@@ -1,13 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Stack, TagsInput, TextInput, Title } from '@mantine/core';
+import { Button, Stack, Title } from '@mantine/core';
 import { Projects } from '@prisma/client';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import {
   CreateProjectRequest,
   CreateProjectSchema,
   UpdateProjectRequest,
 } from '@/types/project';
+
+import FormInput from '../../../common/form/form-input';
 
 const MOCK_JANRES = [
   '판타지',
@@ -52,61 +54,39 @@ const ProjectInfoForm = ({ project, onNext }: ProjectInfoFormProps) => {
       <Title order={2}>작품 정보</Title>
 
       <Stack>
-        <Controller
+        <FormInput
           control={control}
           name="title"
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              withAsterisk
-              label="작품 제목"
-              description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
-              placeholder="작품 제목을 입력해주세요."
-              error={errors.title?.message}
-            />
-          )}
+          label="작품 제목"
+          description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
+          placeholder="작품 제목을 입력해주세요."
+          errorMessage={errors.title?.message}
         />
-        <Controller
+        <FormInput
           control={control}
           name="author"
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              withAsterisk
-              label="작가 이름"
-              description="작가 이름은 1자 이상 50자 이하로 입력해주세요."
-              placeholder="작가 이름을 입력해주세요."
-              error={errors.author?.message}
-            />
-          )}
+          label="작가 이름"
+          description="작가 이름은 1자 이상 50자 이하로 입력해주세요."
+          placeholder="작가 이름을 입력해주세요."
+          errorMessage={errors.author?.message}
         />
-        <Controller
+        <FormInput
+          isTag
+          data={MOCK_JANRES}
           control={control}
           name="janres"
-          render={({ field }) => (
-            <TagsInput
-              {...field}
-              withAsterisk
-              label="장르"
-              placeholder="장르를 선택하거나 입력해주세요."
-              data={MOCK_JANRES}
-              error={errors.janres?.message}
-            />
-          )}
+          label="장르"
+          description="장르는 1개 이상 선택해주세요."
+          placeholder="장르를 선택하거나 입력해주세요."
+          errorMessage={errors.janres?.message}
         />
-        <Controller
+        <FormInput
           control={control}
           name="synopsis"
-          render={({ field }) => (
-            <TextInput
-              {...field}
-              withAsterisk
-              label="시놉시스"
-              description="시놉시스는 1자 이상 200자 이하로 입력해주세요."
-              placeholder="시놉시스를 입력해주세요."
-              error={errors.synopsis?.message}
-            />
-          )}
+          label="시놉시스"
+          description="시놉시스는 1자 이상 200자 이하로 입력해주세요."
+          placeholder="시놉시스를 입력해주세요."
+          errorMessage={errors.synopsis?.message}
         />
       </Stack>
 
