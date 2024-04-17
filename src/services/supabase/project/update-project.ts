@@ -1,3 +1,5 @@
+import { isEqual } from 'lodash-es';
+
 import prisma from '@/libs/prisma';
 
 import { UpdateProjectRequest, UpdateProjectResponse } from '@/types/project';
@@ -36,7 +38,7 @@ export const updateProject = async (
     content += `제목: ${pastProject.title} -> ${project.title}\\n`;
   }
 
-  if (pastProject.janres !== project.janres) {
+  if (!isEqual(pastProject.janres, project.janres)) {
     content += `장르: ${pastProject.janres} -> ${project.janres}\\n`;
   }
 
