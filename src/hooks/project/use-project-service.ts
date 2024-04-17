@@ -88,7 +88,6 @@ export const useUpdateProject = ({
         method: 'PATCH',
         body: JSON.stringify(project),
       }),
-
     onSuccess(response) {
       if (response.success) {
         onSuccess(response);

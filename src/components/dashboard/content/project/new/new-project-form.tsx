@@ -21,7 +21,7 @@ const MOCK_JANRES = [
 ];
 
 interface NewProjectFormProps {
-  onNext: Function;
+  onNext: (data: CreateProjectRequest) => void;
 }
 
 const NewProjectForm = ({ onNext }: NewProjectFormProps) => {

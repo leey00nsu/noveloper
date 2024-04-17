@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { Projects } from '@prisma/client';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import {
@@ -26,12 +27,18 @@ const MOCK_JANRES = [
 ];
 
 interface ProjectInfoFormProps {
+  isSubmitting: boolean;
   project: Projects;
   onNext: (data: UpdateProjectRequest) => void;
 }
 
-const ProjectInfoForm = ({ project, onNext }: ProjectInfoFormProps) => {
+const ProjectInfoForm = ({
+  isSubmitting,
+  project,
+  onNext,
+}: ProjectInfoFormProps) => {
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors, isDirty },
@@ -44,6 +51,10 @@ const ProjectInfoForm = ({ project, onNext }: ProjectInfoFormProps) => {
       synopsis: project.synopsis,
     },
   });
+
+  useEffect(() => {
+    reset(project);
+  }, [project, reset]);
 
   const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
     onNext({ projectId: project.id, ...data });
@@ -91,7 +102,10 @@ const ProjectInfoForm = ({ project, onNext }: ProjectInfoFormProps) => {
       </Stack>
 
       <Stack align="center">
-        <Button disabled={!isDirty} onClick={handleSubmit(submitHandler)}>
+        <Button
+          disabled={!isDirty || isSubmitting}
+          onClick={handleSubmit(submitHandler)}
+        >
           변경된 내용 저장
         </Button>
       </Stack>

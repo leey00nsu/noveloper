@@ -13,7 +13,7 @@ import ProjectInfoForm from './project-info-form';
 
 const ProjectInfo = () => {
   const { projectId } = useParams();
-  const { project } = useGetProjectById(projectId as string);
+  const { project, isFetching } = useGetProjectById(projectId as string);
 
   const { mutate, isPending } = useUpdateProject({
     onSuccess: (response) => {
@@ -35,7 +35,11 @@ const ProjectInfo = () => {
 
   return (
     <ContentWrapper showLoader={isPending}>
-      <ProjectInfoForm project={project} onNext={mutate} />
+      <ProjectInfoForm
+        project={project}
+        onNext={mutate}
+        isSubmitting={isPending || isFetching}
+      />
     </ContentWrapper>
   );
 };
