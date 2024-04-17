@@ -45,7 +45,9 @@ const TimeLineList = () => {
     setIsModalOpen(false);
   };
 
-  const showingHistories = projectId ? filteredHistories : histories;
+  const showingHistories = projectId
+    ? filteredHistories?.toReversed()
+    : histories?.toReversed();
 
   const selectedHistory = showingHistories?.find(
     (history) => history.id === selectedHistoryId,
