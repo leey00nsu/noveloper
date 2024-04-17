@@ -8,7 +8,7 @@ import {
   useUpdateProject,
 } from '@/hooks/project/use-project-service';
 
-import ContentWrapper from '../../../common/content-wrapper';
+import ContentWrapper from '../../../common/wrapper/content-wrapper';
 import ProjectInfoForm from './project-info-form';
 
 const ProjectInfo = () => {

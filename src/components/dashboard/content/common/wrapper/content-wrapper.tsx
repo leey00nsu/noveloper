@@ -1,8 +1,7 @@
 import { Box, Center } from '@mantine/core';
 
+import LoaderModal from '@/components/dashboard/modal/loader/loader-modal';
 import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
-
-import LoaderModal from '../../modal/loader/loader-modal';
 
 interface ContentWrapperProps {
   children: React.ReactNode;

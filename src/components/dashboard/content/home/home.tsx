@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { BsFolderPlus, BsLightbulb } from 'react-icons/bs';
 import { MdArrowOutward } from 'react-icons/md';
 
-import ContentWrapper from '../common/content-wrapper';
+import ContentWrapper from '../common/wrapper/content-wrapper';
 
 const Home = () => {
   const MOCK_CONTENTS = [

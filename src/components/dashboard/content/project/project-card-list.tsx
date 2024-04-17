@@ -1,41 +1,27 @@
 'use client';
 
-import { SimpleGrid } from '@mantine/core';
-
 import { useGetProjects } from '@/hooks/project/use-project-service';
 
-import ProjectCard from './project-card';
-
-const ProjectCardListSkeleton = () => {
-  return (
-    <SimpleGrid
-      cols={{
-        xs: 1,
-        lg: 2,
-      }}
-    >
-      <ProjectCard.Skeleton />
-      <ProjectCard.Skeleton />
-    </SimpleGrid>
-  );
-};
+import Card from '../common/card/card';
+import CardList from '../common/card/card-list';
 
 const ProjectCardList = () => {
   const { projects, isFetching } = useGetProjects();
 
-  if (isFetching) return <ProjectCardListSkeleton />;
-
   return (
-    <SimpleGrid
-      cols={{
-        xs: 1,
-        lg: 2,
-      }}
-    >
+    <CardList showSkeleton={isFetching}>
       {projects?.map((project) => (
-        <ProjectCard key={project.id} project={project} />
+        <Card
+          title={project.title}
+          href={`/dashboard/project/${project.id}`}
+          key={project.id}
+        >
+          <Card.Text>{project.author}</Card.Text>
+          <Card.Text>{project.synopsis}</Card.Text>
+          <Card.Text>{project.janres.join(', ')}</Card.Text>
+        </Card>
       ))}
-    </SimpleGrid>
+    </CardList>
   );
 };
 

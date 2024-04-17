@@ -5,7 +5,7 @@ import { notifications } from '@mantine/notifications';
 import { useCreateProject } from '@/hooks/project/use-project-service';
 import useFunnel from '@/hooks/use-funnel';
 
-import ContentWrapper from '../../common/content-wrapper';
+import ContentWrapper from '../../common/wrapper/content-wrapper';
 import CreatingSuccess from './creating-success';
 import NewProjectForm from './new-project-form';
 

@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
-import ContentWrapper from '../../common/content-wrapper';
+import ContentWrapper from '../../common/wrapper/content-wrapper';
 
 const ProjectHome = () => {
   const { projectId } = useParams();
