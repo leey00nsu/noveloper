@@ -23,6 +23,7 @@ model Projects {
   userId    String      @map("user_id") @db.Uuid
   users     Users       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   Histories Histories[]
+  Pages     Pages[]
 }
 
 model Users {
@@ -33,6 +34,7 @@ model Users {
   plan      Plan        @default(FREE)
   projects  Projects[]
   Histories Histories[]
+  Pages     Pages[]
 }
 
 model Histories {
@@ -42,6 +44,18 @@ model Histories {
   userId    String   @map("user_id") @db.Uuid
   projectId String   @map("project_id") @db.Uuid
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects  Projects @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Pages {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar
+  content   Json     @db.Json
+  userId    String   @map("user_id") @db.Uuid
+  projectId String   @map("project_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
   users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   projects  Projects @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
