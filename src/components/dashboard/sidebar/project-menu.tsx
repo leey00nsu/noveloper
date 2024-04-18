@@ -28,9 +28,9 @@ const ProjectMenu = () => {
       ],
     },
     {
-      label: '회차',
+      label: '스토리',
       items: [
-        { label: '회차 관리', url: `/dashboard/project/${projectId}/page` },
+        { label: '페이지 관리', url: `/dashboard/project/${projectId}/page` },
         { label: '타임라인', url: `/dashboard/project/${projectId}/timeline` },
       ],
     },
