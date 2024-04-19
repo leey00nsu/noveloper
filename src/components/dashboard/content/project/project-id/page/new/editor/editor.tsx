@@ -16,7 +16,11 @@ import { FontSize } from '@/libs/tiptap/fontSize';
 import FontFamillyInput from './font-familly-input';
 import TextSizeInput from './text-size-input';
 
-const Editor = () => {
+interface EditorProps {
+  onChange: (content: object) => void;
+}
+
+const Editor = ({ onChange }: EditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -30,6 +34,9 @@ const Editor = () => {
       FontFamily,
       FontSize,
     ],
+    onUpdate(props) {
+      onChange(props.editor.getJSON());
+    },
   });
 
   return (

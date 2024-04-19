@@ -9,7 +9,7 @@ export const CreatePageSchema = z.object({
     .trim()
     .min(1, { message: '페이지 제목은 1자 이상 50자 이하로 입력해주세요.' })
     .max(50, { message: '페이지 제목은 1자 이상 50자 이하로 입력해주세요.' }),
-  content: z.object({}),
+  content: z.any(),
 });
 
 export interface CreatePageRequest extends z.infer<typeof CreatePageSchema> {

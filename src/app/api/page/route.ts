@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { createPage } from '@/services/supabase/page/create-page';
 import { getPageById } from '@/services/supabase/page/get-page-by-id';
-import { getPages } from '@/services/supabase/page/get-projects';
-import { updatePage } from '@/services/supabase/page/update-project';
+import { getPages } from '@/services/supabase/page/get-pages';
+import { updatePage } from '@/services/supabase/page/update-page';
 
 import { catchResponseError } from '@/libs/response-catch-error';
 

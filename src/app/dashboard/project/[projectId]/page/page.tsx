@@ -7,9 +7,9 @@ import { redirect } from 'next/navigation';
 
 import PageList from '@/components/dashboard/content/project/project-id/page/page-list';
 
-import { getPages } from '@/services/supabase/page/get-projects';
+import { getPages } from '@/services/supabase/page/get-pages';
 
-import { pageQueryKeys } from '@/hooks/page/use-page-service copy';
+import { pageQueryKeys } from '@/hooks/page/use-page-service';
 
 import { GetPagesResponse } from '@/types/page';
 

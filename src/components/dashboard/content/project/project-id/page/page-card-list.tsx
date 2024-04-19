@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-import { useGetPages } from '@/hooks/page/use-page-service copy';
+import { useGetPages } from '@/hooks/page/use-page-service';
 
 import Card from '../../../common/card/card';
 import CardList from '../../../common/card/card-list';
