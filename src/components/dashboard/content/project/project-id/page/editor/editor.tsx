@@ -16,6 +16,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { FontSize } from '@/libs/tiptap/fontSize';
 
 import CharacterCounter from './character-counter';
+import ExportTextButton from './export-text-button';
 import FontFamillyInput from './font-familly-input';
 import TextSizeInput from './text-size-input';
 
@@ -88,6 +89,10 @@ const Editor = ({ onChange, content }: EditorProps) => {
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Undo />
           <RichTextEditor.Redo />
+        </RichTextEditor.ControlsGroup>
+
+        <RichTextEditor.ControlsGroup>
+          <ExportTextButton />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
