@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, RichTextEditor } from '@mantine/tiptap';
+import { RichTextEditor } from '@mantine/tiptap';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import SubScript from '@tiptap/extension-subscript';
@@ -23,9 +23,12 @@ interface EditorProps {
 const Editor = ({ onChange }: EditorProps) => {
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        heading: false,
+        code: false,
+        codeBlock: false,
+      }),
       Underline,
-      Link,
       Superscript,
       SubScript,
       Highlight,

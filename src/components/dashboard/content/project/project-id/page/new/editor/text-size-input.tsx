@@ -5,7 +5,7 @@ import { RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
 import { useEffect, useState } from 'react';
 
 const TextSizeInput = () => {
-  const [currentSize, setCurrentSize] = useState('14px');
+  const [currentSize, setCurrentSize] = useState('16px');
   const { editor } = useRichTextEditorContext();
 
   const teszSizes = Array.from({ length: 60 }).map(
@@ -18,7 +18,7 @@ const TextSizeInput = () => {
     if (!editor) return;
 
     if (!cursorSize) {
-      editor?.commands.setFontSize('14px');
+      editor?.commands.setFontSize('16px');
     } else {
       setCurrentSize(cursorSize);
     }
