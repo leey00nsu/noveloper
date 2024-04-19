@@ -18,7 +18,7 @@ const PageCardList = () => {
       {pages?.map((page) => (
         <Card
           title={page.title}
-          href={`/dashboard/${projectId}/page/${page.id}`}
+          href={`/dashboard/project/${projectId}/page/${page.id}`}
           key={page.id}
         >
           <Card.Text>{page.title}</Card.Text>

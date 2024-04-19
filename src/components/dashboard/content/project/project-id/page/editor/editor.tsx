@@ -1,6 +1,7 @@
 'use client';
 
 import { RichTextEditor } from '@mantine/tiptap';
+import { JsonValue } from '@prisma/client/runtime/library';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import SubScript from '@tiptap/extension-subscript';
@@ -8,7 +9,7 @@ import Superscript from '@tiptap/extension-superscript';
 import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
-import { useEditor } from '@tiptap/react';
+import { JSONContent, generateHTML, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 import { FontSize } from '@/libs/tiptap/fontSize';
@@ -18,9 +19,10 @@ import TextSizeInput from './text-size-input';
 
 interface EditorProps {
   onChange: (content: object) => void;
+  content?: JsonValue;
 }
 
-const Editor = ({ onChange }: EditorProps) => {
+const Editor = ({ onChange, content }: EditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -40,6 +42,23 @@ const Editor = ({ onChange }: EditorProps) => {
     onUpdate(props) {
       onChange(props.editor.getJSON());
     },
+    content: content
+      ? generateHTML(content as JSONContent, [
+          StarterKit.configure({
+            heading: false,
+            code: false,
+            codeBlock: false,
+          }),
+          Underline,
+          Superscript,
+          SubScript,
+          Highlight,
+          TextAlign.configure({ types: ['heading', 'paragraph'] }),
+          TextStyle,
+          FontFamily,
+          FontSize,
+        ])
+      : '',
   });
 
   return (
