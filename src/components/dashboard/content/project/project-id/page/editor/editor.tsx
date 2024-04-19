@@ -2,6 +2,7 @@
 
 import { RichTextEditor } from '@mantine/tiptap';
 import { JsonValue } from '@prisma/client/runtime/library';
+import CharacterCount from '@tiptap/extension-character-count';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import SubScript from '@tiptap/extension-subscript';
@@ -14,6 +15,7 @@ import StarterKit from '@tiptap/starter-kit';
 
 import { FontSize } from '@/libs/tiptap/fontSize';
 
+import CharacterCounter from './character-counter';
 import FontFamillyInput from './font-familly-input';
 import TextSizeInput from './text-size-input';
 
@@ -22,43 +24,33 @@ interface EditorProps {
   content?: JsonValue;
 }
 
+const LIMIT = 2000;
+const extensions = [
+  StarterKit.configure({
+    heading: false,
+    code: false,
+    codeBlock: false,
+  }),
+  Underline,
+  Superscript,
+  SubScript,
+  Highlight,
+  TextAlign.configure({ types: ['paragraph'] }),
+  TextStyle,
+  FontFamily,
+  FontSize,
+  CharacterCount.configure({
+    limit: LIMIT,
+  }),
+];
+
 const Editor = ({ onChange, content }: EditorProps) => {
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: false,
-        code: false,
-        codeBlock: false,
-      }),
-      Underline,
-      Superscript,
-      SubScript,
-      Highlight,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      TextStyle,
-      FontFamily,
-      FontSize,
-    ],
+    extensions,
     onUpdate(props) {
       onChange(props.editor.getJSON());
     },
-    content: content
-      ? generateHTML(content as JSONContent, [
-          StarterKit.configure({
-            heading: false,
-            code: false,
-            codeBlock: false,
-          }),
-          Underline,
-          Superscript,
-          SubScript,
-          Highlight,
-          TextAlign.configure({ types: ['heading', 'paragraph'] }),
-          TextStyle,
-          FontFamily,
-          FontSize,
-        ])
-      : '',
+    content: content ? generateHTML(content as JSONContent, extensions) : '',
   });
 
   return (
@@ -96,6 +88,13 @@ const Editor = ({ onChange, content }: EditorProps) => {
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Undo />
           <RichTextEditor.Redo />
+        </RichTextEditor.ControlsGroup>
+
+        <RichTextEditor.ControlsGroup>
+          <CharacterCounter
+            value={editor?.storage.characterCount.characters()}
+            maxValue={LIMIT}
+          />
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 
