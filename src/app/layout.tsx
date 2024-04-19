@@ -1,16 +1,10 @@
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 
+import { pretendard } from './fonts';
 import './globals.css';
 import Providers from './providers';
-
-const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
