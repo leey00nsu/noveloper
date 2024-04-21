@@ -9,6 +9,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/no-array-index-key": "off", // for parse json
     "import/prefer-default-export": "off", // for route Handlers
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off", // for Mantine

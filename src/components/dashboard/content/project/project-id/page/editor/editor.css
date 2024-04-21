@@ -1,0 +1,8 @@
+/* strike 아래 컴포넌트를 line-through 처리함 */
+.strike {
+  text-decoration: none;
+}
+
+.strike * {
+  text-decoration: line-through;
+}

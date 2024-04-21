@@ -4,7 +4,7 @@ import { Select } from '@mantine/core';
 import { RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
 import { useEffect, useState } from 'react';
 
-import { namumMyeongjo, pretendard } from '@/app/fonts';
+import { namumMyeongjo, pretendard } from '@/app/font-provider';
 
 const fontFamillies = [
   {

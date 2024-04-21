@@ -2,7 +2,7 @@ import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import type { Metadata } from 'next';
 
-import { pretendard } from './fonts';
+import { pretendard } from './font-provider';
 import './globals.css';
 import Providers from './providers';
 

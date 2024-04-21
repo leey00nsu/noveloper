@@ -16,6 +16,8 @@ import StarterKit from '@tiptap/starter-kit';
 import { FontSize } from '@/libs/tiptap/fontSize';
 
 import CharacterCounter from './character-counter';
+import './editor.css';
+import ExportPdfButton from './export-pdf-button';
 import ExportTextButton from './export-text-button';
 import FontFamillyInput from './font-familly-input';
 import TextSizeInput from './text-size-input';
@@ -31,7 +33,19 @@ const extensions = [
     heading: false,
     code: false,
     codeBlock: false,
+    paragraph: {
+      HTMLAttributes: {
+        style: 'line-height: normal',
+      },
+    },
+    strike: {
+      HTMLAttributes: {
+        class: 'strike',
+      },
+    },
+    blockquote: false,
   }),
+
   Underline,
   Superscript,
   SubScript,
@@ -50,6 +64,15 @@ const Editor = ({ onChange, content }: EditorProps) => {
     extensions,
     onUpdate(props) {
       onChange(props.editor.getJSON());
+    },
+    editorProps: {
+      // 복사한 텍스트를 붙여넣을 때 텍스트만 유지
+      handlePaste(view, event) {
+        const plainText = event.clipboardData?.getData('text/plain');
+        view.dispatch(view.state.tr.insertText(plainText as string));
+
+        return true;
+      },
     },
     content: content ? generateHTML(content as JSONContent, extensions) : '',
   });
@@ -71,7 +94,6 @@ const Editor = ({ onChange, content }: EditorProps) => {
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
-          <RichTextEditor.Blockquote />
           <RichTextEditor.Hr />
           <RichTextEditor.BulletList />
           <RichTextEditor.OrderedList />
@@ -93,6 +115,7 @@ const Editor = ({ onChange, content }: EditorProps) => {
 
         <RichTextEditor.ControlsGroup>
           <ExportTextButton />
+          <ExportPdfButton />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
