@@ -52,9 +52,10 @@ const useExportPdf = () => {
 
     const url = URL.createObjectURL(instance.blob);
     const link = document.createElement('a');
-    link.download = 't.pdf';
+    link.download = 'export.pdf';
     link.href = url;
     link.click();
+
     setIsExporting(false);
   }, [instance, isExporting]);
 

@@ -12,7 +12,7 @@ interface Mark {
 const useParseJson = () => {
   const getFontFamily = (fontFamily: string) => {
     if (fontFamily.includes('pretendard')) return 'Pretendard';
-    if (fontFamily.includes('NanumMyeongjo')) return 'NanumMyeongjo';
+    if (fontFamily.includes('Nanum_Myeongjo')) return 'NanumMyeongjo';
     return 'Pretendard';
   };
 
