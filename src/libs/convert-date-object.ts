@@ -5,7 +5,7 @@
  */
 export const convertDateObject = <T>(data: T): T => {
   const converted = JSON.parse(JSON.stringify(data), (k, v) => {
-    if (k === 'createdAt') {
+    if (k === 'createdAt' || k === 'updatedAt') {
       return new Date(v);
     }
     return v;
