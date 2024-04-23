@@ -5,15 +5,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { IoMdRefresh } from 'react-icons/io';
 
-import { pageQueryKeys } from '@/hooks/page/use-page-service';
+import { characterQueryKeys } from '@/hooks/character/use-character-service';
 
-const PageListRefreshButton = () => {
+const CharacterListRefreshButton = () => {
   const { projectId } = useParams();
   const queryClient = useQueryClient();
 
   const refreshHandler = () => {
     queryClient.resetQueries({
-      queryKey: pageQueryKeys.pages(projectId as string),
+      queryKey: characterQueryKeys.characters(projectId as string),
     });
   };
 
@@ -24,4 +24,4 @@ const PageListRefreshButton = () => {
   );
 };
 
-export default PageListRefreshButton;
+export default CharacterListRefreshButton;

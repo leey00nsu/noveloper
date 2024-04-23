@@ -55,6 +55,9 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
         queryClient.invalidateQueries({
           queryKey: historyQueryKeys.histories,
         });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.history(response.data.projectId),
+        });
       } else {
         onError(response);
       }
@@ -94,6 +97,9 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
             response.data.projectId,
             response.data.id,
           ),
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.histories,
         });
         queryClient.invalidateQueries({
           queryKey: historyQueryKeys.history(response.data.projectId),
