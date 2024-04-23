@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { Characters } from '@prisma/client';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import FormInput from '@/components/dashboard/content/common/form/form-input';
@@ -28,6 +29,7 @@ const CharacterInfoForm = ({
   const { characterId } = useParams();
 
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors, isDirty },
@@ -43,6 +45,10 @@ const CharacterInfoForm = ({
   const submitHandler: SubmitHandler<CreateCharacterRequest> = (data) => {
     onNext({ ...data, characterId: Number(characterId) });
   };
+
+  useEffect(() => {
+    reset(character);
+  }, [character, reset]);
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

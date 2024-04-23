@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { Pages } from '@prisma/client';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import FormInput from '@/components/dashboard/content/common/form/form-input';
@@ -26,6 +27,7 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
   const { pageId } = useParams();
 
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors, isDirty },
@@ -36,6 +38,10 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
       content: page.content,
     },
   });
+
+  useEffect(() => {
+    reset(page);
+  }, [page, reset]);
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
     onNext({ ...data, pageId: Number(pageId) });
