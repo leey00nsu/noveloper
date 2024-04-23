@@ -16,8 +16,10 @@ const TimeLineModal = ({
   closeModal,
   selectedHistory,
 }: TimeLineModalProps) => {
-  const contents = selectedHistory?.content.split('\\n');
-  const time = parseDate(selectedHistory?.createdAt, 'ko');
+  if (!selectedHistory) return null;
+
+  const contents = selectedHistory.content.split('\\n');
+  const time = parseDate(selectedHistory.createdAt, 'ko');
 
   return (
     <Modal.Root size="80%" centered opened={isOpen} onClose={closeModal}>
@@ -25,7 +27,7 @@ const TimeLineModal = ({
       <Modal.Content>
         <Modal.Header className="border-b-2 border-gray-300 dark:border-gray-700 ">
           <Modal.Title>
-            <Text className="text-xl font-bold">{selectedHistory?.title}</Text>
+            <Text className="text-xl font-bold">{selectedHistory.title}</Text>
           </Modal.Title>
           <Modal.CloseButton />
         </Modal.Header>

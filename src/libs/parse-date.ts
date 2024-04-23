@@ -4,7 +4,7 @@
  * @param country
  * @returns
  */
-export const parseDate = (date?: Date, lang: string = 'ko') => {
+export const parseDate = (date: Date, lang: string = 'ko') => {
   const time = new Intl.DateTimeFormat(lang, {
     dateStyle: 'full',
     timeStyle: 'medium',
