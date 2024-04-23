@@ -2,6 +2,8 @@
 
 import { useParams } from 'next/navigation';
 
+import { parseDate } from '@/libs/parse-date';
+
 import { useGetPages } from '@/hooks/page/use-page-service';
 
 import Card from '../../../common/card/card';
@@ -22,7 +24,12 @@ const PageCardList = () => {
           key={page.id}
         >
           <Card.Text>{page.title}</Card.Text>
-          <Card.Text>{page.createdAt.toISOString()}</Card.Text>
+          <Card.Text className="font-light">
+            {parseDate(page.updatedAt)} 에 마지막으로 수정됨
+          </Card.Text>
+          <Card.Text className="font-light">
+            {parseDate(page.createdAt)} 에 생성됨
+          </Card.Text>
         </Card>
       ))}
     </CardList>

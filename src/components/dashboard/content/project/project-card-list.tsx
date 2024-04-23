@@ -1,5 +1,7 @@
 'use client';
 
+import { parseDate } from '@/libs/parse-date';
+
 import { useGetProjects } from '@/hooks/project/use-project-service';
 
 import Card from '../common/card/card';
@@ -19,6 +21,9 @@ const ProjectCardList = () => {
           <Card.Text>{project.author}</Card.Text>
           <Card.Text>{project.synopsis}</Card.Text>
           <Card.Text>{project.janres.join(', ')}</Card.Text>
+          <Card.Text className="font-light">
+            {parseDate(project.createdAt)} 에 생성됨
+          </Card.Text>
         </Card>
       ))}
     </CardList>

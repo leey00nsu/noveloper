@@ -3,6 +3,8 @@
 import { Modal, Text } from '@mantine/core';
 import { Histories } from '@prisma/client';
 
+import { parseDate } from '@/libs/parse-date';
+
 interface TimeLineModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -15,10 +17,7 @@ const TimeLineModal = ({
   selectedHistory,
 }: TimeLineModalProps) => {
   const contents = selectedHistory?.content.split('\\n');
-  const time = new Intl.DateTimeFormat('ko', {
-    dateStyle: 'full',
-    timeStyle: 'medium',
-  }).format(selectedHistory?.createdAt);
+  const time = parseDate(selectedHistory?.createdAt, 'ko');
 
   return (
     <Modal.Root size="80%" centered opened={isOpen} onClose={closeModal}>
