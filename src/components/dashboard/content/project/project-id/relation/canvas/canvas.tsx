@@ -15,6 +15,8 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
+import SaveCanvasButton from './save-canvas-button';
+
 interface CanvasProps {
   defaultNodes?: Node[];
   defaultEdges?: Edge[];
@@ -49,7 +51,9 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
           hideAttribution: true,
         }}
       >
-        <Controls />
+        <Controls>
+          <SaveCanvasButton />
+        </Controls>
         <MiniMap />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>

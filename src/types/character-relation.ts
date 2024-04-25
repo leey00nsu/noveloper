@@ -14,3 +14,12 @@ export interface FindOrInsertRelationRequest {
 }
 export interface FindOrInsertRelationResponse
   extends ApiResponse<ParsedCharacterRelations> {}
+
+export interface UpdateCharacterRelationRequest {
+  projectId: string;
+  nodes: Node[];
+  edges: Edge[];
+}
+
+export interface UpdateCharacterRelationResponse
+  extends ApiResponse<ParsedCharacterRelations> {}
