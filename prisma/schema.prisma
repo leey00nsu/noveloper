@@ -14,29 +14,31 @@ enum Plan {
 }
 
 model Projects {
-  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title      String       @db.VarChar
-  author     String       @db.VarChar
-  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
-  synopsis   String       @db.VarChar
-  janres     String[]     @db.VarChar
-  userId     String       @map("user_id") @db.Uuid
-  users      Users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Histories  Histories[]
-  Pages      Pages[]
-  Characters Characters[]
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title              String               @db.VarChar
+  author             String               @db.VarChar
+  createdAt          DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  synopsis           String               @db.VarChar
+  janres             String[]             @db.VarChar
+  userId             String               @map("user_id") @db.Uuid
+  users              Users                @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Histories          Histories[]
+  Pages              Pages[]
+  Characters         Characters[]
+  CharacterRelations CharacterRelations[]
 }
 
 model Users {
-  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
-  userName   String       @map("user_name") @db.VarChar
-  token      Int          @db.SmallInt
-  plan       Plan         @default(FREE)
-  projects   Projects[]
-  Histories  Histories[]
-  Pages      Pages[]
-  Characters Characters[]
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt          DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  userName           String               @map("user_name") @db.VarChar
+  token              Int                  @db.SmallInt
+  plan               Plan                 @default(FREE)
+  projects           Projects[]
+  Histories          Histories[]
+  Pages              Pages[]
+  Characters         Characters[]
+  CharacterRelations CharacterRelations[]
 }
 
 model Histories {
@@ -73,4 +75,16 @@ model Characters {
   updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
   users       Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   projects    Projects @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model CharacterRelations {
+  id        Int      @id @default(autoincrement())
+  nodes     Json     @db.Json
+  edges     Json     @db.Json
+  userId    String   @map("user_id") @db.Uuid
+  projectId String   @map("project_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+  users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects  Projects @relation(fields: [projectId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
