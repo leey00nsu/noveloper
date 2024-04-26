@@ -78,11 +78,10 @@ model Characters {
 }
 
 model CharacterRelations {
-  id        Int      @id @default(autoincrement())
   nodes     Json     @db.Json
   edges     Json     @db.Json
   userId    String   @map("user_id") @db.Uuid
-  projectId String   @map("project_id") @db.Uuid
+  projectId String   @id @map("project_id") @db.Uuid
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
   users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)

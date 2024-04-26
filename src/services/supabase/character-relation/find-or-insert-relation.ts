@@ -1,3 +1,4 @@
+import { createNodes } from '@/libs/create-nodes';
 import prisma from '@/libs/prisma';
 
 import {
@@ -8,6 +9,7 @@ import {
 
 import { getCharacters } from '../character/get-characters';
 import { getUserData } from '../user/get-user-data';
+import { reflectRelation } from './reflect-relation';
 
 export const findOrInsertRelation = async (
   request: FindOrInsertRelationRequest,
@@ -22,8 +24,12 @@ export const findOrInsertRelation = async (
   });
 
   if (relation) {
+    let data = relation as unknown as ParsedCharacterRelations;
+
+    data = await reflectRelation(data, request.projectId);
+
     return {
-      data: relation as unknown as ParsedCharacterRelations,
+      data,
       success: true,
       status: 200,
       message: '인물 관계 정보를 성공적으로 불러왔습니다.',
@@ -34,11 +40,7 @@ export const findOrInsertRelation = async (
     projectId: request.projectId,
   });
 
-  const newNodes = characters.map((character, index) => ({
-    id: character.id + character.name,
-    position: { x: index * 50, y: 0 },
-    data: { label: character.name },
-  }));
+  const newNodes = createNodes(characters);
 
   const created = await prisma.characterRelations.create({
     data: {

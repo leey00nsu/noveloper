@@ -11,7 +11,6 @@ import {
 import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
 import { getUserData } from '../user/get-user-data';
-import { findOrInsertRelation } from './find-or-insert-relation';
 
 export const updateRelation = async (
   request: UpdateCharacterRelationRequest,
@@ -20,13 +19,8 @@ export const updateRelation = async (
 
   const { data: project } = await getProjectById(request.projectId);
 
-  const { data: pastRelation } = await findOrInsertRelation({
-    projectId: request.projectId,
-  });
-
   const updated = await prisma.characterRelations.update({
     where: {
-      id: pastRelation.id,
       projectId: request.projectId,
       userId: user.id,
     },
