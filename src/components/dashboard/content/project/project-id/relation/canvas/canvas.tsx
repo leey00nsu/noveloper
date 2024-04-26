@@ -16,6 +16,7 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
+import ExportCanvasButton from './export-canvas-button';
 import FloatNode from './float-node';
 import LabelEdge from './label-edge';
 import SaveCanvasButton from './save-canvas-button';
@@ -111,6 +112,7 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
       >
         <Controls>
           <SaveCanvasButton />
+          <ExportCanvasButton />
         </Controls>
         <MiniMap />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
