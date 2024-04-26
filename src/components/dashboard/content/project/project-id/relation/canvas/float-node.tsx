@@ -1,4 +1,4 @@
-import { Box } from '@mantine/core';
+import { Paper } from '@mantine/core';
 import { memo } from 'react';
 import { Handle, NodeProps, Position } from 'reactflow';
 
@@ -6,10 +6,10 @@ import tw from '@/libs/tw';
 
 const FloatNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <Box
+    <Paper
       className={tw(
         selected ? 'border-blue-600' : 'border-gray-600',
-        'rounded border bg-white p-4',
+        'rounded border p-4',
       )}
     >
       {data.label}
@@ -37,7 +37,7 @@ const FloatNode = memo(({ data, selected }: NodeProps) => {
         id="d"
         className={tw(selected ? 'visible' : 'invisible')}
       />
-    </Box>
+    </Paper>
   );
 });
 
