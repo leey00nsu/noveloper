@@ -1,4 +1,4 @@
-import { createNodes } from '@/libs/create-nodes';
+import { createNodes } from '@/libs/react-flow/create-nodes';
 
 import { ParsedCharacterRelations } from '@/types/character-relation';
 

@@ -10,6 +10,7 @@ export const createNodes = (characters: Characters[]) => {
     id: `n:${character.id}`,
     position: { x: index * 50, y: 0 },
     data: { label: character.name },
+    type: 'floatNode',
   }));
 
   return newNodes;

@@ -5,6 +5,7 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Connection,
+  ConnectionMode,
   Controls,
   Edge,
   MiniMap,
@@ -15,6 +16,8 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
+import FloatNode from './float-node';
+import LabelEdge from './label-edge';
 import SaveCanvasButton from './save-canvas-button';
 
 interface CanvasProps {
@@ -22,12 +25,58 @@ interface CanvasProps {
   defaultEdges?: Edge[];
 }
 
+// const NODES = [
+//   {
+//     id: '1',
+//     position: { x: 0, y: 0 },
+//     data: { label: 'Hello' },
+//     type: 'floatNode',
+//   },
+//   {
+//     id: '2',
+//     position: { x: 100, y: 100 },
+//     data: { label: 'World' },
+//     type: 'floatNode',
+//   },
+// ];
+
+// const EDGES = [
+//   {
+//     id: '1-2',
+//     source: '1',
+//     target: '2',
+//     sourceHandle: 'c',
+//     targetHandle: 'a',
+//     data: {
+//       label: 'it is a label',
+//     },
+//     type: 'labelEdge',
+//   },
+// ];
+
+const nodeTypes = {
+  floatNode: FloatNode,
+};
+
+const edgeTypes = {
+  labelEdge: LabelEdge,
+};
+
 const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
   const [nodes, , onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onConnect = useCallback(
-    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection) =>
+      setEdges((eds) =>
+        addEdge(
+          {
+            ...params,
+            type: 'labelEdge',
+          },
+          eds,
+        ),
+      ),
     [setEdges],
   );
 
@@ -44,12 +93,21 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
         }}
         nodes={nodes}
         edges={edges}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         proOptions={{
           hideAttribution: true,
         }}
+        defaultEdgeOptions={{
+          type: 'labelEdge',
+          data: {
+            label: '',
+          },
+        }}
+        connectionMode={ConnectionMode.Loose}
       >
         <Controls>
           <SaveCanvasButton />

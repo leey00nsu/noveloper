@@ -1,5 +1,5 @@
-import { createNodes } from '@/libs/create-nodes';
 import prisma from '@/libs/prisma';
+import { createNodes } from '@/libs/react-flow/create-nodes';
 
 import {
   FindOrInsertRelationRequest,
