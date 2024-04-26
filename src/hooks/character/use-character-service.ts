@@ -18,6 +18,7 @@ import {
   UpdateCharacterResponse,
 } from '@/types/character';
 
+import { characterRelationQueryKeys } from '../character-relation/use-character-relation-service';
 import { historyQueryKeys } from '../history/use-history-service';
 
 export const characterQueryKeys = {
@@ -55,9 +56,14 @@ export const useCreateCharacter = ({
       if (response.success) {
         onSuccess(response);
 
-        // character,history 쿼리 캐시를 갱신합니다.
+        // character,relation,history 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterQueryKeys.characters(response.data.projectId),
+        });
+        queryClient.invalidateQueries({
+          queryKey: characterRelationQueryKeys.relation(
+            response.data.projectId,
+          ),
         });
         queryClient.invalidateQueries({
           queryKey: historyQueryKeys.histories,
