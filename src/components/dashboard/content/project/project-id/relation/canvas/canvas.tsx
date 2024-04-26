@@ -1,5 +1,6 @@
 'use client';
 
+import { ButtonGroup } from '@mantine/core';
 import { useCallback } from 'react';
 import ReactFlow, {
   Background,
@@ -10,6 +11,7 @@ import ReactFlow, {
   Edge,
   MiniMap,
   Node,
+  Panel,
   addEdge,
   useEdgesState,
   useNodesState,
@@ -110,10 +112,13 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
         }}
         connectionMode={ConnectionMode.Loose}
       >
-        <Controls>
-          <SaveCanvasButton />
-          <ExportCanvasButton />
-        </Controls>
+        <Panel position="top-right">
+          <ButtonGroup>
+            <SaveCanvasButton />
+            <ExportCanvasButton />
+          </ButtonGroup>
+        </Panel>
+        <Controls />
         <MiniMap />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>

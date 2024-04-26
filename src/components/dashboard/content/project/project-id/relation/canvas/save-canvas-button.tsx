@@ -1,9 +1,10 @@
 'use client';
 
+import { Button } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useParams } from 'next/navigation';
-import { FaSave } from 'react-icons/fa';
-import { ControlButton, useEdges, useNodes } from 'reactflow';
+import { AiOutlineSave } from 'react-icons/ai';
+import { useEdges, useNodes } from 'reactflow';
 
 import { useUpdateCharacterRelation } from '@/hooks/character-relation/use-character-relation-service';
 
@@ -34,7 +35,8 @@ const SaveCanvasButton = () => {
   });
 
   return (
-    <ControlButton
+    <Button
+      variant="default"
       title="save"
       disabled={isPending}
       onClick={() =>
@@ -44,9 +46,10 @@ const SaveCanvasButton = () => {
           edges,
         })
       }
+      rightSection={<AiOutlineSave />}
     >
-      <FaSave className="text-black" />
-    </ControlButton>
+      저장
+    </Button>
   );
 };
 

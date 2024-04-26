@@ -1,13 +1,9 @@
 'use client';
 
+import { Button } from '@mantine/core';
 import { toPng } from 'html-to-image';
-import { TbPng } from 'react-icons/tb';
-import {
-  ControlButton,
-  getRectOfNodes,
-  getTransformForBounds,
-  useReactFlow,
-} from 'reactflow';
+import { AiOutlineExport } from 'react-icons/ai';
+import { getRectOfNodes, getTransformForBounds, useReactFlow } from 'reactflow';
 
 import { downloadImage } from '@/libs/download-image';
 
@@ -50,9 +46,14 @@ const ExportCanvasButton = () => {
   };
 
   return (
-    <ControlButton title="save" onClick={downloadHandler}>
-      <TbPng className="text-black" />
-    </ControlButton>
+    <Button
+      variant="default"
+      title="save"
+      onClick={downloadHandler}
+      rightSection={<AiOutlineExport />}
+    >
+      png로 내보내기
+    </Button>
   );
 };
 
