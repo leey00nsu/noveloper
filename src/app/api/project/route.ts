@@ -5,10 +5,11 @@ import { getProjects } from '@/services/supabase/project/get-projects';
 import { updateProject } from '@/services/supabase/project/update-project';
 
 import { catchResponseError } from '@/libs/response-catch-error';
+import { createProject } from '@/services/supabase/project/create-project';
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const response = await catchResponseError(updateProject(body));
+  const response = await catchResponseError(createProject(body));
 
   return NextResponse.json(response, {
     status: response.status,
