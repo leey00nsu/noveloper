@@ -10,8 +10,6 @@ import { fetcher } from '@/libs/fetcher';
 import {
   CreatePageRequest,
   CreatePageResponse,
-  CreateSummaryRequest,
-  CreateSummaryResponse,
   GetPageRequest,
   GetPageResponse,
   GetPagesRequest,
@@ -146,37 +144,4 @@ export const useGetPageById = (request: GetPageRequest) => {
   });
 
   return { page: result?.data, isLoading, isFetching };
-};
-
-interface UseCreateSummaryProps {
-  onSuccess: (response: CreateSummaryResponse) => void;
-  onError: (response: CreateSummaryResponse) => void;
-}
-
-export const useCreateSummary = ({
-  onSuccess,
-  onError,
-}: UseCreateSummaryProps) => {
-  const { mutate, isPending } = useMutation<
-    CreateSummaryResponse,
-    DefaultError,
-    CreateSummaryRequest
-  >({
-    mutationFn: (request) =>
-      fetcher({
-        url: `/api/page/summary`,
-        method: 'POST',
-        body: JSON.stringify(request),
-      }),
-    onSuccess(response) {
-      if (response.success) {
-        onSuccess(response);
-      } else {
-        onError(response);
-      }
-    },
-    onError() {},
-  });
-
-  return { mutate, isPending };
 };

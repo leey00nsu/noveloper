@@ -11,13 +11,15 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
 
-import { useCreateSummary } from '@/hooks/page/use-page-service';
+import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 
 import {
   CreatePageRequest,
   CreatePageSchema,
   UpdatePageRequest,
 } from '@/types/page';
+
+import { PROMPTS } from '@/constants/openai/prompt';
 
 import Editor from '../editor/editor';
 
@@ -46,7 +48,7 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
     },
   });
 
-  const { mutate, isPending } = useCreateSummary({
+  const { mutate, isPending } = useGenerateMessage({
     onSuccess: (response) => {
       setValue('summary', response.data, { shouldDirty: true });
 
@@ -101,6 +103,7 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
             onClick={() =>
               mutate({
                 content: contentText,
+                prompt: PROMPTS.generateSummaryInOneSentence,
               })
             }
           />

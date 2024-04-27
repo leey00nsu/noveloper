@@ -10,9 +10,11 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
 
-import { useCreateSummary } from '@/hooks/page/use-page-service';
+import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 
 import { CreatePageRequest, CreatePageSchema } from '@/types/page';
+
+import { PROMPTS } from '@/constants/openai/prompt';
 
 import Editor from '../editor/editor';
 
@@ -33,7 +35,7 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
     resolver: zodResolver(CreatePageSchema),
   });
 
-  const { mutate, isPending } = useCreateSummary({
+  const { mutate, isPending } = useGenerateMessage({
     onSuccess: (response) => {
       setValue('summary', response.data, { shouldDirty: true });
 
@@ -84,6 +86,7 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
             onClick={() =>
               mutate({
                 content: contentText,
+                prompt: PROMPTS.generateSummaryInOneSentence,
               })
             }
           />

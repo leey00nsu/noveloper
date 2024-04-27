@@ -10,7 +10,7 @@ const openai = new OpenAI({
  * @param prompt
  * @returns
  */
-export const createMessage = async (messages: string, prompt: string) => {
+export const generateMessage = async (messages: string, prompt: string) => {
   const chatCompletion = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo-0125',
     messages: [

@@ -35,7 +35,4 @@ export interface UpdatePageRequest extends CreatePageRequest {
 }
 export interface UpdatePageResponse extends ApiResponse<Pages> {}
 
-export interface CreateSummaryRequest {
-  content: string;
-}
-export interface CreateSummaryResponse extends ApiResponse<string> {}
+

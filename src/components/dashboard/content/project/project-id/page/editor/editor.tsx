@@ -15,6 +15,7 @@ import StarterKit from '@tiptap/starter-kit';
 
 import { FontSize } from '@/libs/tiptap/fontSize';
 
+import AICommand from './ai-command';
 import CharacterCounter from './character-counter';
 import './editor.css';
 import ExportPdfButton from './export-pdf-button';
@@ -122,6 +123,10 @@ const Editor = ({ onTextChange, onChange, content }: EditorProps) => {
         <RichTextEditor.ControlsGroup>
           <ExportTextButton />
           <ExportPdfButton />
+        </RichTextEditor.ControlsGroup>
+
+        <RichTextEditor.ControlsGroup>
+          <AICommand />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
