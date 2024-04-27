@@ -2,10 +2,15 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+
+import { useCreateSummary } from '@/hooks/page/use-page-service';
 
 import { CreatePageRequest, CreatePageSchema } from '@/types/page';
 
@@ -16,14 +21,34 @@ interface NewPageFormProps {
 }
 
 const NewPageForm = ({ onNext }: NewPageFormProps) => {
+  const [contentText, setContentText] = useState('');
   const { projectId } = useParams();
 
   const {
+    setValue,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<CreatePageRequest>({
     resolver: zodResolver(CreatePageSchema),
+  });
+
+  const { mutate, isPending } = useCreateSummary({
+    onSuccess: (response) => {
+      setValue('summary', response.data, { shouldDirty: true });
+
+      notifications.show({
+        title: '요약 생성 성공',
+        message: response.message,
+      });
+    },
+    onError: (response) => {
+      notifications.show({
+        color: 'red',
+        title: '요약 생성 실패',
+        message: response.message,
+      });
+    },
   });
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
@@ -44,6 +69,7 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
       />
 
       <FormInput
+        disabled={isPending}
         control={control}
         isTextarea
         name="summary"
@@ -51,13 +77,29 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
         description="페이지 요약은 1자 이상 100자 이하로 입력해주세요."
         placeholder="페이지 요약을 입력해주세요."
         errorMessage={errors.summary?.message}
+        leftSection={
+          <FormGenerationButton
+            disabled={contentText.length === 0}
+            isPending={isPending}
+            onClick={() =>
+              mutate({
+                content: contentText,
+              })
+            }
+          />
+        }
       />
 
       <Controller
         defaultValue={{}}
         control={control}
         name="content"
-        render={({ field }) => <Editor onChange={field.onChange} />}
+        render={({ field }) => (
+          <Editor
+            onTextChange={(text) => setContentText(text)}
+            onChange={field.onChange}
+          />
+        )}
       />
 
       <Stack align="center">

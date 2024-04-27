@@ -23,6 +23,7 @@ import FontFamillyInput from './font-familly-input';
 import TextSizeInput from './text-size-input';
 
 interface EditorProps {
+  onTextChange: (text: string) => void;
   onChange: (content: object) => void;
   content?: JsonValue;
 }
@@ -59,11 +60,16 @@ const extensions = [
   }),
 ];
 
-const Editor = ({ onChange, content }: EditorProps) => {
+const Editor = ({ onTextChange, onChange, content }: EditorProps) => {
   const editor = useEditor({
     extensions,
+    onCreate(props) {
+      onChange(props.editor.getJSON());
+      onTextChange(props.editor.getText());
+    },
     onUpdate(props) {
       onChange(props.editor.getJSON());
+      onTextChange(props.editor.getText());
     },
     editorProps: {
       // 복사한 텍스트를 붙여넣을 때 텍스트만 유지

@@ -34,3 +34,8 @@ export interface UpdatePageRequest extends CreatePageRequest {
   pageId: number;
 }
 export interface UpdatePageResponse extends ApiResponse<Pages> {}
+
+export interface CreateSummaryRequest {
+  content: string;
+}
+export interface CreateSummaryResponse extends ApiResponse<string> {}

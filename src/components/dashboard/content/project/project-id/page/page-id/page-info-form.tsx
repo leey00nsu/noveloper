@@ -2,12 +2,16 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import { Pages } from '@prisma/client';
 import { useParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+
+import { useCreateSummary } from '@/hooks/page/use-page-service';
 
 import {
   CreatePageRequest,
@@ -24,9 +28,11 @@ interface PageInfoFormProps {
 }
 
 const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
+  const [contentText, setContentText] = useState('');
   const { pageId } = useParams();
 
   const {
+    setValue,
     reset,
     control,
     handleSubmit,
@@ -35,7 +41,26 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
     resolver: zodResolver(CreatePageSchema),
     defaultValues: {
       title: page.title,
+      summary: page.summary,
       content: page.content,
+    },
+  });
+
+  const { mutate, isPending } = useCreateSummary({
+    onSuccess: (response) => {
+      setValue('summary', response.data, { shouldDirty: true });
+
+      notifications.show({
+        title: '요약 생성 성공',
+        message: response.message,
+      });
+    },
+    onError: (response) => {
+      notifications.show({
+        color: 'red',
+        title: '요약 생성 실패',
+        message: response.message,
+      });
     },
   });
 
@@ -61,6 +86,7 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
       />
 
       <FormInput
+        disabled={isPending}
         control={control}
         isTextarea
         name="summary"
@@ -68,6 +94,17 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
         description="페이지 요약은 1자 이상 100자 이하로 입력해주세요."
         placeholder="페이지 요약을 입력해주세요."
         errorMessage={errors.summary?.message}
+        leftSection={
+          <FormGenerationButton
+            disabled={contentText.length === 0}
+            isPending={isPending}
+            onClick={() =>
+              mutate({
+                content: contentText,
+              })
+            }
+          />
+        }
       />
 
       <Controller
@@ -75,7 +112,11 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
         control={control}
         name="content"
         render={({ field }) => (
-          <Editor onChange={field.onChange} content={page.content} />
+          <Editor
+            onTextChange={(text) => setContentText(text)}
+            onChange={field.onChange}
+            content={page.content}
+          />
         )}
       />
 
