@@ -9,6 +9,11 @@ export const CreatePageSchema = z.object({
     .trim()
     .min(1, { message: '페이지 제목은 1자 이상 50자 이하로 입력해주세요.' })
     .max(50, { message: '페이지 제목은 1자 이상 50자 이하로 입력해주세요.' }),
+  summary: z
+    .string()
+    .trim()
+    .min(1, { message: '페이지 요약은 1자 이상 100자 이하로 입력해주세요.' })
+    .max(100, { message: '페이지 요약은 1자 이상 100자 이하로 입력해주세요.' }),
   content: z.any(),
 });
 

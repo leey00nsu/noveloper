@@ -56,6 +56,7 @@ model Pages {
   id        Int      @id @default(autoincrement())
   title     String   @db.VarChar
   content   Json     @db.Json
+  summary   String   @db.VarChar
   userId    String   @map("user_id") @db.Uuid
   projectId String   @map("project_id") @db.Uuid
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)

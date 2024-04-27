@@ -16,6 +16,7 @@ export const createPage = async (
       projectId: request.projectId,
       title: request.title,
       content: request.content,
+      summary: request.summary,
     },
   });
 

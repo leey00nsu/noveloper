@@ -43,6 +43,16 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
         errorMessage={errors.title?.message}
       />
 
+      <FormInput
+        control={control}
+        isTextarea
+        name="summary"
+        label="페이지 요약"
+        description="페이지 요약은 1자 이상 100자 이하로 입력해주세요."
+        placeholder="페이지 요약을 입력해주세요."
+        errorMessage={errors.summary?.message}
+      />
+
       <Controller
         defaultValue={{}}
         control={control}

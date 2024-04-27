@@ -1,13 +1,19 @@
-import { ComboboxStringData, TagsInput, TextInput } from '@mantine/core';
+import {
+  ComboboxStringData,
+  TagsInput,
+  TagsInputProps,
+  TextInput,
+  TextInputProps,
+  Textarea,
+  TextareaProps,
+} from '@mantine/core';
 import { Control, Controller } from 'react-hook-form';
 
 type FormInputProps = {
   name: string;
-  label: string;
-  description: string;
-  placeholder: string;
   control: Control<any, any>;
   errorMessage: string | undefined;
+  isTextarea?: boolean;
 } & (
   | {
       isTag: boolean;
@@ -17,10 +23,12 @@ type FormInputProps = {
       isTag?: never;
       data?: never;
     }
-);
+) &
+  TagsInputProps &
+  TextInputProps &
+  TextareaProps;
 
-const FormInput = ({
-  isTag,
+const FormTagsInput = ({
   data,
   name,
   label,
@@ -28,35 +36,18 @@ const FormInput = ({
   placeholder,
   control,
   errorMessage,
+  ...props
 }: FormInputProps) => {
-  if (isTag)
-    return (
-      <Controller
-        defaultValue={[]}
-        control={control}
-        name={name}
-        render={({ field }) => (
-          <TagsInput
-            {...field}
-            data={data}
-            withAsterisk
-            label={label}
-            description={description}
-            placeholder={placeholder}
-            error={errorMessage}
-          />
-        )}
-      />
-    );
-
   return (
     <Controller
-      defaultValue=""
+      defaultValue={[]}
       control={control}
       name={name}
       render={({ field }) => (
-        <TextInput
+        <TagsInput
           {...field}
+          {...props}
+          data={data}
           withAsterisk
           label={label}
           description={description}
@@ -66,6 +57,77 @@ const FormInput = ({
       )}
     />
   );
+};
+
+const FormTextInput = ({
+  name,
+  label,
+  description,
+  placeholder,
+  control,
+  errorMessage,
+  ...props
+}: FormInputProps) => {
+  return (
+    <Controller
+      defaultValue=""
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <TextInput
+          {...field}
+          {...props}
+          withAsterisk
+          label={label}
+          description={description}
+          placeholder={placeholder}
+          error={errorMessage}
+        />
+      )}
+    />
+  );
+};
+
+const FormTextareaInput = ({
+  name,
+  label,
+  description,
+  placeholder,
+  control,
+  errorMessage,
+  ...props
+}: FormInputProps) => {
+  return (
+    <Controller
+      defaultValue=""
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <Textarea
+          {...field}
+          {...props}
+          withAsterisk
+          label={label}
+          description={description}
+          placeholder={placeholder}
+          error={errorMessage}
+          autosize
+        />
+      )}
+    />
+  );
+};
+
+const FormInput = ({ isTag, isTextarea, data, ...props }: FormInputProps) => {
+  if (isTag) {
+    return <FormTagsInput isTag={isTag} data={data} {...props} />;
+  }
+
+  if (isTextarea) {
+    return <FormTextareaInput {...props} />;
+  }
+
+  return <FormTextInput {...props} />;
 };
 
 export default FormInput;

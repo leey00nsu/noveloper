@@ -19,6 +19,7 @@ export const updatePage = async (
     data: {
       title: request.title,
       content: request.content,
+      summary: request.summary,
       updatedAt: new Date(),
     },
   });
