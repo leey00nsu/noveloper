@@ -45,7 +45,7 @@ export const findOrInsertRelation = async (
   const created = await prisma.characterRelations.create({
     data: {
       nodes: newNodes,
-      edges: {},
+      edges: [],
       userId: user.id,
       projectId: request.projectId,
     },
