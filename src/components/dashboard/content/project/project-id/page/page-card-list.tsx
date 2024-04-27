@@ -23,7 +23,7 @@ const PageCardList = () => {
           href={`/dashboard/project/${projectId}/page/${page.id}`}
           key={page.id}
         >
-          <Card.Text>{page.title}</Card.Text>
+          <Card.Text>{page.summary}</Card.Text>
           <Card.Text className="font-light">
             {parseDate(page.updatedAt)} 에 마지막으로 수정됨
           </Card.Text>
