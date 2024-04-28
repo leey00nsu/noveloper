@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createPage } from '@/services/supabase/page/create-page';
+import { deletePage } from '@/services/supabase/page/delete-page';
 import { getPageById } from '@/services/supabase/page/get-page-by-id';
 import { getPages } from '@/services/supabase/page/get-pages';
 import { updatePage } from '@/services/supabase/page/update-page';
@@ -19,6 +20,15 @@ export async function POST(request: Request) {
 export async function PATCH(request: Request) {
   const body = await request.json();
   const response = await catchResponseError(updatePage(body));
+
+  return NextResponse.json(response, {
+    status: response.status,
+  });
+}
+
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const response = await catchResponseError(deletePage(body));
 
   return NextResponse.json(response, {
     status: response.status,

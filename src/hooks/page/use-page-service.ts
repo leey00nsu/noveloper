@@ -10,6 +10,8 @@ import { fetcher } from '@/libs/fetcher';
 import {
   CreatePageRequest,
   CreatePageResponse,
+  DeletePageRequest,
+  DeletePageResponse,
   GetPageRequest,
   GetPageResponse,
   GetPagesRequest,
@@ -92,6 +94,54 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
         onSuccess(response);
 
         // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: pageQueryKeys.page(
+            response.data.projectId,
+            response.data.id,
+          ),
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.histories,
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.history(response.data.projectId),
+        });
+      } else {
+        onError(response);
+      }
+    },
+    onError() {},
+  });
+
+  return { mutate, isPending };
+};
+interface UseDeletePageProps {
+  onSuccess: (response: DeletePageResponse) => void;
+  onError: (response: DeletePageResponse) => void;
+}
+
+export const useDeletePage = ({ onSuccess, onError }: UseDeletePageProps) => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation<
+    DeletePageResponse,
+    DefaultError,
+    DeletePageRequest
+  >({
+    mutationFn: (request) =>
+      fetcher({
+        url: `/api/page`,
+        method: 'DELETE',
+        body: JSON.stringify(request),
+      }),
+    onSuccess(response) {
+      if (response.success) {
+        onSuccess(response);
+
+        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: pageQueryKeys.pages(response.data.projectId),
+        });
         queryClient.invalidateQueries({
           queryKey: pageQueryKeys.page(
             response.data.projectId,

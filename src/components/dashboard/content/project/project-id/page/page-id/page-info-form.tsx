@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Stack, Title } from '@mantine/core';
+import { Button, Group, Stack, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { Pages } from '@prisma/client';
 import { useParams } from 'next/navigation';
@@ -26,10 +26,16 @@ import Editor from '../editor/editor';
 interface PageInfoFormProps {
   page: Pages;
   onNext: (data: UpdatePageRequest) => void;
+  openModal: () => void;
   isSubmitting: boolean;
 }
 
-const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
+const PageInfoForm = ({
+  page,
+  isSubmitting,
+  openModal,
+  onNext,
+}: PageInfoFormProps) => {
   const [contentText, setContentText] = useState('');
   const { pageId } = useParams();
 
@@ -123,14 +129,17 @@ const PageInfoForm = ({ page, isSubmitting, onNext }: PageInfoFormProps) => {
         )}
       />
 
-      <Stack align="center">
+      <Group justify="center">
         <Button
           disabled={!isDirty || isSubmitting}
           onClick={handleSubmit(submitHandler)}
         >
           변경된 내용 저장
         </Button>
-      </Stack>
+        <Button color="red" onClick={openModal}>
+          페이지 삭제
+        </Button>
+      </Group>
     </Stack>
   );
 };

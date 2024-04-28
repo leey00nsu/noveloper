@@ -35,4 +35,5 @@ export interface UpdatePageRequest extends CreatePageRequest {
 }
 export interface UpdatePageResponse extends ApiResponse<Pages> {}
 
-
+export interface DeletePageRequest extends GetPageRequest {}
+export interface DeletePageResponse extends ApiResponse<Pages> {}
