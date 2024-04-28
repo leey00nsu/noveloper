@@ -92,10 +92,6 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
     }
   }, [setNodes, setEdges, defaultNodes, defaultEdges]);
 
-  if (!defaultNodes || !defaultEdges) {
-    return null;
-  }
-
   return (
     <div className="h-full w-full">
       <ReactFlow
