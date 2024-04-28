@@ -1,7 +1,7 @@
 'use client';
 
 import { ButtonGroup } from '@mantine/core';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import ReactFlow, {
   Background,
   BackgroundVariant,
@@ -66,7 +66,7 @@ const edgeTypes = {
 };
 
 const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
-  const [nodes, , onNodesChange] = useNodesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onConnect = useCallback(
@@ -83,6 +83,15 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
     [setEdges],
   );
 
+  useEffect(() => {
+    if (defaultNodes) {
+      setNodes(defaultNodes);
+    }
+    if (defaultEdges) {
+      setEdges(defaultEdges);
+    }
+  }, [setNodes, setEdges, defaultNodes, defaultEdges]);
+
   if (!defaultNodes || !defaultEdges) {
     return null;
   }
@@ -90,10 +99,6 @@ const Canvas = ({ defaultNodes, defaultEdges }: CanvasProps) => {
   return (
     <div className="h-full w-full">
       <ReactFlow
-        onInit={(reactFlowInstance) => {
-          reactFlowInstance.addNodes(defaultNodes);
-          reactFlowInstance.addEdges(defaultEdges);
-        }}
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
