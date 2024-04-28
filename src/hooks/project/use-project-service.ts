@@ -10,6 +10,8 @@ import { fetcher } from '@/libs/fetcher';
 import {
   CreateProjectRequest,
   CreateProjectResponse,
+  DeleteProjectRequest,
+  DeleteProjectResponse,
   GetProjectResponse,
   GetProjectsResponse,
   UpdateProjectRequest,
@@ -98,6 +100,48 @@ export const useUpdateProject = ({
         });
         queryClient.invalidateQueries({
           queryKey: historyQueryKeys.history(response.data.id),
+        });
+      } else {
+        onError(response);
+      }
+    },
+    onError() {},
+  });
+
+  return { mutate, isPending };
+};
+interface UseDeleteProjectProps {
+  onSuccess: (response: DeleteProjectResponse) => void;
+  onError: (response: DeleteProjectResponse) => void;
+}
+
+export const useDeleteProject = ({
+  onSuccess,
+  onError,
+}: UseDeleteProjectProps) => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation<
+    DeleteProjectResponse,
+    DefaultError,
+    DeleteProjectRequest
+  >({
+    mutationFn: (project) =>
+      fetcher({
+        url: `/api/project`,
+        method: 'DELETE',
+        body: JSON.stringify(project),
+      }),
+    onSuccess(response) {
+      if (response.success) {
+        onSuccess(response);
+
+        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: projectQueryKeys.projects,
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.histories,
         });
       } else {
         onError(response);

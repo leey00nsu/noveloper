@@ -41,3 +41,5 @@ export interface UpdateProjectRequest extends CreateProjectRequest {
   projectId: string;
 }
 export interface UpdateProjectResponse extends ApiResponse<Projects> {}
+export interface DeleteProjectRequest extends GetProjectRequest {}
+export interface DeleteProjectResponse extends ApiResponse<Projects> {}

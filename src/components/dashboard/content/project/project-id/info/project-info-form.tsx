@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Stack, Title } from '@mantine/core';
+import { Button, Group, Stack, Title } from '@mantine/core';
 import { Projects } from '@prisma/client';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -29,12 +29,14 @@ const MOCK_JANRES = [
 interface ProjectInfoFormProps {
   isSubmitting: boolean;
   project: Projects;
+  openModal: () => void;
   onNext: (data: UpdateProjectRequest) => void;
 }
 
 const ProjectInfoForm = ({
   isSubmitting,
   project,
+  openModal,
   onNext,
 }: ProjectInfoFormProps) => {
   const {
@@ -101,14 +103,17 @@ const ProjectInfoForm = ({
         />
       </Stack>
 
-      <Stack align="center">
+      <Group justify="center">
         <Button
           disabled={!isDirty || isSubmitting}
           onClick={handleSubmit(submitHandler)}
         >
           변경된 내용 저장
         </Button>
-      </Stack>
+        <Button color="red" onClick={openModal}>
+          프로젝트 삭제
+        </Button>
+      </Group>
     </Stack>
   );
 };

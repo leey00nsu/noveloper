@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createProject } from '@/services/supabase/project/create-project';
+import { deleteProject } from '@/services/supabase/project/delete-project';
 import { getProjectById } from '@/services/supabase/project/get-project-by-id';
 import { getProjects } from '@/services/supabase/project/get-projects';
 import { updateProject } from '@/services/supabase/project/update-project';
@@ -19,6 +20,15 @@ export async function POST(request: Request) {
 export async function PATCH(request: Request) {
   const body = await request.json();
   const response = await catchResponseError(updateProject(body));
+
+  return NextResponse.json(response, {
+    status: response.status,
+  });
+}
+
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const response = await catchResponseError(deleteProject(body));
 
   return NextResponse.json(response, {
     status: response.status,
