@@ -8,6 +8,7 @@ import {
   useGetHistories,
   useGetHistoriesById,
 } from '@/hooks/history/use-history-service';
+import useModal from '@/hooks/use-modal';
 
 import TimeLineModal from '../../modal/timeline/time-line-modal';
 import TimeLineItem from './time-line-item';
@@ -24,25 +25,18 @@ const TimeLineListSkeleton = () => {
 };
 
 const TimeLineList = () => {
+  const [selectedHistoryId, setSelectedHistoryId] = useState('');
   const { projectId } = useParams();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const { histories, isLoading: isHistoriesLoading } = useGetHistories();
   const {
     histories: filteredHistories,
     isLoading: isFilteredHistoriesLoading,
   } = useGetHistoriesById(projectId as string);
-  const [selectedHistoryId, setSelectedHistoryId] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const selectHistoryId = (historyId: string) => {
     setSelectedHistoryId(historyId);
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   const showingHistories = projectId
