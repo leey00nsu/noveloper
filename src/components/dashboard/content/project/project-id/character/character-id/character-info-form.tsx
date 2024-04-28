@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Stack, Title } from '@mantine/core';
+import { Button, Group, Stack, Title } from '@mantine/core';
 import { Characters } from '@prisma/client';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -18,12 +18,14 @@ import {
 interface CharacterInfoFormProps {
   character: Characters;
   onNext: (data: UpdateCharacterRequest) => void;
+  openModal: () => void;
   isSubmitting: boolean;
 }
 
 const CharacterInfoForm = ({
   character,
   isSubmitting,
+  openModal,
   onNext,
 }: CharacterInfoFormProps) => {
   const { characterId } = useParams();
@@ -79,14 +81,17 @@ const CharacterInfoForm = ({
         errorMessage={errors.description?.message}
       />
 
-      <Stack align="center">
+      <Group justify="center">
         <Button
           disabled={!isDirty || isSubmitting}
           onClick={handleSubmit(submitHandler)}
         >
           변경된 내용 저장
         </Button>
-      </Stack>
+        <Button color="red" onClick={openModal}>
+          캐릭터 삭제
+        </Button>
+      </Group>
     </Stack>
   );
 };

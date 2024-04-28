@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { createCharacter } from '@/services/supabase/character/create-character';
+import { deleteCharacter } from '@/services/supabase/character/delete-character';
 import { getCharacterById } from '@/services/supabase/character/get-character-by-id';
 import { getCharacters } from '@/services/supabase/character/get-characters';
 import { updateCharacter } from '@/services/supabase/character/update-character';
@@ -19,6 +20,15 @@ export async function POST(request: Request) {
 export async function PATCH(request: Request) {
   const body = await request.json();
   const response = await catchResponseError(updateCharacter(body));
+
+  return NextResponse.json(response, {
+    status: response.status,
+  });
+}
+
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const response = await catchResponseError(deleteCharacter(body));
 
   return NextResponse.json(response, {
     status: response.status,

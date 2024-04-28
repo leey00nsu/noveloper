@@ -10,6 +10,8 @@ import { fetcher } from '@/libs/fetcher';
 import {
   CreateCharacterRequest,
   CreateCharacterResponse,
+  DeleteCharacterRequest,
+  DeleteCharacterResponse,
   GetCharacterRequest,
   GetCharacterResponse,
   GetCharactersRequest,
@@ -107,11 +109,73 @@ export const useUpdateCharacter = ({
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,relation,history 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterQueryKeys.character(
             response.data.projectId,
             response.data.id,
+          ),
+        });
+        queryClient.invalidateQueries({
+          queryKey: characterRelationQueryKeys.relation(
+            response.data.projectId,
+          ),
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.histories,
+        });
+        queryClient.invalidateQueries({
+          queryKey: historyQueryKeys.history(response.data.projectId),
+        });
+      } else {
+        onError(response);
+      }
+    },
+    onError() {},
+  });
+
+  return { mutate, isPending };
+};
+
+interface UseDeleteCharacterProps {
+  onSuccess: (response: DeleteCharacterResponse) => void;
+  onError: (response: DeleteCharacterResponse) => void;
+}
+
+export const useDeleteCharacter = ({
+  onSuccess,
+  onError,
+}: UseDeleteCharacterProps) => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation<
+    DeleteCharacterResponse,
+    DefaultError,
+    DeleteCharacterRequest
+  >({
+    mutationFn: (request) =>
+      fetcher({
+        url: `/api/character`,
+        method: 'DELETE',
+        body: JSON.stringify(request),
+      }),
+    onSuccess(response) {
+      if (response.success) {
+        onSuccess(response);
+
+        // 변경한 project,relation,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: characterQueryKeys.characters(response.data.projectId),
+        });
+        queryClient.invalidateQueries({
+          queryKey: characterQueryKeys.character(
+            response.data.projectId,
+            response.data.id,
+          ),
+        });
+        queryClient.invalidateQueries({
+          queryKey: characterRelationQueryKeys.relation(
+            response.data.projectId,
           ),
         });
         queryClient.invalidateQueries({

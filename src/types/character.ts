@@ -35,3 +35,6 @@ export interface UpdateCharacterRequest extends CreateCharacterRequest {
   characterId: number;
 }
 export interface UpdateCharacterResponse extends ApiResponse<Characters> {}
+
+export interface DeleteCharacterRequest extends GetCharacterRequest {}
+export interface DeleteCharacterResponse extends ApiResponse<Characters> {}
