@@ -6,17 +6,17 @@ import { createHistory } from '../history/create-history';
 import { getUserData } from '../user/get-user-data';
 
 export const createProject = async (
-  project: CreateProjectRequest,
+  request: CreateProjectRequest,
 ): Promise<CreateProjectResponse> => {
   const { data: user } = await getUserData();
 
   const created = await prisma.projects.create({
     data: {
       userId: user.id,
-      title: project.title,
-      janres: project.janres,
-      author: project.author,
-      synopsis: project.synopsis,
+      title: request.title,
+      janres: request.janres,
+      author: request.author,
+      synopsis: request.synopsis,
     },
   });
 
@@ -26,8 +26,8 @@ export const createProject = async (
 
   await createHistory({
     projectId: created.id,
-    title: `${project.title} 생성`,
-    content: `${project.title} 프로젝트가 생성되었습니다.`,
+    title: `${request.title} 생성`,
+    content: `${request.title} 프로젝트가 생성되었습니다.`,
   });
 
   return {

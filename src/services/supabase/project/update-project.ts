@@ -9,24 +9,24 @@ import { getUserData } from '../user/get-user-data';
 import { getProjectById } from './get-project-by-id';
 
 export const updateProject = async (
-  project: UpdateProjectRequest,
+  request: UpdateProjectRequest,
 ): Promise<UpdateProjectResponse> => {
   const { data: user } = await getUserData();
 
   const { data: pastProject } = await getProjectById({
-    projectId: project.projectId,
+    projectId: request.projectId,
   });
 
   const updated = await prisma.projects.update({
     where: {
-      id: project.projectId,
+      id: request.projectId,
       userId: user.id,
     },
     data: {
-      title: project.title,
-      janres: project.janres,
-      author: project.author,
-      synopsis: project.synopsis,
+      title: request.title,
+      janres: request.janres,
+      author: request.author,
+      synopsis: request.synopsis,
     },
   });
 
@@ -36,25 +36,25 @@ export const updateProject = async (
 
   let content = '';
 
-  if (pastProject.title !== project.title) {
-    content += `제목: ${pastProject.title} -> ${project.title}\\n`;
+  if (pastProject.title !== request.title) {
+    content += `제목: ${pastProject.title} -> ${request.title}\\n`;
   }
 
-  if (!isEqual(pastProject.janres, project.janres)) {
-    content += `장르: ${pastProject.janres} -> ${project.janres}\\n`;
+  if (!isEqual(pastProject.janres, request.janres)) {
+    content += `장르: ${pastProject.janres} -> ${request.janres}\\n`;
   }
 
-  if (pastProject.author !== project.author) {
-    content += `작가: ${pastProject.author} -> ${project.author}\\n`;
+  if (pastProject.author !== request.author) {
+    content += `작가: ${pastProject.author} -> ${request.author}\\n`;
   }
 
-  if (pastProject.synopsis !== project.synopsis) {
-    content += `시놉시스: ${pastProject.synopsis} -> ${project.synopsis}\\n`;
+  if (pastProject.synopsis !== request.synopsis) {
+    content += `시놉시스: ${pastProject.synopsis} -> ${request.synopsis}\\n`;
   }
 
   await createHistory({
     projectId: updated.id,
-    title: `${project.title} 업데이트`,
+    title: `${request.title} 업데이트`,
     content,
   });
 
