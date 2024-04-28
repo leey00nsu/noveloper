@@ -30,7 +30,10 @@ export default async function Page({
     await queryClient.fetchQuery<GetProjectResponse>({
       queryKey: projectQueryKeys.project(params.projectId),
       queryFn: async () => {
-        const data = await getProjectById(params.projectId);
+        const data = await getProjectById({
+          projectId: params.projectId,
+        });
+
         return data;
       },
     });

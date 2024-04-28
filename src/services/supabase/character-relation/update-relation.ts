@@ -17,7 +17,9 @@ export const updateRelation = async (
 ): Promise<UpdateCharacterRelationResponse> => {
   const { data: user } = await getUserData();
 
-  const { data: project } = await getProjectById(request.projectId);
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
+  });
 
   const updated = await prisma.characterRelations.update({
     where: {

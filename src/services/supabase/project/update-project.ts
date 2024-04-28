@@ -13,7 +13,9 @@ export const updateProject = async (
 ): Promise<UpdateProjectResponse> => {
   const { data: user } = await getUserData();
 
-  const { data: pastProject } = await getProjectById(project.projectId);
+  const { data: pastProject } = await getProjectById({
+    projectId: project.projectId,
+  });
 
   const updated = await prisma.projects.update({
     where: {
