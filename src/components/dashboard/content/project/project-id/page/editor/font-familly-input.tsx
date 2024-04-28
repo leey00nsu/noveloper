@@ -4,7 +4,7 @@ import { Select } from '@mantine/core';
 import { RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
 import { useEffect, useState } from 'react';
 
-import { namumMyeongjo, pretendard } from '@/app/font-provider';
+import { notoSerif, pretendard } from '@/app/font-provider';
 
 const fontFamillies = [
   {
@@ -12,8 +12,8 @@ const fontFamillies = [
     value: pretendard.style.fontFamily.replaceAll("'", ''),
   },
   {
-    label: '나눔 명조',
-    value: namumMyeongjo.style.fontFamily.replaceAll("'", ''),
+    label: 'Noto Serif',
+    value: notoSerif.style.fontFamily.replaceAll("'", ''),
   },
 ];
 

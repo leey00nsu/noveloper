@@ -2,13 +2,13 @@ import { Document, Font, Page, usePDF } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 
 Font.register({
-  family: 'NanumMyeongjo',
+  family: 'NotoSerif',
   fonts: [
     {
-      src: '/fonts/NanumMyeongjo-Regular.ttf',
+      src: '/fonts/NotoSerif-Regular.ttf',
     },
     {
-      src: '/fonts/NanumMyeongjo-Bold.ttf',
+      src: '/fonts/NotoSerif-Bold.ttf',
       fontWeight: 'bold',
     },
   ],

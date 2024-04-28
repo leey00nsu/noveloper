@@ -12,7 +12,7 @@ interface Mark {
 const useParseJson = () => {
   const getFontFamily = (fontFamily: string) => {
     if (fontFamily.includes('pretendard')) return 'Pretendard';
-    if (fontFamily.includes('Nanum_Myeongjo')) return 'NanumMyeongjo';
+    if (fontFamily.includes('Noto_Serif_KR')) return 'NotoSerif';
     return 'Pretendard';
   };
 
@@ -25,7 +25,7 @@ const useParseJson = () => {
         case 'textStyle':
           style.fontFamily = mark.attrs?.fontFamily
             ? getFontFamily(mark.attrs?.fontFamily)
-            : 'pretendard';
+            : 'Pretendard';
           style.fontSize = mark.attrs?.fontSize
             ? parseInt(mark.attrs?.fontSize, 10)
             : 16;

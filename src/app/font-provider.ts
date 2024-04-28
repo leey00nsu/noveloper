@@ -1,4 +1,4 @@
-import { Nanum_Myeongjo } from 'next/font/google';
+import { Noto_Serif_KR } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const pretendard = localFont({
@@ -8,9 +8,9 @@ export const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-export const namumMyeongjo = Nanum_Myeongjo({
+export const notoSerif = Noto_Serif_KR({
   display: 'swap',
   subsets: ['latin'],
   weight: ['400', '700'],
-  variable: '--font-nanum-myeongjo',
+  variable: '--font-noto-serif',
 });
