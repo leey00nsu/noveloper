@@ -3,7 +3,7 @@
 import { Button } from '@mantine/core';
 import { toPng } from 'html-to-image';
 import { AiOutlineExport } from 'react-icons/ai';
-import { getRectOfNodes, getTransformForBounds, useReactFlow } from 'reactflow';
+import { getNodesBounds, getTransformForBounds, useReactFlow } from 'reactflow';
 
 import { downloadImage } from '@/libs/download-image';
 
@@ -12,7 +12,7 @@ const imageHeight = 768;
 
 const ExportCanvasButton = () => {
   const { getNodes } = useReactFlow();
-  const nodesBounds = getRectOfNodes(getNodes());
+  const nodesBounds = getNodesBounds(getNodes());
 
   const downloadHandler = async () => {
     const transform = getTransformForBounds(
