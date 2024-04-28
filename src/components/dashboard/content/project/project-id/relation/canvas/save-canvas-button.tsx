@@ -21,6 +21,7 @@ const SaveCanvasButton = () => {
         id: 'relation-save',
         title: '관계도를 저장중입니다.',
         message: '저장 중...',
+        autoClose: false,
       });
     },
     onSuccess: (response) => {
@@ -29,6 +30,7 @@ const SaveCanvasButton = () => {
         id: 'relation-save',
         title: '관계도가 저장되었습니다.',
         message: response.message,
+        autoClose: true,
       });
     },
     onError: () => {},
