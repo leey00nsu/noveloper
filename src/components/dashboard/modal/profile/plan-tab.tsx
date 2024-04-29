@@ -1,4 +1,12 @@
-import { Button, Divider, Flex, List, Stack, Text } from '@mantine/core';
+import {
+  Button,
+  Divider,
+  Flex,
+  List,
+  NumberFormatter,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { Fragment } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
@@ -17,7 +25,14 @@ const PlanTab = () => {
         <Fragment key={plan.name}>
           <Stack className="grow">
             <Text className="text-xl font-bold ">{plan.name}</Text>
-            <Text className="text-lg ">{plan.price}원 / 달</Text>
+            <Text className="text-lg ">
+              <NumberFormatter
+                value={plan.price}
+                suffix="원"
+                thousandSeparator
+              />{' '}
+              / 달
+            </Text>
             {user.plan.toLowerCase() === plan.name.toLowerCase() && (
               <Button disabled color="blue">
                 현재 플랜
