@@ -12,6 +12,11 @@ const ProjectCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
+      {projects?.length === 0 && (
+        <Card title="프로젝트가 없습니다.">
+          <Card.Text>새로운 프로젝트를 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {projects?.map((project) => (
         <Card
           title={project.title}

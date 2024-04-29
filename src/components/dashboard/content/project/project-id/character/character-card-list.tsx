@@ -17,6 +17,11 @@ const CharacterCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
+      {characters?.length === 0 && (
+        <Card title="인물이 없습니다.">
+          <Card.Text>새로운 인물을 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {characters?.map((character) => (
         <Card
           title={character.name}

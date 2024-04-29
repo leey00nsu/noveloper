@@ -17,6 +17,11 @@ const PageCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
+      {pages?.length === 0 && (
+        <Card title="페이지가 없습니다.">
+          <Card.Text>새로운 페이지를 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {pages?.map((page) => (
         <Card
           title={page.title}

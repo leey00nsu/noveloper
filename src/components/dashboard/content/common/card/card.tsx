@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   Group,
   Card as MantineCard,
   CardProps as MantineCardProps,
@@ -8,7 +7,6 @@ import {
   TextProps,
 } from '@mantine/core';
 import Link from 'next/link';
-import { FaEllipsis } from 'react-icons/fa6';
 
 import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
@@ -25,9 +23,6 @@ const CardSkeleton = () => {
     <MantineCard withBorder className="h-40">
       <Group wrap="nowrap" justify="space-between">
         <ThemeSkeleton className="h-4" />
-        <ActionIcon color="gray" variant="subtle">
-          <FaEllipsis />
-        </ActionIcon>
       </Group>
 
       <ThemeSkeleton className="h-full" />
@@ -62,9 +57,6 @@ const Card = ({ title, href, children, ...props }: CardProps) => {
     >
       <Group wrap="nowrap" justify="space-between">
         <Text truncate="end">{title}</Text>
-        <ActionIcon color="gray" variant="subtle">
-          <FaEllipsis />
-        </ActionIcon>
       </Group>
 
       <Stack className="gap-1">{children}</Stack>
