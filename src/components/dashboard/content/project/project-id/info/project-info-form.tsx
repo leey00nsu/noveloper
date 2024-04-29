@@ -1,8 +1,11 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Stack, Title } from '@mantine/core';
 import { Projects } from '@prisma/client';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+
+import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import {
   CreateProjectRequest,
@@ -29,15 +32,15 @@ const MOCK_JANRES = [
 interface ProjectInfoFormProps {
   isSubmitting: boolean;
   project: Projects;
-  openModal: () => void;
   onNext: (data: UpdateProjectRequest) => void;
+  removeHandler: () => void;
 }
 
 const ProjectInfoForm = ({
   isSubmitting,
   project,
-  openModal,
   onNext,
+  removeHandler,
 }: ProjectInfoFormProps) => {
   const {
     reset,
@@ -57,6 +60,15 @@ const ProjectInfoForm = ({
   useEffect(() => {
     reset(project);
   }, [project, reset]);
+
+  const openRemoveModal = () => {
+    NiceModal.show(RemoveModal, {
+      remove: removeHandler,
+      title: '프로젝트 삭제',
+      contents: ['프로젝트를 삭제하시겠습니까?', '되돌릴 수 없습니다.'],
+      label: { remove: '삭제', cancel: '취소' },
+    });
+  };
 
   const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
     onNext({ projectId: project.id, ...data });
@@ -110,7 +122,7 @@ const ProjectInfoForm = ({
         >
           변경된 내용 저장
         </Button>
-        <Button color="red" onClick={openModal}>
+        <Button color="red" onClick={openRemoveModal}>
           프로젝트 삭제
         </Button>
       </Group>

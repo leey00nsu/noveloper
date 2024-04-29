@@ -3,18 +3,18 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Group, Modal, Stack, Text } from '@mantine/core';
 
-interface RemoveModalProps {
-  remove: (...args: any) => any;
+interface ConfirmModalProps {
+  confirm: (...args: any) => any;
   title: string;
   contents: string[];
   label: {
-    remove: string;
+    confirm: string;
     cancel: string;
   };
 }
 
-const RemoveModal = NiceModal.create(
-  ({ remove, title, contents, label }: RemoveModalProps) => {
+const ConfirmModal = NiceModal.create(
+  ({ confirm, title, contents, label }: ConfirmModalProps) => {
     const modal = useModal();
 
     return (
@@ -39,13 +39,12 @@ const RemoveModal = NiceModal.create(
                   {label.cancel}
                 </Button>
                 <Button
-                  color="red"
                   onClick={() => {
                     modal.hide();
-                    remove();
+                    confirm();
                   }}
                 >
-                  {label.remove}
+                  {label.confirm}
                 </Button>
               </Group>
             </Stack>
@@ -56,4 +55,4 @@ const RemoveModal = NiceModal.create(
   },
 );
 
-export default RemoveModal;
+export default ConfirmModal;

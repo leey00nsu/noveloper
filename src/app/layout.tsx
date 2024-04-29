@@ -4,7 +4,8 @@ import type { Metadata } from 'next';
 
 import { pretendard } from './font-provider';
 import './globals.css';
-import Providers from './providers';
+import ModalProvider from './modal-provider';
+import QueryProvider from './query-providers';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -50,10 +51,10 @@ export default function RootLayout({
       </head>
       <body className={pretendard.className}>
         <MantineProvider theme={theme}>
-          <Providers>
+          <ModalProvider>
             <Notifications zIndex={1000} />
-            {children}
-          </Providers>
+            <QueryProvider>{children}</QueryProvider>
+          </ModalProvider>
         </MantineProvider>
       </body>
     </html>

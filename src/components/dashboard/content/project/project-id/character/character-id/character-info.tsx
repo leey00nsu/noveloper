@@ -4,19 +4,16 @@ import { notifications } from '@mantine/notifications';
 import { useParams, useRouter } from 'next/navigation';
 
 import ContentWrapper from '@/components/dashboard/content/common/wrapper/content-wrapper';
-import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import {
   useDeleteCharacter,
   useGetCharacterById,
   useUpdateCharacter,
 } from '@/hooks/character/use-character-service';
-import useModal from '@/hooks/use-modal';
 
 import CharacterInfoForm from './character-info-form';
 
 const CharacterInfo = () => {
-  const { isModalOpen, openModal, closeModal } = useModal();
   const router = useRouter();
   const { projectId, characterId } = useParams();
 
@@ -62,7 +59,6 @@ const CharacterInfo = () => {
     });
 
   const removeHandler = () => {
-    closeModal();
     deleteCharacter({
       projectId: projectId as string,
       characterId: Number(characterId),
@@ -73,17 +69,11 @@ const CharacterInfo = () => {
 
   return (
     <ContentWrapper showLoader={isUpdatePending || isDeletePending}>
-      <RemoveModal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        remove={removeHandler}
-        title={character.name}
-      />
       <CharacterInfoForm
         character={character}
         onNext={updateCharacter}
         isSubmitting={isUpdatePending || isFetching}
-        openModal={openModal}
+        removeHandler={removeHandler}
       />
     </ContentWrapper>
   );

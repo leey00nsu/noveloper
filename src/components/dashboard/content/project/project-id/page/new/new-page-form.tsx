@@ -1,5 +1,6 @@
 'use client';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
@@ -9,6 +10,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
@@ -57,7 +59,12 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
   });
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
-    onNext({ ...data, projectId: projectId as string });
+    NiceModal.show(ConfirmModal, {
+      confirm: () => onNext({ ...data, projectId: projectId as string }),
+      title: '페이지 생성',
+      contents: ['페이지를 생성하시겠습니까?', '20토큰이 소모됩니다.'],
+      label: { confirm: '생성', cancel: '취소' },
+    });
   };
 
   return (

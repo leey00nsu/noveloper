@@ -1,3 +1,4 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { Button, Text } from '@mantine/core';
 import { Histories } from '@prisma/client';
 
@@ -5,13 +6,13 @@ import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
 import tw from '@/libs/tw';
 
+import TimeLineModal from '../../modal/timeline/time-line-modal';
 import TimeLineMenu from './time-line-menu';
 
 interface TimeLineItemProps {
   history: Histories;
   selectedHistoryId: string;
   selectHistoryId: (historyId: string) => void;
-  openModal: () => void;
 }
 
 const TimeLineItemSkeleton = () => {
@@ -22,8 +23,13 @@ const TimeLineItem = ({
   history,
   selectHistoryId,
   selectedHistoryId,
-  openModal,
 }: TimeLineItemProps) => {
+  const openModal = () => {
+    NiceModal.show(TimeLineModal, {
+      selectedHistory: history,
+    });
+  };
+
   return (
     <Button
       onClick={() => selectHistoryId(history.id)}

@@ -1,5 +1,6 @@
 'use client';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Stack, Title } from '@mantine/core';
 import { Characters } from '@prisma/client';
@@ -8,6 +9,7 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import {
   CreateCharacterRequest,
@@ -18,15 +20,15 @@ import {
 interface CharacterInfoFormProps {
   character: Characters;
   onNext: (data: UpdateCharacterRequest) => void;
-  openModal: () => void;
   isSubmitting: boolean;
+  removeHandler: () => void;
 }
 
 const CharacterInfoForm = ({
   character,
   isSubmitting,
-  openModal,
   onNext,
+  removeHandler,
 }: CharacterInfoFormProps) => {
   const { characterId } = useParams();
 
@@ -43,6 +45,15 @@ const CharacterInfoForm = ({
       description: character.description,
     },
   });
+
+  const openRemoveModal = () => {
+    NiceModal.show(RemoveModal, {
+      remove: removeHandler,
+      title: '인물 삭제',
+      contents: ['인물을 삭제하시겠습니까?', '되돌릴 수 없습니다.'],
+      label: { remove: '삭제', cancel: '취소' },
+    });
+  };
 
   const submitHandler: SubmitHandler<CreateCharacterRequest> = (data) => {
     onNext({ ...data, characterId: Number(characterId) });
@@ -88,7 +99,7 @@ const CharacterInfoForm = ({
         >
           변경된 내용 저장
         </Button>
-        <Button color="red" onClick={openModal}>
+        <Button color="red" onClick={openRemoveModal}>
           캐릭터 삭제
         </Button>
       </Group>

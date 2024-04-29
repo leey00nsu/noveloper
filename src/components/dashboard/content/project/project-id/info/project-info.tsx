@@ -3,20 +3,16 @@
 import { notifications } from '@mantine/notifications';
 import { useParams, useRouter } from 'next/navigation';
 
-import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
-
 import {
   useDeleteProject,
   useGetProjectById,
   useUpdateProject,
 } from '@/hooks/project/use-project-service';
-import useModal from '@/hooks/use-modal';
 
 import ContentWrapper from '../../../common/wrapper/content-wrapper';
 import ProjectInfoForm from './project-info-form';
 
 const ProjectInfo = () => {
-  const { isModalOpen, openModal, closeModal } = useModal();
   const { projectId } = useParams();
   const router = useRouter();
 
@@ -59,7 +55,6 @@ const ProjectInfo = () => {
     });
 
   const removeHandler = () => {
-    closeModal();
     deleteProject({
       projectId: projectId as string,
     });
@@ -69,17 +64,11 @@ const ProjectInfo = () => {
 
   return (
     <ContentWrapper showLoader={isUpdatePending || isDeletePending}>
-      <RemoveModal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        remove={removeHandler}
-        title={project.title}
-      />
       <ProjectInfoForm
         project={project}
         onNext={updateProject}
         isSubmitting={isUpdatePending || isFetching}
-        openModal={openModal}
+        removeHandler={removeHandler}
       />
     </ContentWrapper>
   );

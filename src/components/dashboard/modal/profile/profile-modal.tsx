@@ -2,17 +2,15 @@
 
 import { Modal, Tabs, Text } from '@mantine/core';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FaRegCreditCard, FaRegUser } from 'react-icons/fa';
-
-import useModal from '@/hooks/use-modal';
 
 import PlanTab from './plan-tab';
 import ProfileTab from './profile-tab';
 
 const ProfileModal = () => {
+  const [isOpen, setOpen] = useState(false);
   const router = useRouter();
-  const { isModalOpen, openModal } = useModal();
 
   const tabs = [
     { label: '프로필', icon: <FaRegUser /> },
@@ -21,15 +19,15 @@ const ProfileModal = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      openModal();
+      setOpen(true);
     }, 0);
-  }, [openModal]);
+  }, []);
 
   return (
     <Modal.Root
       size="80%"
       centered
-      opened={isModalOpen}
+      opened={isOpen}
       onClose={() => router.back()}
     >
       <Modal.Overlay />

@@ -8,9 +8,7 @@ import {
   useGetHistories,
   useGetHistoriesById,
 } from '@/hooks/history/use-history-service';
-import useModal from '@/hooks/use-modal';
 
-import TimeLineModal from '../../modal/timeline/time-line-modal';
 import TimeLineItem from './time-line-item';
 
 const TimeLineListSkeleton = () => {
@@ -27,7 +25,6 @@ const TimeLineListSkeleton = () => {
 const TimeLineList = () => {
   const [selectedHistoryId, setSelectedHistoryId] = useState('');
   const { projectId } = useParams();
-  const { isModalOpen, openModal, closeModal } = useModal();
 
   const { histories, isLoading: isHistoriesLoading } = useGetHistories();
   const {
@@ -54,18 +51,12 @@ const TimeLineList = () => {
   return (
     <Stack className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
-      <TimeLineModal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        selectedHistory={selectedHistory}
-      />
       {showingHistories?.map((history) => (
         <TimeLineItem
           key={history.id}
           history={history}
           selectHistoryId={selectHistoryId}
           selectedHistoryId={selectedHistoryId}
-          openModal={openModal}
         />
       ))}
     </Stack>

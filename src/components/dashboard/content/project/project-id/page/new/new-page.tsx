@@ -12,7 +12,7 @@ import NewPageForm from './new-page-form';
 
 const NewPage = () => {
   const { Funnel, setStep } = useFunnel(['form', 'success']);
-  const { mutate, isPending } = useCreatePage({
+  const { mutate: createPage, isPending } = useCreatePage({
     onSuccess: (response) => {
       setStep('success');
 
@@ -34,7 +34,7 @@ const NewPage = () => {
     <ContentWrapper showLoader={isPending}>
       <Funnel>
         <Funnel.Step name="form">
-          <NewPageForm onNext={mutate} />
+          <NewPageForm onNext={createPage} />
         </Funnel.Step>
         <Funnel.Step name="success">
           <CreatingSuccess />

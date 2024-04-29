@@ -13,6 +13,7 @@
     "restructure": "3.0.0"
   },
   "dependencies": {
+    "@ebay/nice-modal-react": "^1.2.13",
     "@hookform/resolvers": "^3.3.4",
     "@mantine/core": "^7.8.0",
     "@mantine/hooks": "^7.8.0",

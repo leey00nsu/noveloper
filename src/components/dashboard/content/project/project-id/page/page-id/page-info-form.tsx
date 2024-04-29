@@ -1,5 +1,6 @@
 'use client';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Stack, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
@@ -10,6 +11,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
@@ -27,15 +29,15 @@ import Editor from '../editor/editor';
 interface PageInfoFormProps {
   page: Pages;
   onNext: (data: UpdatePageRequest) => void;
-  openModal: () => void;
   isSubmitting: boolean;
+  removeHandler: () => void;
 }
 
 const PageInfoForm = ({
   page,
   isSubmitting,
-  openModal,
   onNext,
+  removeHandler,
 }: PageInfoFormProps) => {
   const [contentText, setContentText] = useState('');
   const { projectId, pageId } = useParams();
@@ -81,6 +83,15 @@ const PageInfoForm = ({
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
     onNext({ ...data, pageId: Number(pageId) });
+  };
+
+  const openRemoveModal = () => {
+    NiceModal.show(RemoveModal, {
+      remove: removeHandler,
+      title: '페이지 삭제',
+      contents: ['페이지를 삭제하시겠습니까?', '되돌릴 수 없습니다.'],
+      label: { remove: '삭제', cancel: '취소' },
+    });
   };
 
   return (
@@ -142,7 +153,7 @@ const PageInfoForm = ({
         >
           변경된 내용 저장
         </Button>
-        <Button color="red" onClick={openModal}>
+        <Button color="red" onClick={openRemoveModal}>
           페이지 삭제
         </Button>
       </Group>
