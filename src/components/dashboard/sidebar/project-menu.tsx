@@ -1,10 +1,11 @@
 'use client';
 
-import { Accordion, Button, Stack, Text } from '@mantine/core';
-import Link from 'next/link';
+import { Accordion, Stack } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
 import { useGetProjectById } from '@/hooks/project/use-project-service';
+
+import AccordianButton from '../content/common/button/accordian-button';
 
 const ProjectMenu = () => {
   const { projectId } = useParams();
@@ -19,33 +20,38 @@ const ProjectMenu = () => {
       items: [
         {
           label: '인물 관리',
-          url: `/dashboard/project/${projectId}/character`,
+          href: `/dashboard/project/${projectId}/character`,
         },
         {
           label: '인물 관계도',
-          url: `/dashboard/project/${projectId}/relation`,
+          href: `/dashboard/project/${projectId}/relation`,
         },
       ],
     },
     {
       label: '스토리',
       items: [
-        { label: '페이지 관리', url: `/dashboard/project/${projectId}/page` },
+        { label: '페이지 관리', href: `/dashboard/project/${projectId}/page` },
       ],
     },
     {
       label: '설정',
       items: [
-        { label: '작품 정보', url: `/dashboard/project/${projectId}/info` },
+        { label: '작품 정보', href: `/dashboard/project/${projectId}/info` },
       ],
     },
   ];
 
   return (
     <Accordion multiple defaultValue={[]} className="p-sm">
-      <Text className="px-md text-sm font-bold text-gray-600">
-        {project.title}
-      </Text>
+      <Stack>
+        <AccordianButton
+          label={project.title}
+          href={`/dashboard/project/${projectId}`}
+          className="text-sm font-bold text-gray-600"
+        />
+      </Stack>
+
       {accordions.map((accordion) => (
         <Accordion.Item
           key={accordion.label}
@@ -58,17 +64,11 @@ const ProjectMenu = () => {
           <Accordion.Panel>
             <Stack>
               {accordion.items.map((item) => (
-                <Button
-                  component={Link}
-                  href={item.url}
+                <AccordianButton
                   key={item.label}
-                  variant="transparent"
-                  justify="flex-start"
-                  color="white"
-                  className="px-md hover:bg-gray-800 "
-                >
-                  {item.label}
-                </Button>
+                  label={item.label}
+                  href={item.href}
+                />
               ))}
             </Stack>
           </Accordion.Panel>

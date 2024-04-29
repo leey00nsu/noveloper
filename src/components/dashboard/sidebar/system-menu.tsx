@@ -1,9 +1,10 @@
-import { Button, Stack } from '@mantine/core';
-import Link from 'next/link';
+import { Stack } from '@mantine/core';
 import { FaRegFileAlt, FaRegFolderOpen } from 'react-icons/fa';
 
+import AccordianButton from '../content/common/button/accordian-button';
+
 const SystemMenu = () => {
-  const MOCK_BUTTONS = [
+  const menus = [
     { label: '가이드', icon: <FaRegFileAlt />, href: '/dashboard/guide' },
     {
       label: '작품 목록',
@@ -14,19 +15,13 @@ const SystemMenu = () => {
 
   return (
     <Stack className="p-sm">
-      {MOCK_BUTTONS.map((button) => (
-        <Button
-          component={Link}
-          href={button.href}
-          key={button.label}
-          variant="transparent"
-          leftSection={button.icon}
-          justify="flex-start"
-          color="white"
-          className="px-md hover:bg-gray-800 "
-        >
-          {button.label}
-        </Button>
+      {menus.map((menu) => (
+        <AccordianButton
+          key={menu.label}
+          label={menu.label}
+          href={menu.href}
+          icon={menu.icon}
+        />
       ))}
     </Stack>
   );
