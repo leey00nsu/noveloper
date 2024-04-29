@@ -27,6 +27,9 @@ interface EditorProps {
   onTextChange: (text: string) => void;
   onChange: (content: object) => void;
   content?: JsonValue;
+  title?: string;
+  author?: string;
+  subTitle: string;
 }
 
 const LIMIT = 2000;
@@ -61,7 +64,14 @@ const extensions = [
   }),
 ];
 
-const Editor = ({ onTextChange, onChange, content }: EditorProps) => {
+const Editor = ({
+  onTextChange,
+  onChange,
+  content,
+  title,
+  author,
+  subTitle,
+}: EditorProps) => {
   const editor = useEditor({
     extensions,
     onCreate(props) {
@@ -122,7 +132,7 @@ const Editor = ({ onTextChange, onChange, content }: EditorProps) => {
 
         <RichTextEditor.ControlsGroup>
           <ExportTextButton />
-          <ExportPdfButton />
+          <ExportPdfButton title={title} subTitle={subTitle} author={author} />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>

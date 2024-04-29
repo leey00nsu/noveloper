@@ -12,6 +12,7 @@ import FormGenerationButton from '@/components/dashboard/content/common/form/for
 import FormInput from '@/components/dashboard/content/common/form/form-input';
 
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
+import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 import {
   CreatePageRequest,
@@ -37,9 +38,11 @@ const PageInfoForm = ({
   onNext,
 }: PageInfoFormProps) => {
   const [contentText, setContentText] = useState('');
-  const { pageId } = useParams();
+  const { projectId, pageId } = useParams();
+  const { project } = useGetProjectById(projectId as string);
 
   const {
+    getValues,
     setValue,
     reset,
     control,
@@ -125,6 +128,9 @@ const PageInfoForm = ({
             onTextChange={(text) => setContentText(text)}
             onChange={field.onChange}
             content={page.content}
+            title={project?.title}
+            author={project?.author}
+            subTitle={getValues('title')}
           />
         )}
       />
