@@ -1,14 +1,17 @@
-import { Button, Stack, Text, Title } from '@mantine/core';
-import Link from 'next/link';
+import { Stack, Text, Title } from '@mantine/core';
 import { BsFolderPlus, BsLightbulb } from 'react-icons/bs';
-import { MdArrowOutward } from 'react-icons/md';
 
+import LinkButton from '../common/button/link-button';
 import ContentWrapper from '../common/wrapper/content-wrapper';
 
 const Home = () => {
   const MOCK_CONTENTS = [
-    { label: '사용 가이드', icon: <BsLightbulb /> },
-    { label: '새로운 소설 생성', icon: <BsFolderPlus /> },
+    { label: '사용 가이드', icon: <BsLightbulb />, href: '/dashboard/guide' },
+    {
+      label: '새로운 프로젝트 생성',
+      icon: <BsFolderPlus />,
+      href: '/dashboard/project',
+    },
   ];
 
   return (
@@ -24,18 +27,12 @@ const Home = () => {
 
         <Stack className="gap-sm">
           {MOCK_CONTENTS.map((content) => (
-            <Button
-              href="/dashboard/guide"
-              component={Link}
+            <LinkButton
               key={content.label}
-              size="lg"
-              variant="light"
-              justify="space-between"
-              leftSection={content.icon}
-              rightSection={<MdArrowOutward />}
-            >
-              <Text className="text-center">{content.label}</Text>
-            </Button>
+              href={content.href}
+              label={content.label}
+              icon={content.icon}
+            />
           ))}
         </Stack>
       </Stack>
