@@ -13,7 +13,7 @@ const ProjectMenu = () => {
 
   if (!project) return null;
 
-  const MOCK_ACCORDIANS = [
+  const accordions = [
     {
       label: '인물',
       items: [
@@ -31,21 +31,12 @@ const ProjectMenu = () => {
       label: '스토리',
       items: [
         { label: '페이지 관리', url: `/dashboard/project/${projectId}/page` },
-        { label: '타임라인', url: `/dashboard/project/${projectId}/timeline` },
       ],
     },
     {
       label: '설정',
       items: [
         { label: '작품 정보', url: `/dashboard/project/${projectId}/info` },
-        {
-          label: '배경 관리',
-          url: `/dashboard/project/${projectId}/background`,
-        },
-        {
-          label: '고유 명사 설정',
-          url: `/dashboard/project/${projectId}/noun`,
-        },
       ],
     },
   ];
@@ -53,9 +44,9 @@ const ProjectMenu = () => {
   return (
     <Accordion multiple defaultValue={[]} className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">
-        {project?.title}
+        {project.title}
       </Text>
-      {MOCK_ACCORDIANS.map((accordion) => (
+      {accordions.map((accordion) => (
         <Accordion.Item
           key={accordion.label}
           value={accordion.label}
