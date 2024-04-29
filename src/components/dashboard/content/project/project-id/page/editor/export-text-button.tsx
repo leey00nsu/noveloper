@@ -1,5 +1,6 @@
-import { Text } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
+import { IoDocumentTextOutline } from 'react-icons/io5';
 
 import { textToFile } from '@/libs/text-to-file';
 
@@ -15,9 +16,19 @@ const ExportTextButton = () => {
 
   return (
     <RichTextEditor.Control>
-      <Text className="text-xs" onClick={exportHandler}>
-        .txt
-      </Text>
+      <Button
+        size="xs"
+        component="div"
+        variant="default"
+        title="export as pdf"
+        onClick={exportHandler}
+        rightSection={<IoDocumentTextOutline />}
+        classNames={{
+          root: 'h-[26px] rounded-none border-x-0 font-normal',
+        }}
+      >
+        텍스트로 내보내기
+      </Button>
     </RichTextEditor.Control>
   );
 };
