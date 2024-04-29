@@ -14,7 +14,7 @@ const ProfileModal = () => {
   const router = useRouter();
   const { isModalOpen, openModal } = useModal();
 
-  const MOCK_BUTTONS = [
+  const tabs = [
     { label: '프로필', icon: <FaRegUser /> },
     { label: '플랜', icon: <FaRegCreditCard /> },
   ];
@@ -55,13 +55,13 @@ const ProfileModal = () => {
             }}
           >
             <Tabs.List>
-              {MOCK_BUTTONS.map((button) => (
+              {tabs.map((tab) => (
                 <Tabs.Tab
-                  value={button.label}
-                  key={button.label}
-                  leftSection={button.icon}
+                  value={tab.label}
+                  key={tab.label}
+                  leftSection={tab.icon}
                 >
-                  {button.label}
+                  {tab.label}
                 </Tabs.Tab>
               ))}
             </Tabs.List>

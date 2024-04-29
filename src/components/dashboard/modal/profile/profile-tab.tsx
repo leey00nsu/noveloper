@@ -26,7 +26,7 @@ const ProfilTab = () => {
         <Text>언어</Text>
         <Select
           size="sm"
-          checkIconPosition="right"
+          allowDeselect={false}
           defaultValue={SUPPORT_LANGUAGES[0]}
           data={SUPPORT_LANGUAGES}
         />
