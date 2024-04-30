@@ -1,16 +1,18 @@
 'use client';
 
 import { notifications } from '@mantine/notifications';
+import { useParams } from 'next/navigation';
 
+import CreatingSuccess from '@/components/dashboard/content/common/success/creating-success';
 import ContentWrapper from '@/components/dashboard/content/common/wrapper/content-wrapper';
 
 import { useCreatePage } from '@/hooks/page/use-page-service';
 import useFunnel from '@/hooks/use-funnel';
 
-import CreatingSuccess from './creating-success';
 import NewPageForm from './new-page-form';
 
 const NewPage = () => {
+  const { projectId } = useParams();
   const { Funnel, setStep } = useFunnel(['form', 'success']);
   const { mutate: createPage, isPending } = useCreatePage({
     onSuccess: (response) => {
@@ -37,7 +39,10 @@ const NewPage = () => {
           <NewPageForm onNext={createPage} />
         </Funnel.Step>
         <Funnel.Step name="success">
-          <CreatingSuccess />
+          <CreatingSuccess
+            title="페이지가 생성되었습니다."
+            projectId={projectId as string}
+          />
         </Funnel.Step>
       </Funnel>
     </ContentWrapper>

@@ -1,18 +1,21 @@
 'use client';
 
 import { notifications } from '@mantine/notifications';
+import { useState } from 'react';
 
 import { useCreateProject } from '@/hooks/project/use-project-service';
 import useFunnel from '@/hooks/use-funnel';
 
+import CreatingSuccess from '../../common/success/creating-success';
 import ContentWrapper from '../../common/wrapper/content-wrapper';
-import CreatingSuccess from './creating-success';
 import NewProjectForm from './new-project-form';
 
 const NewProject = () => {
+  const [projectId, setProjectId] = useState('');
   const { Funnel, setStep } = useFunnel(['form', 'success']);
   const { mutate, isPending } = useCreateProject({
     onSuccess: (response) => {
+      setProjectId(response.data.id);
       setStep('success');
 
       notifications.show({
@@ -36,7 +39,10 @@ const NewProject = () => {
           <NewProjectForm onNext={mutate} />
         </Funnel.Step>
         <Funnel.Step name="success">
-          <CreatingSuccess />
+          <CreatingSuccess
+            projectId={projectId}
+            title="프로젝트가 생성되었습니다."
+          />
         </Funnel.Step>
       </Funnel>
     </ContentWrapper>
