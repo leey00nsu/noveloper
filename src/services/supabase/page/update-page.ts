@@ -3,12 +3,17 @@ import prisma from '@/libs/prisma';
 import { UpdatePageRequest, UpdatePageResponse } from '@/types/page';
 
 import { createHistory } from '../history/create-history';
+import { getProjectById } from '../project/get-project-by-id';
 import { getUserData } from '../user/get-user-data';
 
 export const updatePage = async (
   request: UpdatePageRequest,
 ): Promise<UpdatePageResponse> => {
   const { data: user } = await getUserData();
+
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
+  });
 
   const updated = await prisma.pages.update({
     where: {
@@ -31,7 +36,7 @@ export const updatePage = async (
   await createHistory({
     projectId: updated.projectId,
     title: `${request.title} 업데이트`,
-    content: '페이지가 업데이트 되었습니다.',
+    content: `${project.title}의 ${request.title} 페이지가 업데이트 되었습니다.`,
   });
 
   return {

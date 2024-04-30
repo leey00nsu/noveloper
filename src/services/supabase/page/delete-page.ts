@@ -4,11 +4,16 @@ import { DeletePageRequest, DeletePageResponse } from '@/types/page';
 
 import { createHistory } from '../history/create-history';
 import { getUserData } from '../user/get-user-data';
+import { getProjectById } from '../project/get-project-by-id';
 
 export const deletePage = async (
   request: DeletePageRequest,
 ): Promise<DeletePageResponse> => {
   const { data: user } = await getUserData();
+
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
+  });
 
   const deleted = await prisma.pages.delete({
     where: {
@@ -25,7 +30,7 @@ export const deletePage = async (
   await createHistory({
     projectId: deleted.projectId,
     title: `${deleted.title} 삭제`,
-    content: '페이지가 삭제 되었습니다.',
+    content: `${project.title}의 ${deleted.title} 페이지가 삭제되었습니다.`,
   });
 
   return {

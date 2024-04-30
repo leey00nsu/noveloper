@@ -3,6 +3,7 @@ import prisma from '@/libs/prisma';
 import { CreatePageRequest, CreatePageResponse } from '@/types/page';
 
 import { createHistory } from '../history/create-history';
+import { getProjectById } from '../project/get-project-by-id';
 import { getUserData } from '../user/get-user-data';
 import { consumeToken } from '../user/use-token';
 
@@ -13,6 +14,10 @@ export const createPage = async (
 
   await consumeToken({
     usage: 20,
+  });
+
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
   });
 
   const created = await prisma.pages.create({
@@ -32,7 +37,7 @@ export const createPage = async (
   await createHistory({
     projectId: created.projectId,
     title: `${request.title} 페이지 생성`,
-    content: `${request.title} 페이지가 생성되었습니다.`,
+    content: `${project.title}에 ${request.title} 페이지가 생성되었습니다. (-20 토큰)`,
   });
 
   return {

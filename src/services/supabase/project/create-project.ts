@@ -32,7 +32,7 @@ export const createProject = async (
   await createHistory({
     projectId: created.id,
     title: `${request.title} 생성`,
-    content: `${request.title} 프로젝트가 생성되었습니다.`,
+    content: `${request.title} 프로젝트가 생성되었습니다. (-50 토큰)`,
   });
 
   return {

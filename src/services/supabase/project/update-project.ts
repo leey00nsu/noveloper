@@ -34,7 +34,7 @@ export const updateProject = async (
     throw new Error('프로젝트 업데이트에 실패했습니다. 다시 시도해주세요.');
   }
 
-  let content = '';
+  let content = `${updated.title} 프로젝트가 업데이트 되었습니다. \\n`;
 
   if (pastProject.title !== request.title) {
     content += `제목: ${pastProject.title} -> ${request.title}\\n`;

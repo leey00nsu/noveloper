@@ -6,12 +6,17 @@ import {
 } from '@/types/character';
 
 import { createHistory } from '../history/create-history';
+import { getProjectById } from '../project/get-project-by-id';
 import { getUserData } from '../user/get-user-data';
 
 export const createCharacter = async (
   request: CreateCharacterRequest,
 ): Promise<CreateCharacterResponse> => {
   const { data: user } = await getUserData();
+
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
+  });
 
   const created = await prisma.characters.create({
     data: {
@@ -30,7 +35,7 @@ export const createCharacter = async (
   await createHistory({
     projectId: created.projectId,
     title: `${request.name} 인물 생성`,
-    content: `${request.name} 인물이 생성되었습니다.`,
+    content: `${project.title}에 인물 ${request.name} 이 생성되었습니다. `,
   });
 
   return {

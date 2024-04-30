@@ -6,6 +6,7 @@ import {
 } from '@/types/character';
 
 import { createHistory } from '../history/create-history';
+import { getProjectById } from '../project/get-project-by-id';
 import { getUserData } from '../user/get-user-data';
 import { getCharacterById } from './get-character-by-id';
 
@@ -13,6 +14,10 @@ export const updateCharacter = async (
   request: UpdateCharacterRequest,
 ): Promise<UpdateCharacterResponse> => {
   const { data: user } = await getUserData();
+
+  const { data: project } = await getProjectById({
+    projectId: request.projectId,
+  });
 
   const { data: pastCharacter } = await getCharacterById({
     projectId: request.projectId,
@@ -37,7 +42,7 @@ export const updateCharacter = async (
     throw new Error('인물 정보 업데이트에 실패했습니다. 다시 시도해주세요.');
   }
 
-  let content = '';
+  let content = `${project.title} 인물 ${request.name} 이 업데이트 되었습니다. \\n`;
 
   if (pastCharacter.name !== request.name) {
     content += `이름: ${pastCharacter.name} -> ${request.name}\\n`;
