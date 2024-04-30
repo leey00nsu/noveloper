@@ -1,11 +1,13 @@
 'use client';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import FormInput from '@/components/dashboard/content/common/form/form-input';
+import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 
 import {
   CreateCharacterRequest,
@@ -28,7 +30,12 @@ const NewCharacterForm = ({ onNext }: NewCharacterFormProps) => {
   });
 
   const submitHandler: SubmitHandler<CreateCharacterRequest> = (data) => {
-    onNext({ ...data, projectId: projectId as string });
+    NiceModal.show(ConfirmModal, {
+      confirm: () => onNext({ ...data, projectId: projectId as string }),
+      title: '캐릭터 생성',
+      contents: ['캐릭터를 생성하시겠습니까?'],
+      label: { confirm: '생성', cancel: '취소' },
+    });
   };
 
   return (

@@ -1,6 +1,9 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack, Title } from '@mantine/core';
 import { SubmitHandler, useForm } from 'react-hook-form';
+
+import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 
 import { CreateProjectRequest, CreateProjectSchema } from '@/types/project';
 
@@ -34,7 +37,12 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
   });
 
   const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
-    onNext(data);
+    NiceModal.show(ConfirmModal, {
+      confirm: () => onNext(data),
+      title: '프로젝트 생성',
+      contents: ['프로젝트를 생성하시겠습니까?', '50토큰이 소모됩니다.'],
+      label: { confirm: '생성', cancel: '취소' },
+    });
   };
 
   return (

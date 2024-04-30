@@ -4,11 +4,16 @@ import { CreateProjectRequest, CreateProjectResponse } from '@/types/project';
 
 import { createHistory } from '../history/create-history';
 import { getUserData } from '../user/get-user-data';
+import { consumeToken } from '../user/use-token';
 
 export const createProject = async (
   request: CreateProjectRequest,
 ): Promise<CreateProjectResponse> => {
   const { data: user } = await getUserData();
+
+  await consumeToken({
+    usage: 50,
+  });
 
   const created = await prisma.projects.create({
     data: {
