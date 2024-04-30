@@ -19,6 +19,7 @@ import {
 } from '@/types/project';
 
 import { historyQueryKeys } from '../history/use-history-service';
+import { userQueryKeys } from '../user/use-user-service';
 
 export const projectQueryKeys = {
   projects: ['projects'],
@@ -51,7 +52,10 @@ export const useCreateProject = ({
       if (response.success) {
         onSuccess(response);
 
-        // project,history 쿼리 캐시를 갱신합니다.
+        // user,project,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: userQueryKeys.user,
+        });
         queryClient.invalidateQueries({
           queryKey: projectQueryKeys.projects,
         });

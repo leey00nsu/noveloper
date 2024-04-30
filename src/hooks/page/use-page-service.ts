@@ -21,6 +21,7 @@ import {
 } from '@/types/page';
 
 import { historyQueryKeys } from '../history/use-history-service';
+import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
   pages: (projectId: string) => ['pages', projectId],
@@ -50,7 +51,10 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
       if (response.success) {
         onSuccess(response);
 
-        // page,history 쿼리 캐시를 갱신합니다.
+        // user,page,history 쿼리 캐시를 갱신합니다.
+        queryClient.invalidateQueries({
+          queryKey: userQueryKeys.user,
+        });
         queryClient.invalidateQueries({
           queryKey: pageQueryKeys.pages(response.data.projectId),
         });
