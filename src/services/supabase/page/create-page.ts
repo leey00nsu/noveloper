@@ -4,15 +4,14 @@ import { CreatePageRequest, CreatePageResponse } from '@/types/page';
 
 import { createHistory } from '../history/create-history';
 import { getUserData } from '../user/get-user-data';
-import { useToken } from '../user/use-token';
-
+import { consumeToken } from '../user/use-token';
 
 export const createPage = async (
   request: CreatePageRequest,
 ): Promise<CreatePageResponse> => {
   const { data: user } = await getUserData();
 
-  await useToken({
+  await consumeToken({
     usage: 20,
   });
 

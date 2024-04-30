@@ -4,7 +4,7 @@ import { UseTokenRequest, UseTokenResponse } from '@/types/user';
 
 import { getUserData } from './get-user-data';
 
-export const useToken = async (
+export const consumeToken = async (
   request: UseTokenRequest,
 ): Promise<UseTokenResponse> => {
   const { data: user } = await getUserData();
