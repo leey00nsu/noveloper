@@ -23,7 +23,7 @@ const TimeLineModal = NiceModal.create(
         size="80%"
         centered
         opened={modal.visible}
-        onClose={() => modal.hide}
+        onClose={() => modal.hide()}
       >
         <Modal.Overlay />
         <Modal.Content>
