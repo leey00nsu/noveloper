@@ -39,9 +39,9 @@ const PageInfoForm = ({
   onNext,
   removeHandler,
 }: PageInfoFormProps) => {
-  const [contentText, setContentText] = useState('');
   const { projectId, pageId } = useParams();
   const { project } = useGetProjectById(projectId as string);
+  const [content, setContent] = useState(page.content);
 
   const {
     getValues,
@@ -55,7 +55,7 @@ const PageInfoForm = ({
     defaultValues: {
       title: page.title,
       summary: page.summary,
-      content: page.content,
+      contentText: page.contentText,
     },
   });
 
@@ -78,11 +78,15 @@ const PageInfoForm = ({
   });
 
   useEffect(() => {
-    reset(page);
+    reset({
+      title: page.title,
+      summary: page.summary,
+      contentText: page.contentText,
+    });
   }, [page, reset]);
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
-    onNext({ ...data, pageId: Number(pageId) });
+    onNext({ ...data, content, pageId: Number(pageId) });
   };
 
   const openRemoveModal = () => {
@@ -118,11 +122,11 @@ const PageInfoForm = ({
         errorMessage={errors.summary?.message}
         leftSection={
           <FormGenerationButton
-            disabled={contentText.length === 0}
+            disabled={getValues('contentText').length === 0}
             isPending={isPending}
             onClick={() =>
               mutate({
-                content: contentText,
+                content: getValues('contentText'),
                 prompt: PROMPTS.generateSummaryInOneSentence,
               })
             }
@@ -131,13 +135,13 @@ const PageInfoForm = ({
       />
 
       <Controller
-        defaultValue={{}}
+        defaultValue=''
         control={control}
-        name="content"
+        name="contentText"
         render={({ field }) => (
           <Editor
-            onTextChange={(text) => setContentText(text)}
-            onChange={field.onChange}
+            onTextChange={field.onChange}
+            onChange={(json) => setContent(json)}
             content={page.content}
             title={project?.title}
             author={project?.author}

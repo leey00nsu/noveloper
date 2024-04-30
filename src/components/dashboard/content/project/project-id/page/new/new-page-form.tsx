@@ -26,7 +26,7 @@ interface NewPageFormProps {
 }
 
 const NewPageForm = ({ onNext }: NewPageFormProps) => {
-  const [contentText, setContentText] = useState('');
+  const [content, setContent] = useState({});
   const { projectId } = useParams();
   const { project } = useGetProjectById(projectId as string);
 
@@ -60,7 +60,8 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
 
   const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
     NiceModal.show(ConfirmModal, {
-      confirm: () => onNext({ ...data, projectId: projectId as string }),
+      confirm: () =>
+        onNext({ ...data, content, projectId: projectId as string }),
       title: '페이지 생성',
       contents: ['페이지를 생성하시겠습니까?', '20토큰이 소모됩니다.'],
       label: { confirm: '생성', cancel: '취소' },
@@ -91,11 +92,11 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
         errorMessage={errors.summary?.message}
         leftSection={
           <FormGenerationButton
-            disabled={contentText.length === 0}
+            disabled={getValues('contentText')?.length === 0}
             isPending={isPending}
             onClick={() =>
               mutate({
-                content: contentText,
+                content: getValues('contentText'),
                 prompt: PROMPTS.generateSummaryInOneSentence,
               })
             }
@@ -104,13 +105,13 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
       />
 
       <Controller
-        defaultValue={{}}
+        defaultValue=""
         control={control}
-        name="content"
+        name="contentText"
         render={({ field }) => (
           <Editor
-            onTextChange={(text) => setContentText(text)}
-            onChange={field.onChange}
+            onTextChange={field.onChange}
+            onChange={(json) => setContent(json)}
             title={project?.title}
             author={project?.author}
             subTitle={getValues('title')}

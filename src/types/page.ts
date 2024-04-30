@@ -1,4 +1,4 @@
-import { Pages } from '@prisma/client';
+import { Pages, Prisma } from '@prisma/client';
 import { z } from 'zod';
 
 import { ApiResponse } from './api';
@@ -14,11 +14,12 @@ export const CreatePageSchema = z.object({
     .trim()
     .min(1, { message: '페이지 요약은 1자 이상 100자 이하로 입력해주세요.' })
     .max(100, { message: '페이지 요약은 1자 이상 100자 이하로 입력해주세요.' }),
-  content: z.any(),
+  contentText: z.string(),
 });
 
 export interface CreatePageRequest extends z.infer<typeof CreatePageSchema> {
   projectId: string;
+  content: Prisma.JsonValue;
 }
 export interface CreatePageResponse extends ApiResponse<Pages> {}
 export interface GetPageRequest {

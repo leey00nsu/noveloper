@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 import prisma from '@/libs/prisma';
 
 import { CreatePageRequest, CreatePageResponse } from '@/types/page';
@@ -25,7 +27,8 @@ export const createPage = async (
       userId: user.id,
       projectId: request.projectId,
       title: request.title,
-      content: request.content,
+      content: request.content as Prisma.InputJsonObject,
+      contentText: request.contentText,
       summary: request.summary,
     },
   });
