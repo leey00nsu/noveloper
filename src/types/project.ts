@@ -7,8 +7,8 @@ export const CreateProjectSchema = z.object({
   title: z
     .string()
     .trim()
-    .min(1, { message: '작품 제목은 1자 이상 50자 이하로 입력해주세요.' })
-    .max(50, { message: '작품 제목은 1자 이상 50자 이하로 입력해주세요.' }),
+    .min(1, { message: '프로젝트 제목은 1자 이상 50자 이하로 입력해주세요.' })
+    .max(50, { message: '프로젝트 제목은 1자 이상 50자 이하로 입력해주세요.' }),
   author: z
     .string()
     .trim()

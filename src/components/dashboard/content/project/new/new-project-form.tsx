@@ -55,15 +55,15 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
 
   return (
     <Stack component="form" className="h-full w-full p-sm">
-      <Title order={2}>작품의 기본정보를 입력해주세요</Title>
+      <Title order={2}>프로젝트의 기본정보를 입력해주세요</Title>
 
       <Stack>
         <FormInput
           control={control}
           name="title"
-          label="작품 제목"
-          description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
-          placeholder="작품 제목을 입력해주세요."
+          label="프로젝트 제목"
+          description="프로젝트 제목은 1자 이상 50자 이하로 입력해주세요."
+          placeholder="프로젝트 제목을 입력해주세요."
           errorMessage={errors.title?.message}
         />
         <FormInput
@@ -95,7 +95,7 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
       </Stack>
 
       <Stack align="center">
-        <Button onClick={handleSubmit(submitHandler)}>작품 생성</Button>
+        <Button onClick={handleSubmit(submitHandler)}>프로젝트 생성</Button>
       </Stack>
     </Stack>
   );

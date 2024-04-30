@@ -81,15 +81,15 @@ const ProjectInfoForm = ({
 
   return (
     <Stack component="form" className="h-full w-full p-sm">
-      <Title order={2}>작품 정보</Title>
+      <Title order={2}>프로젝트 정보</Title>
 
       <Stack>
         <FormInput
           control={control}
           name="title"
-          label="작품 제목"
-          description="작품 제목은 1자 이상 50자 이하로 입력해주세요."
-          placeholder="작품 제목을 입력해주세요."
+          label="프로젝트 제목"
+          description="프로젝트 제목은 1자 이상 50자 이하로 입력해주세요."
+          placeholder="프로젝트 제목을 입력해주세요."
           errorMessage={errors.title?.message}
         />
         <FormInput

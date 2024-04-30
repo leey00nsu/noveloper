@@ -7,7 +7,7 @@ const SystemMenu = () => {
   const menus = [
     { label: '가이드', icon: <FaRegFileAlt />, href: '/dashboard/guide' },
     {
-      label: '작품 목록',
+      label: '프로젝트 목록',
       icon: <FaRegFolderOpen />,
       href: '/dashboard/project',
     },
