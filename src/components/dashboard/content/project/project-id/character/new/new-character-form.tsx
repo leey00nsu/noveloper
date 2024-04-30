@@ -10,6 +10,7 @@ import FormInput from '@/components/dashboard/content/common/form/form-input';
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 
 import {
+  CreateCharacterForm,
   CreateCharacterRequest,
   CreateCharacterSchema,
 } from '@/types/character';
@@ -25,13 +26,18 @@ const NewCharacterForm = ({ onNext }: NewCharacterFormProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateCharacterRequest>({
+  } = useForm<CreateCharacterForm>({
     resolver: zodResolver(CreateCharacterSchema),
   });
 
-  const submitHandler: SubmitHandler<CreateCharacterRequest> = (data) => {
+  const submitHandler: SubmitHandler<CreateCharacterForm> = (data) => {
+    const newCharacter = {
+      ...data,
+      projectId: projectId as string,
+    };
+
     NiceModal.show(ConfirmModal, {
-      confirm: () => onNext({ ...data, projectId: projectId as string }),
+      confirm: () => onNext(newCharacter),
       title: '캐릭터 생성',
       contents: ['캐릭터를 생성하시겠습니까?'],
       label: { confirm: '생성', cancel: '취소' },

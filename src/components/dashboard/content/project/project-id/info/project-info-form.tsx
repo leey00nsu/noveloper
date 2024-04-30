@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import {
-  CreateProjectRequest,
+  CreateProjectForm,
   CreateProjectSchema,
   UpdateProjectRequest,
 } from '@/types/project';
@@ -47,7 +47,7 @@ const ProjectInfoForm = ({
     control,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm<CreateProjectRequest>({
+  } = useForm<CreateProjectForm>({
     resolver: zodResolver(CreateProjectSchema),
     defaultValues: {
       title: project.title,
@@ -70,8 +70,13 @@ const ProjectInfoForm = ({
     });
   };
 
-  const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
-    onNext({ projectId: project.id, ...data });
+  const submitHandler: SubmitHandler<CreateProjectForm> = (data) => {
+    const newProject = {
+      ...data,
+      projectId: project.id,
+    };
+
+    onNext(newProject);
   };
 
   return (

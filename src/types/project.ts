@@ -29,7 +29,10 @@ export const CreateProjectSchema = z.object({
     }),
 });
 
-export type CreateProjectRequest = z.infer<typeof CreateProjectSchema>;
+export interface CreateProjectForm
+  extends z.infer<typeof CreateProjectSchema> {}
+
+export interface CreateProjectRequest extends CreateProjectForm {}
 
 export interface CreateProjectResponse extends ApiResponse<Projects> {}
 export interface GetProjectRequest {

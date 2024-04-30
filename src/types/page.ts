@@ -17,7 +17,9 @@ export const CreatePageSchema = z.object({
   contentText: z.string(),
 });
 
-export interface CreatePageRequest extends z.infer<typeof CreatePageSchema> {
+export interface CreatePageForm extends z.infer<typeof CreatePageSchema> {}
+
+export interface CreatePageRequest extends CreatePageForm {
   projectId: string;
   content: Prisma.JsonValue;
 }

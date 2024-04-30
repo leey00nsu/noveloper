@@ -4,7 +4,6 @@ import NiceModal from '@ebay/nice-modal-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Group, Stack, Title } from '@mantine/core';
 import { Characters } from '@prisma/client';
-import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -12,7 +11,7 @@ import FormInput from '@/components/dashboard/content/common/form/form-input';
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 
 import {
-  CreateCharacterRequest,
+  CreateCharacterForm,
   CreateCharacterSchema,
   UpdateCharacterRequest,
 } from '@/types/character';
@@ -30,14 +29,12 @@ const CharacterInfoForm = ({
   onNext,
   removeHandler,
 }: CharacterInfoFormProps) => {
-  const { characterId } = useParams();
-
   const {
     reset,
     control,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm<CreateCharacterRequest>({
+  } = useForm<CreateCharacterForm>({
     resolver: zodResolver(CreateCharacterSchema),
     defaultValues: {
       name: character.name,
@@ -55,8 +52,14 @@ const CharacterInfoForm = ({
     });
   };
 
-  const submitHandler: SubmitHandler<CreateCharacterRequest> = (data) => {
-    onNext({ ...data, characterId: Number(characterId) });
+  const submitHandler: SubmitHandler<CreateCharacterForm> = (data) => {
+    const newCharacter = {
+      ...data,
+      projectId: character.projectId,
+      characterId: character.id,
+    };
+
+    onNext(newCharacter);
   };
 
   useEffect(() => {

@@ -17,7 +17,7 @@ import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 import {
-  CreatePageRequest,
+  CreatePageForm,
   CreatePageSchema,
   UpdatePageRequest,
 } from '@/types/page';
@@ -39,7 +39,7 @@ const PageInfoForm = ({
   onNext,
   removeHandler,
 }: PageInfoFormProps) => {
-  const { projectId, pageId } = useParams();
+  const { projectId } = useParams();
   const { project } = useGetProjectById(projectId as string);
   const [content, setContent] = useState(page.content);
 
@@ -50,7 +50,7 @@ const PageInfoForm = ({
     control,
     handleSubmit,
     formState: { errors, isDirty },
-  } = useForm<CreatePageRequest>({
+  } = useForm<CreatePageForm>({
     resolver: zodResolver(CreatePageSchema),
     defaultValues: {
       title: page.title,
@@ -85,8 +85,15 @@ const PageInfoForm = ({
     });
   }, [page, reset]);
 
-  const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
-    onNext({ ...data, content, pageId: Number(pageId) });
+  const submitHandler: SubmitHandler<CreatePageForm> = (data) => {
+    const newPage = {
+      ...data,
+      content,
+      projectId: projectId as string,
+      pageId: page.id,
+    };
+
+    onNext(newPage);
   };
 
   const openRemoveModal = () => {
@@ -135,7 +142,7 @@ const PageInfoForm = ({
       />
 
       <Controller
-        defaultValue=''
+        defaultValue=""
         control={control}
         name="contentText"
         render={({ field }) => (

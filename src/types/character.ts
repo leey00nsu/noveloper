@@ -17,8 +17,10 @@ export const CreateCharacterSchema = z.object({
     .max(50, { message: '설명은 1자 이상 50자 이하로 입력해주세요.' }),
 });
 
-export interface CreateCharacterRequest
-  extends z.infer<typeof CreateCharacterSchema> {
+export interface CreateCharacterForm
+  extends z.infer<typeof CreateCharacterSchema> {}
+
+export interface CreateCharacterRequest extends CreateCharacterForm {
   projectId: string;
 }
 export interface CreateCharacterResponse extends ApiResponse<Characters> {}

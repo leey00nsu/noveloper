@@ -15,7 +15,11 @@ import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
-import { CreatePageRequest, CreatePageSchema } from '@/types/page';
+import {
+  CreatePageForm,
+  CreatePageRequest,
+  CreatePageSchema,
+} from '@/types/page';
 
 import { PROMPTS } from '@/constants/openai/prompt';
 
@@ -36,7 +40,7 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreatePageRequest>({
+  } = useForm<CreatePageForm>({
     resolver: zodResolver(CreatePageSchema),
   });
 
@@ -58,10 +62,15 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
     },
   });
 
-  const submitHandler: SubmitHandler<CreatePageRequest> = (data) => {
+  const submitHandler: SubmitHandler<CreatePageForm> = (data) => {
+    const newPage = {
+      ...data,
+      content,
+      projectId: projectId as string,
+    };
+
     NiceModal.show(ConfirmModal, {
-      confirm: () =>
-        onNext({ ...data, content, projectId: projectId as string }),
+      confirm: () => onNext(newPage),
       title: '페이지 생성',
       contents: ['페이지를 생성하시겠습니까?', '20토큰이 소모됩니다.'],
       label: { confirm: '생성', cancel: '취소' },

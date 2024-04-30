@@ -5,7 +5,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 
-import { CreateProjectRequest, CreateProjectSchema } from '@/types/project';
+import {
+  CreateProjectForm,
+  CreateProjectRequest,
+  CreateProjectSchema,
+} from '@/types/project';
 
 import FormInput from '../../common/form/form-input';
 
@@ -32,13 +36,17 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateProjectRequest>({
+  } = useForm<CreateProjectForm>({
     resolver: zodResolver(CreateProjectSchema),
   });
 
-  const submitHandler: SubmitHandler<CreateProjectRequest> = (data) => {
+  const submitHandler: SubmitHandler<CreateProjectForm> = (data) => {
+    const newProject = {
+      ...data,
+    };
+
     NiceModal.show(ConfirmModal, {
-      confirm: () => onNext(data),
+      confirm: () => onNext(newProject),
       title: '프로젝트 생성',
       contents: ['프로젝트를 생성하시겠습니까?', '50토큰이 소모됩니다.'],
       label: { confirm: '생성', cancel: '취소' },
