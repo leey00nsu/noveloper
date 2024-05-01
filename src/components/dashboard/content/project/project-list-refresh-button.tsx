@@ -1,8 +1,8 @@
 'use client';
 
-import { ActionIcon } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
-import { IoMdRefresh } from 'react-icons/io';
+
+import RefreshButton from '@/components/ui/button/refresh-button';
 
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 
@@ -15,11 +15,7 @@ const ProjectListRefreshButton = () => {
     });
   };
 
-  return (
-    <ActionIcon className="h-full" onClick={refreshHandler}>
-      <IoMdRefresh />
-    </ActionIcon>
-  );
+  return <RefreshButton onClick={refreshHandler} />;
 };
 
 export default ProjectListRefreshButton;
