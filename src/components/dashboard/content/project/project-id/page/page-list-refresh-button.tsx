@@ -1,9 +1,9 @@
 'use client';
 
-import { ActionIcon } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { IoMdRefresh } from 'react-icons/io';
+
+import RefreshButton from '@/components/ui/button/refresh-button';
 
 import { pageQueryKeys } from '@/hooks/page/use-page-service';
 
@@ -17,11 +17,7 @@ const PageListRefreshButton = () => {
     });
   };
 
-  return (
-    <ActionIcon className="h-full" onClick={refreshHandler}>
-      <IoMdRefresh />
-    </ActionIcon>
-  );
+  return <RefreshButton onClick={refreshHandler} />;
 };
 
 export default PageListRefreshButton;

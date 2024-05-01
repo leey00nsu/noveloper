@@ -1,9 +1,9 @@
 'use client';
 
-import { ActionIcon } from '@mantine/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { IoMdRefresh } from 'react-icons/io';
+
+import RefreshButton from '@/components/ui/button/refresh-button';
 
 import { characterQueryKeys } from '@/hooks/character/use-character-service';
 
@@ -17,11 +17,7 @@ const CharacterListRefreshButton = () => {
     });
   };
 
-  return (
-    <ActionIcon className="h-full" onClick={refreshHandler}>
-      <IoMdRefresh />
-    </ActionIcon>
-  );
+  return <RefreshButton onClick={refreshHandler} />;
 };
 
 export default CharacterListRefreshButton;
