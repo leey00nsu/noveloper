@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 
 import SearchInput from '@/components/ui/input/search-input';
 
+import PageFilterButton from './page-filter-button';
 import PageListRefreshButton from './page-list-refresh-button';
 
 const PageNavigation = () => {
@@ -15,6 +16,7 @@ const PageNavigation = () => {
     <Group>
       <SearchInput placeholder="페이지를 검색해보세요." />
       <PageListRefreshButton />
+      <PageFilterButton />
       <Button
         component={Link}
         href={`/dashboard/project/${projectId}/page/new`}

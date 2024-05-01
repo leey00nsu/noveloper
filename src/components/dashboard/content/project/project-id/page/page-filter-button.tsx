@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-const FILTERS = ['프로젝트 이름', '작가 이름', '시간'];
+const FILTERS = ['페이지 제목', '시간'];
 
-const ProjectFilterButton = () => {
+const PageFilterButton = () => {
   const [currentFilter, setCurrentFilter] = useState(FILTERS[0]);
   const [currentOrder, setCurrentOrder] = useState<'asc' | 'desc'>('asc');
 
@@ -29,4 +29,4 @@ const ProjectFilterButton = () => {
   );
 };
 
-export default ProjectFilterButton;
+export default PageFilterButton;

@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 
 import SearchInput from '@/components/ui/input/search-input';
 
+import CharacterFilterButton from './character-filter-button';
 import CharacterListRefreshButton from './character-list-refresh-button';
 
 const CharacterNavigation = () => {
@@ -15,6 +16,7 @@ const CharacterNavigation = () => {
     <Group>
       <SearchInput placeholder="인물을 검색해보세요." />
       <CharacterListRefreshButton />
+      <CharacterFilterButton />
       <Button
         component={Link}
         href={`/dashboard/project/${projectId}/character/new`}
