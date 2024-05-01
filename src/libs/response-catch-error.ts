@@ -13,7 +13,14 @@ export const catchResponseError = async <T>(
   try {
     return await promise;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError ||
+      error instanceof Prisma.PrismaClientUnknownRequestError ||
+      error instanceof Prisma.PrismaClientInitializationError ||
+      error instanceof Prisma.PrismaClientValidationError ||
+      error instanceof Prisma.PrismaClientRustPanicError ||
+      error instanceof Prisma.PrismaClientInitializationError
+    ) {
       return {
         data: null,
         success: false,
