@@ -21,11 +21,10 @@ interface CardProps extends MantineCardProps {
 const CardSkeleton = () => {
   return (
     <MantineCard withBorder className="h-40">
-      <Group wrap="nowrap" justify="space-between">
+      <Stack className="h-full">
         <ThemeSkeleton className="h-4" />
-      </Group>
-
-      <ThemeSkeleton className="h-full" />
+        <ThemeSkeleton className="grow" />
+      </Stack>
     </MantineCard>
   );
 };
