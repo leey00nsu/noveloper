@@ -1,6 +1,6 @@
 'use client';
 
-import { Stack, Title } from '@mantine/core';
+import { Stack, Text, Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
 import { BsGear, BsPersonGear, BsVectorPen } from 'react-icons/bs';
 
@@ -8,7 +8,7 @@ import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 import LinkButton from '../../common/button/link-button';
 import ContentWrapper from '../../common/wrapper/content-wrapper';
-import ProjectHistoryChart from './project-history-chart';
+import ProjectTimelineChart from './project-timeline-chart';
 
 const ProjectHome = () => {
   const { projectId } = useParams();
@@ -40,7 +40,9 @@ const ProjectHome = () => {
           {project?.title}
         </Title>
 
-        <ProjectHistoryChart />
+        <Text className="text-center text-sm">{project?.author}</Text>
+
+        <ProjectTimelineChart />
 
         <Stack className="gap-sm">
           {contents.map((content) => (

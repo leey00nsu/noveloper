@@ -1,7 +1,7 @@
 'use client';
 
 import { Group, Paper, Select, Text } from '@mantine/core';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import CalendarChart from '@/components/ui/chart/calendar-chart';
@@ -13,17 +13,18 @@ const YEARS = Array.from({ length: 2099 - 2024 + 1 }, (_, i) =>
   (2024 + i).toString(),
 );
 
-const ProjectHistoryChartSkeleton = () => (
+const ProjectTimelineChartSkeleton = () => (
   <Paper withBorder className="h-[200px] w-full p-sm">
     <ThemeSkeleton className="h-full w-full" />
   </Paper>
 );
 
-const ProjectHistoryChart = () => {
-  const { projectId } = useParams();
+const ProjectTimelineChart = () => {
   const [selectedYear, setSelectedYear] = useState(
     new Date().getFullYear().toString(),
   );
+  const router = useRouter();
+  const { projectId } = useParams();
 
   const { histories, isLoading } = useGetHistoriesByYear({
     projectId: projectId as string,
@@ -51,7 +52,11 @@ const ProjectHistoryChart = () => {
     value,
   }));
 
-  if (isLoading) return <ProjectHistoryChartSkeleton />;
+  const clickDateHandler = (date: string) => {
+    router.push(`/dashboard/project/${projectId}/timeline/${date}`);
+  };
+
+  if (isLoading) return <ProjectTimelineChartSkeleton />;
 
   return (
     <Paper withBorder className="h-[200px] w-full p-sm">
@@ -68,9 +73,14 @@ const ProjectHistoryChart = () => {
           data={YEARS}
         />
       </Group>
-      <CalendarChart data={data} year={selectedYear} />
+
+      <CalendarChart
+        data={data}
+        year={selectedYear}
+        onClick={clickDateHandler}
+      />
     </Paper>
   );
 };
 
-export default ProjectHistoryChart;
+export default ProjectTimelineChart;

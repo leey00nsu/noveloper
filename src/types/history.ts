@@ -17,3 +17,7 @@ export interface GetHistoriesByYearRequest extends GetHistoriesRequest {
   year: string;
 }
 export interface GetHistoriesByYearResponse extends ApiResponse<Histories[]> {}
+export interface GetHistoriesByDateRequest extends GetHistoriesRequest {
+  date: string;
+}
+export interface GetHistoriesByDateResponse extends ApiResponse<Histories[]> {}

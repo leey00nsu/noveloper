@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/libs/fetcher';
 
 import {
+  GetHistoriesByDateRequest,
+  GetHistoriesByDateResponse,
   GetHistoriesByYearRequest,
   GetHistoriesByYearResponse,
   GetHistoriesRequest,
@@ -57,6 +59,24 @@ export const useGetHistoriesByYear = (request: GetHistoriesByYearRequest) => {
     queryFn: () =>
       fetcher({
         url: `/api/history?id=${request.projectId}&year=${request.year}`,
+        method: 'GET',
+      }),
+  });
+
+  return { histories: result?.data, isLoading, isFetching };
+};
+
+export const useGetHistoriesByDate = (request: GetHistoriesByDateRequest) => {
+  const {
+    data: result,
+    isLoading,
+    isFetching,
+  } = useQuery<GetHistoriesByDateResponse>({
+    queryKey: historyQueryKeys.history(request.projectId, request.date),
+    enabled: !!request.projectId,
+    queryFn: () =>
+      fetcher({
+        url: `/api/history?id=${request.projectId}&date=${request.date}`,
         method: 'GET',
       }),
   });

@@ -19,9 +19,10 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 interface CalendarChartProps {
   data: { value: number; day: string }[];
   year: string;
+  onClick: (date: string) => void;
 }
 
-const CalendarChart = ({ data, year }: CalendarChartProps) => {
+const CalendarChart = ({ data, year, onClick }: CalendarChartProps) => {
   return (
     <ResponsiveCalendar
       data={data}
@@ -34,7 +35,17 @@ const CalendarChart = ({ data, year }: CalendarChartProps) => {
       monthBorderColor="#ffffff"
       dayBorderWidth={2}
       dayBorderColor="#ffffff"
-      onClick={() => {}}
+      onClick={(date) => {
+        // value가 있는 경우에만 클릭 이벤트 발생
+        if (Object.hasOwn(date, 'value')) {
+          onClick(date.day);
+        }
+      }}
+      onMouseEnter={(_datum, event) => {
+        // 포인터 스타일 변경
+        // eslint-disable-next-line no-param-reassign
+        event.currentTarget.style.cursor = 'pointer';
+      }}
       theme={{
         labels: {
           text: {
