@@ -8,6 +8,7 @@ import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 import LinkButton from '../../common/button/link-button';
 import ContentWrapper from '../../common/wrapper/content-wrapper';
+import ProjectHistoryChart from './project-history-chart';
 
 const ProjectHome = () => {
   const { projectId } = useParams();
@@ -38,6 +39,8 @@ const ProjectHome = () => {
         <Title order={2} className="mt-sm text-center">
           {project?.title}
         </Title>
+
+        <ProjectHistoryChart />
 
         <Stack className="gap-sm">
           {contents.map((content) => (

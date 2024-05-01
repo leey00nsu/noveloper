@@ -4,13 +4,23 @@ import { getHistories } from '@/services/supabase/history/get-histories';
 import { getHistoriesById } from '@/services/supabase/history/get-histories-by-id';
 
 import { catchResponseError } from '@/libs/response-catch-error';
+import { getHistoriesByYear } from '@/services/supabase/history/get-histories-by-year';
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const projectId = params.get('id');
+  const year = params.get('year');
+
+  if (projectId && year)  {
+    const response = await catchResponseError(getHistoriesByYear({ projectId, year}));
+
+    return NextResponse.json(response, {
+      status: response.status,
+    });
+  }
 
   if (projectId) {
-    const response = await catchResponseError(getHistoriesById(projectId));
+    const response = await catchResponseError(getHistoriesById({ projectId }));
 
     return NextResponse.json(response, {
       status: response.status,

@@ -1,18 +1,25 @@
 import prisma from '@/libs/prisma';
 
-import { GetHistoriesRequest, GetHistoriesResponse } from '@/types/history';
+import {
+  GetHistoriesByYearRequest,
+  GetHistoriesByYearResponse,
+} from '@/types/history';
 
 import { getUserData } from '../user/get-user-data';
 
-export const getHistoriesById = async (
-  request: GetHistoriesRequest,
-): Promise<GetHistoriesResponse> => {
+export const getHistoriesByYear = async (
+  request: GetHistoriesByYearRequest,
+): Promise<GetHistoriesByYearResponse> => {
   const { data: user } = await getUserData();
 
   const history = await prisma.histories.findMany({
     where: {
       userId: user.id,
       projectId: request.projectId,
+      createdAt: {
+        gte: new Date(`${request.year}-01-01T00:00:00.000Z`),
+        lt: new Date(`${request.year}-12-31T23:59:59.999Z`),
+      },
     },
   });
 

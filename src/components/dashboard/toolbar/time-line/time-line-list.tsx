@@ -30,7 +30,7 @@ const TimeLineList = () => {
   const {
     histories: filteredHistories,
     isLoading: isFilteredHistoriesLoading,
-  } = useGetHistoriesById(projectId as string);
+  } = useGetHistoriesById({ projectId: projectId as string });
 
   const selectHistoryId = (historyId: string) => {
     setSelectedHistoryId(historyId);
@@ -39,10 +39,6 @@ const TimeLineList = () => {
   const showingHistories = projectId
     ? filteredHistories?.toReversed()
     : histories?.toReversed();
-
-  const selectedHistory = showingHistories?.find(
-    (history) => history.id === selectedHistoryId,
-  );
 
   if (isHistoriesLoading || isFilteredHistoriesLoading) {
     return <TimeLineListSkeleton />;

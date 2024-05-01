@@ -9,5 +9,11 @@ export interface CreateHistoryRequest {
 }
 
 export interface CreateHistoryResponse extends ApiResponse<Histories> {}
+export interface GetHistoriesRequest {
+  projectId: string;
+}
 export interface GetHistoriesResponse extends ApiResponse<Histories[]> {}
-export interface GetHistoryResponse extends ApiResponse<Histories> {}
+export interface GetHistoriesByYearRequest extends GetHistoriesRequest {
+  year: string;
+}
+export interface GetHistoriesByYearResponse extends ApiResponse<Histories[]> {}
