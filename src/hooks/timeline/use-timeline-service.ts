@@ -12,7 +12,7 @@ import {
 } from '@/types/timeline';
 
 export const timelineQueryKeys = {
-  timelines: ['timelines'],
+  timelines: ['timeline'],
   timeline: (projectId: string, year: string = 'all') => [
     'timeline',
     projectId,

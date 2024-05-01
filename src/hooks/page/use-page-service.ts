@@ -24,7 +24,7 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
-  pages: (projectId: string) => ['pages', projectId],
+  pages: (projectId: string) => ['page', projectId],
   page: (projectId: string, pageId: number) => ['page', projectId, pageId],
 };
 
@@ -61,9 +61,6 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
         });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
-        });
       } else {
         onError(response);
       }
@@ -99,16 +96,10 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
 
         // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: pageQueryKeys.page(
-            response.data.projectId,
-            response.data.id,
-          ),
+          queryKey: pageQueryKeys.pages(response.data.projectId),
         });
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
-        });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -147,16 +138,7 @@ export const useDeletePage = ({ onSuccess, onError }: UseDeletePageProps) => {
           queryKey: pageQueryKeys.pages(response.data.projectId),
         });
         queryClient.invalidateQueries({
-          queryKey: pageQueryKeys.page(
-            response.data.projectId,
-            response.data.id,
-          ),
-        });
-        queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
-        });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);

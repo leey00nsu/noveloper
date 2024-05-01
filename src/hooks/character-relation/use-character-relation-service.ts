@@ -76,9 +76,6 @@ export const useUpdateCharacterRelation = ({
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
         });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
-        });
       } else {
         onError(response);
       }

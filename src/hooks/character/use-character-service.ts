@@ -24,7 +24,7 @@ import { characterRelationQueryKeys } from '../character-relation/use-character-
 import { timelineQueryKeys } from '../timeline/use-timeline-service';
 
 export const characterQueryKeys = {
-  characters: (projectId: string) => ['characters', projectId],
+  characters: (projectId: string) => ['character', projectId],
   character: (projectId: string, characterId: number) => [
     'character',
     projectId,
@@ -70,9 +70,6 @@ export const useCreateCharacter = ({
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
         });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
-        });
       } else {
         onError(response);
       }
@@ -111,10 +108,7 @@ export const useUpdateCharacter = ({
 
         // 변경한 project,relation,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: characterQueryKeys.character(
-            response.data.projectId,
-            response.data.id,
-          ),
+          queryKey: characterQueryKeys.characters(response.data.projectId),
         });
         queryClient.invalidateQueries({
           queryKey: characterRelationQueryKeys.relation(
@@ -123,9 +117,6 @@ export const useUpdateCharacter = ({
         });
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
-        });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -168,21 +159,12 @@ export const useDeleteCharacter = ({
           queryKey: characterQueryKeys.characters(response.data.projectId),
         });
         queryClient.invalidateQueries({
-          queryKey: characterQueryKeys.character(
-            response.data.projectId,
-            response.data.id,
-          ),
-        });
-        queryClient.invalidateQueries({
           queryKey: characterRelationQueryKeys.relation(
             response.data.projectId,
           ),
         });
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.timelines,
-        });
-        queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);

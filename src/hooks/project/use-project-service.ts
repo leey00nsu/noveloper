@@ -22,7 +22,7 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const projectQueryKeys = {
-  projects: ['projects'],
+  projects: ['project'],
   project: (projectId: string) => ['project', projectId],
 };
 
@@ -100,10 +100,10 @@ export const useUpdateProject = ({
 
         // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: projectQueryKeys.project(response.data.id),
+          queryKey: projectQueryKeys.projects,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timeline(response.data.id),
+          queryKey: timelineQueryKeys.timelines,
         });
       } else {
         onError(response);
