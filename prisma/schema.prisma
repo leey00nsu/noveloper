@@ -22,10 +22,10 @@ model Projects {
   janres             String[]             @db.VarChar
   userId             String               @map("user_id") @db.Uuid
   users              Users                @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  Histories          Histories[]
-  Pages              Pages[]
-  Characters         Characters[]
-  CharacterRelations CharacterRelations[]
+  timelines          Timelines[]
+  pages              Pages[]
+  characters         Characters[]
+  characterRelations CharacterRelations[]
 }
 
 model Users {
@@ -35,13 +35,13 @@ model Users {
   token              Int                  @db.SmallInt
   plan               Plan                 @default(FREE)
   projects           Projects[]
-  Histories          Histories[]
-  Pages              Pages[]
-  Characters         Characters[]
-  CharacterRelations CharacterRelations[]
+  timelines          Timelines[]
+  pages              Pages[]
+  characters         Characters[]
+  characterRelations CharacterRelations[]
 }
 
-model Histories {
+model Timelines {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title     String   @db.VarChar
   content   String   @db.VarChar

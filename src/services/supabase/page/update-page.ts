@@ -4,8 +4,8 @@ import prisma from '@/libs/prisma';
 
 import { UpdatePageRequest, UpdatePageResponse } from '@/types/page';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 
 export const updatePage = async (
@@ -36,7 +36,7 @@ export const updatePage = async (
     throw new Error('페이지 업데이트에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: updated.projectId,
     title: `${request.title} 업데이트`,
     content: `${project.title}의 ${request.title} 페이지가 업데이트 되었습니다.`,

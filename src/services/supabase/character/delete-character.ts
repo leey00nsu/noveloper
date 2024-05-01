@@ -5,8 +5,8 @@ import {
   DeleteCharacterResponse,
 } from '@/types/character';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 
 export const deleteCharacter = async (
@@ -30,7 +30,7 @@ export const deleteCharacter = async (
     throw new Error('인물 정보 삭제에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: deleted.projectId,
     title: `${deleted.name} 삭제`,
     content: `${project.title}의 인물 ${deleted.name} 이 삭제되었습니다.`,

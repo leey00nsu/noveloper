@@ -21,7 +21,7 @@ import {
 } from '@/types/character';
 
 import { characterRelationQueryKeys } from '../character-relation/use-character-relation-service';
-import { historyQueryKeys } from '../history/use-history-service';
+import { timelineQueryKeys } from '../timeline/use-timeline-service';
 
 export const characterQueryKeys = {
   characters: (projectId: string) => ['characters', projectId],
@@ -58,7 +58,7 @@ export const useCreateCharacter = ({
       if (response.success) {
         onSuccess(response);
 
-        // character,relation,history 쿼리 캐시를 갱신합니다.
+        // character,relation,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterQueryKeys.characters(response.data.projectId),
         });
@@ -68,10 +68,10 @@ export const useCreateCharacter = ({
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -109,7 +109,7 @@ export const useUpdateCharacter = ({
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,relation,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,relation,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterQueryKeys.character(
             response.data.projectId,
@@ -122,10 +122,10 @@ export const useUpdateCharacter = ({
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -163,7 +163,7 @@ export const useDeleteCharacter = ({
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,relation,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,relation,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterQueryKeys.characters(response.data.projectId),
         });
@@ -179,10 +179,10 @@ export const useDeleteCharacter = ({
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);

@@ -8,8 +8,8 @@ import {
   UpdateCharacterRelationResponse,
 } from '@/types/character-relation';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 
 export const updateRelation = async (
@@ -37,7 +37,7 @@ export const updateRelation = async (
     throw new Error('인물 관계 업데이트에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: updated.projectId,
     title: `${project.title} 인물 관계 업데이트`,
     content: `인물 관계 업데이트`,

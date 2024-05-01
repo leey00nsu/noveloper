@@ -5,8 +5,8 @@ import {
   UpdateCharacterResponse,
 } from '@/types/character';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 import { getCharacterById } from './get-character-by-id';
 
@@ -56,7 +56,7 @@ export const updateCharacter = async (
     content += `설명: ${pastCharacter.description} -> ${request.description}\\n`;
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: updated.projectId,
     title: `${request.name} 업데이트`,
     content,

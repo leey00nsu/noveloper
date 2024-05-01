@@ -8,7 +8,7 @@ import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
 import { parseDate } from '@/libs/parse-date';
 
-import { useGetHistoriesByDate } from '@/hooks/history/use-history-service';
+import { useGetTimelinesByDate } from '@/hooks/timeline/use-timeline-service';
 
 import ContentWrapper from '../../../common/wrapper/content-wrapper';
 
@@ -29,7 +29,7 @@ const ProjectTimeline = () => {
   const { projectId, date } = useParams();
   const router = useRouter();
 
-  const { histories, isFetching } = useGetHistoriesByDate({
+  const { timelines, isFetching } = useGetTimelinesByDate({
     projectId: projectId as string,
     date: date as string,
   });
@@ -37,18 +37,18 @@ const ProjectTimeline = () => {
   useEffect(() => {
     if (isFetching) return;
 
-    if (!histories) {
+    if (!timelines) {
       router.push(`/dashboard/project/${projectId}`);
     }
-  }, [histories, projectId, router, isFetching]);
+  }, [timelines, projectId, router, isFetching]);
 
-  if (!histories || isFetching) return <ProjectTimelineSkeleton />;
+  if (!timelines || isFetching) return <ProjectTimelineSkeleton />;
 
   return (
     <ContentWrapper>
       <Stack className="h-full w-full p-sm ">
         <Title order={2}>{date}</Title>
-        <Text>{histories.length} 개의 타임라인이 있습니다.</Text>
+        <Text>{timelines.length} 개의 타임라인이 있습니다.</Text>
 
         <Table striped>
           <Table.Thead>
@@ -59,7 +59,7 @@ const ProjectTimeline = () => {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {histories.map((history) => (
+            {timelines.map((history) => (
               <Table.Tr key={history.id}>
                 <Table.Td>{parseDate(history.createdAt, 'ko')}</Table.Td>
                 <Table.Td>{history.title}</Table.Td>

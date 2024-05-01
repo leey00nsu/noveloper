@@ -7,7 +7,7 @@ import { useState } from 'react';
 import CalendarChart from '@/components/ui/chart/calendar-chart';
 import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
-import { useGetHistoriesByYear } from '@/hooks/history/use-history-service';
+import { useGetTimelinesByYear } from '@/hooks/timeline/use-timeline-service';
 
 const YEARS = Array.from({ length: 2099 - 2024 + 1 }, (_, i) =>
   (2024 + i).toString(),
@@ -26,28 +26,28 @@ const ProjectTimelineChart = () => {
   const router = useRouter();
   const { projectId } = useParams();
 
-  const { histories, isLoading } = useGetHistoriesByYear({
+  const { timelines, isLoading } = useGetTimelinesByYear({
     projectId: projectId as string,
     year: selectedYear,
   });
 
-  const mergedHistories: {
+  const mergedTimelines: {
     [key: string]: number;
   } = {};
 
-  histories?.forEach((history) => {
-    const dateString = new Date(history.createdAt)
+  timelines?.forEach((timeline) => {
+    const dateString = new Date(timeline.createdAt)
       .toISOString()
       .substring(0, 10);
 
-    if (mergedHistories[dateString]) {
-      mergedHistories[dateString] += 1;
+    if (mergedTimelines[dateString]) {
+      mergedTimelines[dateString] += 1;
     } else {
-      mergedHistories[dateString] = 1;
+      mergedTimelines[dateString] = 1;
     }
   });
 
-  const data = Object.entries(mergedHistories).map(([date, value]) => ({
+  const data = Object.entries(mergedTimelines).map(([date, value]) => ({
     day: date,
     value,
   }));
@@ -62,7 +62,7 @@ const ProjectTimelineChart = () => {
     <Paper withBorder className="h-[200px] w-full p-sm">
       <Group justify="space-between">
         <Text className="text-sm">
-          {selectedYear}년에 {histories?.length}개의 타임라인이 있습니다.
+          {selectedYear}년에 {timelines?.length}개의 타임라인이 있습니다.
         </Text>
 
         <Select

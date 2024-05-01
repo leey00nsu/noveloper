@@ -4,8 +4,8 @@ import prisma from '@/libs/prisma';
 
 import { CreatePageRequest, CreatePageResponse } from '@/types/page';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 import { consumeToken } from '../user/use-token';
 
@@ -37,7 +37,7 @@ export const createPage = async (
     throw new Error('페이지 생성에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: created.projectId,
     title: `${request.title} 페이지 생성`,
     content: `${project.title}에 ${request.title} 페이지가 생성되었습니다. (-20 토큰)`,

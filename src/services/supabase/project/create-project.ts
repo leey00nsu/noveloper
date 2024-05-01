@@ -2,7 +2,7 @@ import prisma from '@/libs/prisma';
 
 import { CreateProjectRequest, CreateProjectResponse } from '@/types/project';
 
-import { createHistory } from '../history/create-history';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 import { consumeToken } from '../user/use-token';
 
@@ -29,7 +29,7 @@ export const createProject = async (
     throw new Error('프로젝트 생성에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: created.id,
     title: `${request.title} 생성`,
     content: `${request.title} 프로젝트가 생성되었습니다. (-50 토큰)`,

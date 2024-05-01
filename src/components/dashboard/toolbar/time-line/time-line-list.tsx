@@ -5,9 +5,9 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 import {
-  useGetHistories,
-  useGetHistoriesById,
-} from '@/hooks/history/use-history-service';
+  useGetTimelines,
+  useGetTimelinesById,
+} from '@/hooks/timeline/use-timeline-service';
 
 import TimeLineItem from './time-line-item';
 
@@ -23,36 +23,36 @@ const TimeLineListSkeleton = () => {
 };
 
 const TimeLineList = () => {
-  const [selectedHistoryId, setSelectedHistoryId] = useState('');
+  const [selectedTimelineId, setSelectedTimelineId] = useState('');
   const { projectId } = useParams();
 
-  const { histories, isLoading: isHistoriesLoading } = useGetHistories();
+  const { timelines, isLoading: isTimelinesLoading } = useGetTimelines();
   const {
-    histories: filteredHistories,
-    isLoading: isFilteredHistoriesLoading,
-  } = useGetHistoriesById({ projectId: projectId as string });
+    timelines: filteredTimelines,
+    isLoading: isFilteredTimelinesLoading,
+  } = useGetTimelinesById({ projectId: projectId as string });
 
-  const selectHistoryId = (historyId: string) => {
-    setSelectedHistoryId(historyId);
+  const selectTimelineId = (timelineId: string) => {
+    setSelectedTimelineId(timelineId);
   };
 
-  const showingHistories = projectId
-    ? filteredHistories?.toReversed()
-    : histories?.toReversed();
+  const showingTimelines = projectId
+    ? filteredTimelines?.toReversed()
+    : timelines?.toReversed();
 
-  if (isHistoriesLoading || isFilteredHistoriesLoading) {
+  if (isTimelinesLoading || isFilteredTimelinesLoading) {
     return <TimeLineListSkeleton />;
   }
 
   return (
     <Stack className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
-      {showingHistories?.map((history) => (
+      {showingTimelines?.map((timeline) => (
         <TimeLineItem
-          key={history.id}
-          history={history}
-          selectHistoryId={selectHistoryId}
-          selectedHistoryId={selectedHistoryId}
+          key={timeline.id}
+          timeline={timeline}
+          selectTimelineId={selectTimelineId}
+          selectedTimelineId={selectedTimelineId}
         />
       ))}
     </Stack>

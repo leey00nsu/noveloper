@@ -18,7 +18,7 @@ import {
   UpdateProjectResponse,
 } from '@/types/project';
 
-import { historyQueryKeys } from '../history/use-history-service';
+import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const projectQueryKeys = {
@@ -52,7 +52,7 @@ export const useCreateProject = ({
       if (response.success) {
         onSuccess(response);
 
-        // user,project,history 쿼리 캐시를 갱신합니다.
+        // user,project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: userQueryKeys.user,
         });
@@ -60,7 +60,7 @@ export const useCreateProject = ({
           queryKey: projectQueryKeys.projects,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
       } else {
         onError(response);
@@ -98,12 +98,12 @@ export const useUpdateProject = ({
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: projectQueryKeys.project(response.data.id),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.id),
+          queryKey: timelineQueryKeys.timeline(response.data.id),
         });
       } else {
         onError(response);
@@ -140,12 +140,12 @@ export const useDeleteProject = ({
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: projectQueryKeys.projects,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
       } else {
         onError(response);

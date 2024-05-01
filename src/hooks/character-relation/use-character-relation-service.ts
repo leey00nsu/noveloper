@@ -14,7 +14,7 @@ import {
   UpdateCharacterRelationResponse,
 } from '@/types/character-relation';
 
-import { historyQueryKeys } from '../history/use-history-service';
+import { timelineQueryKeys } from '../timeline/use-timeline-service';
 
 export const characterRelationQueryKeys = {
   relation: (projectId: string) => ['relation', projectId],
@@ -67,17 +67,17 @@ export const useUpdateCharacterRelation = ({
       if (response.success) {
         onSuccess(response);
 
-        // character,history 쿼리 캐시를 갱신합니다.
+        // character,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: characterRelationQueryKeys.relation(
             response.data.projectId,
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);

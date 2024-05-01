@@ -20,7 +20,7 @@ import {
   UpdatePageResponse,
 } from '@/types/page';
 
-import { historyQueryKeys } from '../history/use-history-service';
+import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
@@ -51,7 +51,7 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
       if (response.success) {
         onSuccess(response);
 
-        // user,page,history 쿼리 캐시를 갱신합니다.
+        // user,page,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: userQueryKeys.user,
         });
@@ -59,10 +59,10 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
           queryKey: pageQueryKeys.pages(response.data.projectId),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -97,7 +97,7 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: pageQueryKeys.page(
             response.data.projectId,
@@ -105,10 +105,10 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);
@@ -142,7 +142,7 @@ export const useDeletePage = ({ onSuccess, onError }: UseDeletePageProps) => {
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,history 쿼리 캐시를 갱신합니다.
+        // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
           queryKey: pageQueryKeys.pages(response.data.projectId),
         });
@@ -153,10 +153,10 @@ export const useDeletePage = ({ onSuccess, onError }: UseDeletePageProps) => {
           ),
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.histories,
+          queryKey: timelineQueryKeys.timelines,
         });
         queryClient.invalidateQueries({
-          queryKey: historyQueryKeys.history(response.data.projectId),
+          queryKey: timelineQueryKeys.timeline(response.data.projectId),
         });
       } else {
         onError(response);

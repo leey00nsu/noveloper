@@ -2,9 +2,9 @@ import prisma from '@/libs/prisma';
 
 import { DeletePageRequest, DeletePageResponse } from '@/types/page';
 
-import { createHistory } from '../history/create-history';
-import { getUserData } from '../user/get-user-data';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
+import { getUserData } from '../user/get-user-data';
 
 export const deletePage = async (
   request: DeletePageRequest,
@@ -27,7 +27,7 @@ export const deletePage = async (
     throw new Error('페이지 삭제에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: deleted.projectId,
     title: `${deleted.title} 삭제`,
     content: `${project.title}의 ${deleted.title} 페이지가 삭제되었습니다.`,

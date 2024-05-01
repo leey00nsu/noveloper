@@ -5,8 +5,8 @@ import {
   CreateCharacterResponse,
 } from '@/types/character';
 
-import { createHistory } from '../history/create-history';
 import { getProjectById } from '../project/get-project-by-id';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 
 export const createCharacter = async (
@@ -32,7 +32,7 @@ export const createCharacter = async (
     throw new Error('인물 생성에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: created.projectId,
     title: `${request.name} 인물 생성`,
     content: `${project.title}에 인물 ${request.name} 이 생성되었습니다. `,

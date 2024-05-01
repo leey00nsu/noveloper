@@ -1,6 +1,6 @@
 import NiceModal from '@ebay/nice-modal-react';
 import { Button, Text } from '@mantine/core';
-import { Histories } from '@prisma/client';
+import { Timelines } from '@prisma/client';
 
 import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
 
@@ -10,9 +10,9 @@ import TimeLineModal from '../../modal/timeline/time-line-modal';
 import TimeLineMenu from './time-line-menu';
 
 interface TimeLineItemProps {
-  history: Histories;
-  selectedHistoryId: string;
-  selectHistoryId: (historyId: string) => void;
+  timeline: Timelines;
+  selectedTimelineId: string;
+  selectTimelineId: (timelineId: string) => void;
 }
 
 const TimeLineItemSkeleton = () => {
@@ -20,34 +20,34 @@ const TimeLineItemSkeleton = () => {
 };
 
 const TimeLineItem = ({
-  history,
-  selectHistoryId,
-  selectedHistoryId,
+  timeline,
+  selectTimelineId,
+  selectedTimelineId,
 }: TimeLineItemProps) => {
   const openModal = () => {
     NiceModal.show(TimeLineModal, {
-      selectedHistory: history,
+      selectedTimeline: timeline,
     });
   };
 
   return (
     <Button
-      onClick={() => selectHistoryId(history.id)}
+      onClick={() => selectTimelineId(timeline.id)}
       variant="transparent"
       justify="space-between"
       color="white"
       rightSection={
-        selectedHistoryId === history.id && (
+        selectedTimelineId === timeline.id && (
           <TimeLineMenu openModal={openModal} />
         )
       }
       className={tw(
         'px-md hover:bg-gray-800',
-        selectedHistoryId === history.id && 'bg-gray-800',
+        selectedTimelineId === timeline.id && 'bg-gray-800',
       )}
     >
       <Text component="span" truncate className="text-start">
-        {history.title}
+        {timeline.title}
       </Text>
     </Button>
   );

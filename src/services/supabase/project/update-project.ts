@@ -4,7 +4,7 @@ import prisma from '@/libs/prisma';
 
 import { UpdateProjectRequest, UpdateProjectResponse } from '@/types/project';
 
-import { createHistory } from '../history/create-history';
+import { createTimeline } from '../timeline/create-timeline';
 import { getUserData } from '../user/get-user-data';
 import { getProjectById } from './get-project-by-id';
 
@@ -52,7 +52,7 @@ export const updateProject = async (
     content += `시놉시스: ${pastProject.synopsis} -> ${request.synopsis}\\n`;
   }
 
-  await createHistory({
+  await createTimeline({
     projectId: updated.id,
     title: `${request.title} 업데이트`,
     content,
