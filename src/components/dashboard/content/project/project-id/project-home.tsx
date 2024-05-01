@@ -36,11 +36,13 @@ const ProjectHome = () => {
   return (
     <ContentWrapper>
       <Stack className="w-full max-w-xl">
-        <Title order={2} className="mt-sm text-center">
+        <Title order={2} className="mt-sm break-words text-center">
           {project?.title}
         </Title>
 
-        <Text className="text-center text-sm">{project?.author}</Text>
+        <Text className="break-words text-center text-sm">
+          {project?.author}
+        </Text>
 
         <ProjectTimelineChart />
 
