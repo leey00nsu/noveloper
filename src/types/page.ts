@@ -1,7 +1,7 @@
 import { Pages, Prisma } from '@prisma/client';
 import { z } from 'zod';
 
-import { ApiResponse } from './api';
+import { ApiResponse, Order } from './api';
 
 export const CreatePageSchema = z.object({
   title: z
@@ -17,6 +17,9 @@ export const CreatePageSchema = z.object({
   contentText: z.string(),
 });
 
+export const PAGE_ORDER_BY = ['title', 'createdAt'] as const;
+export type PageOrderBy = (typeof PAGE_ORDER_BY)[number];
+
 export interface CreatePageForm extends z.infer<typeof CreatePageSchema> {}
 
 export interface CreatePageRequest extends CreatePageForm {
@@ -31,6 +34,8 @@ export interface GetPageRequest {
 export interface GetPageResponse extends ApiResponse<Pages> {}
 export interface GetPagesRequest {
   projectId: string;
+  orderBy: PageOrderBy;
+  order: Order;
 }
 export interface GetPagesResponse extends ApiResponse<Pages[]> {}
 export interface UpdatePageRequest extends CreatePageRequest {

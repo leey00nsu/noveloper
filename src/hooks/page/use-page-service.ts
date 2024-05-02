@@ -25,6 +25,12 @@ import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
   pages: (projectId: string) => ['page', projectId],
+  pagesWithFilter: (projectId: string, orderBy: string, order: string) => [
+    'page',
+    projectId,
+    orderBy,
+    order,
+  ],
   page: (projectId: string, pageId: number) => ['page', projectId, pageId],
 };
 
@@ -156,9 +162,16 @@ export const useGetPages = (request: GetPagesRequest) => {
     isLoading,
     isFetching,
   } = useQuery<GetPagesResponse>({
-    queryKey: pageQueryKeys.pages(request.projectId),
+    queryKey: pageQueryKeys.pagesWithFilter(
+      request.projectId,
+      request.orderBy,
+      request.order,
+    ),
     queryFn: () =>
-      fetcher({ url: `/api/page?id=${request.projectId}`, method: 'GET' }),
+      fetcher({
+        url: `/api/page?id=${request.projectId}&order-by=${request.orderBy}&order=${request.order}`,
+        method: 'GET',
+      }),
   });
 
   return { pages: result?.data, isLoading, isFetching };

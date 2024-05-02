@@ -1,21 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-const FILTERS = ['페이지 제목', '시간'];
+import useFilter from '@/hooks/use-filter';
+
+import { PAGE_ORDER_BY, PageOrderBy } from '@/types/page';
+
+const FILTERS = [
+  {
+    label: '제목',
+    value: 'title',
+  },
+  {
+    label: '시간',
+    value: 'createdAt',
+  },
+];
 
 const PageFilterButton = () => {
-  const [currentFilter, setCurrentFilter] = useState(FILTERS[0]);
-  const [currentOrder, setCurrentOrder] = useState<'asc' | 'desc'>('asc');
+  const { projectId } = useParams();
+  const router = useRouter();
+  const { currentFilter, currentOrder } = useFilter<PageOrderBy>({
+    filters: PAGE_ORDER_BY,
+  });
 
   const changeFilterHandler = (filter: string) => {
-    setCurrentFilter(filter);
+    router.push(
+      `/dashboard/project/${projectId}/page?order-by=${filter}&order=${currentOrder}`,
+    );
   };
 
   const toggleOrderHandler = () => {
-    setCurrentOrder(currentOrder === 'asc' ? 'desc' : 'asc');
+    const order = currentOrder === 'asc' ? 'desc' : 'asc';
+
+    router.push(
+      `/dashboard/project/${projectId}/page?order-by=${currentFilter}&order=${order}`,
+    );
   };
 
   return (

@@ -11,7 +11,8 @@ import { getPages } from '@/services/supabase/page/get-pages';
 
 import { pageQueryKeys } from '@/hooks/page/use-page-service';
 
-import { GetPagesResponse } from '@/types/page';
+import { ORDER } from '@/types/api';
+import { GetPagesResponse, PAGE_ORDER_BY } from '@/types/page';
 
 export default async function Page({
   params,
@@ -32,6 +33,8 @@ export default async function Page({
       queryFn: async () => {
         const data = await getPages({
           projectId: params.projectId,
+          orderBy: PAGE_ORDER_BY[0],
+          order: ORDER[0],
         });
         return data;
       },

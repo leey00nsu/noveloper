@@ -14,6 +14,9 @@ export const getPages = async (
       userId: user.id,
       projectId: request.projectId,
     },
+    orderBy: {
+      [request.orderBy]: request.order,
+    },
   });
 
   if (!pages) {
