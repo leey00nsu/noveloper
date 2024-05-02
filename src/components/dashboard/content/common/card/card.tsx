@@ -45,7 +45,7 @@ const CardText = ({ children, className, ...props }: CardTextProps) => {
 const Card = ({ title, href, children, ...props }: CardProps) => {
   return (
     <MantineCard
-      component={href ? Link : undefined}
+      component={(href ? Link : undefined) as any} // https://github.com/orgs/mantinedev/discussions/1292
       href={href ?? ''}
       withBorder
       className="h-40"
