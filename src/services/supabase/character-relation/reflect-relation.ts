@@ -51,11 +51,14 @@ export const reflectRelation = async (
     return false;
   });
 
-  const { data } = await updateRelation({
-    projectId,
-    nodes: newNodes,
-    edges: newEdges,
-  });
+  const { data } = await updateRelation(
+    {
+      projectId,
+      nodes: newNodes,
+      edges: newEdges,
+    },
+    true,
+  );
 
   return data;
 };

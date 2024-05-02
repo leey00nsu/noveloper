@@ -14,6 +14,7 @@ import { getUserData } from '../user/get-user-data';
 
 export const updateRelation = async (
   request: UpdateCharacterRelationRequest,
+  isReflect: boolean = false,
 ): Promise<UpdateCharacterRelationResponse> => {
   const { data: user } = await getUserData();
 
@@ -37,11 +38,13 @@ export const updateRelation = async (
     throw new Error('인물 관계 업데이트에 실패했습니다. 다시 시도해주세요.');
   }
 
-  await createTimeline({
-    projectId: updated.projectId,
-    title: `${project.title} 인물 관계 업데이트`,
-    content: `인물 관계 업데이트`,
-  });
+  if (!isReflect) {
+    await createTimeline({
+      projectId: updated.projectId,
+      title: `${project.title} 인물 관계 업데이트`,
+      content: `인물 관계가 업데이트 되었습니다.`,
+    });
+  }
 
   return {
     data: updated as unknown as ParsedCharacterRelations,
