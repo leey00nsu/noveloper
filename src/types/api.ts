@@ -4,3 +4,6 @@ export interface ApiResponse<T> {
   status: number;
   message: string;
 }
+
+export const ORDER = ['asc', 'desc'] as const;
+export type Order = (typeof ORDER)[number];

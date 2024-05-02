@@ -4,10 +4,12 @@ import { Button, Menu, Switch } from '@mantine/core';
 import { IoFilter } from 'react-icons/io5';
 import { TbCheck } from 'react-icons/tb';
 
+import { ORDER, Order } from '@/types/api';
+
 interface FilterMenuButtonProps {
-  filters: string[];
+  filters: { label: string; value: string }[];
   currentFilter: string;
-  currentOrder: 'asc' | 'desc';
+  currentOrder: Order;
   onChageFilter: (filter: string) => void;
   onToggleOrder: () => void;
 }
@@ -15,7 +17,7 @@ interface FilterMenuButtonProps {
 const FilterMenuButton = ({
   filters,
   currentFilter,
-  currentOrder = 'asc',
+  currentOrder = ORDER[0],
   onChageFilter,
   onToggleOrder,
 }: FilterMenuButtonProps) => {
@@ -41,11 +43,11 @@ const FilterMenuButton = ({
 
         {filters.map((filter) => (
           <Menu.Item
-            key={filter}
-            onClick={() => clickFilterHanlder(filter)}
-            rightSection={currentFilter === filter ? <TbCheck /> : null}
+            key={filter.value}
+            onClick={() => clickFilterHanlder(filter.value)}
+            rightSection={currentFilter === filter.value ? <TbCheck /> : null}
           >
-            {filter}
+            {filter.label}
           </Menu.Item>
         ))}
       </Menu.Dropdown>

@@ -3,12 +3,22 @@
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetProjects } from '@/hooks/project/use-project-service';
+import useFilter from '@/hooks/use-filter';
+
+import { PROJECT_ORDER_BY, ProjectOrderBy } from '@/types/project';
 
 import Card from '../common/card/card';
 import CardList from '../common/card/card-list';
 
 const ProjectCardList = () => {
-  const { projects, isFetching } = useGetProjects();
+  const { currentFilter, currentOrder } = useFilter<ProjectOrderBy>({
+    filters: PROJECT_ORDER_BY,
+  });
+
+  const { projects, isFetching } = useGetProjects({
+    orderBy: currentFilter,
+    order: currentOrder,
+  });
 
   return (
     <CardList showSkeleton={isFetching}>

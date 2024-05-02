@@ -7,13 +7,17 @@ import {
 
 import { fetcher } from '@/libs/fetcher';
 
+import { ORDER, Order } from '@/types/api';
 import {
   CreateProjectRequest,
   CreateProjectResponse,
   DeleteProjectRequest,
   DeleteProjectResponse,
   GetProjectResponse,
+  GetProjectsRequest,
   GetProjectsResponse,
+  PROJECT_ORDER_BY,
+  ProjectOrderBy,
   UpdateProjectRequest,
   UpdateProjectResponse,
 } from '@/types/project';
@@ -22,7 +26,11 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const projectQueryKeys = {
-  projects: ['project'],
+  projects: ['projects'],
+  projectsWithFilter: (
+    orderBy: ProjectOrderBy = PROJECT_ORDER_BY[0],
+    order: Order = ORDER[0],
+  ) => ['projects', orderBy, order],
   project: (projectId: string) => ['project', projectId],
 };
 
@@ -157,14 +165,21 @@ export const useDeleteProject = ({
   return { mutate, isPending };
 };
 
-export const useGetProjects = () => {
+export const useGetProjects = (request: GetProjectsRequest) => {
   const {
     data: result,
     isLoading,
     isFetching,
   } = useQuery<GetProjectsResponse>({
-    queryKey: projectQueryKeys.projects,
-    queryFn: () => fetcher({ url: `/api/project`, method: 'GET' }),
+    queryKey: projectQueryKeys.projectsWithFilter(
+      request.orderBy,
+      request.order,
+    ),
+    queryFn: () =>
+      fetcher({
+        url: `/api/project?order-by=${request.orderBy}&order=${request.order}`,
+        method: 'GET',
+      }),
   });
 
   return { projects: result?.data, isLoading, isFetching };

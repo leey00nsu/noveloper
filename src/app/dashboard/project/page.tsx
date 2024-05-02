@@ -11,7 +11,8 @@ import { getProjects } from '@/services/supabase/project/get-projects';
 
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 
-import { GetProjectsResponse } from '@/types/project';
+import { ORDER } from '@/types/api';
+import { GetProjectsResponse, PROJECT_ORDER_BY } from '@/types/project';
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -22,7 +23,10 @@ export default async function Page() {
     await queryClient.fetchQuery<GetProjectsResponse>({
       queryKey: projectQueryKeys.projects,
       queryFn: async () => {
-        const data = await getProjects();
+        const data = await getProjects({
+          orderBy: PROJECT_ORDER_BY[0],
+          order: ORDER[0],
+        });
 
         return data;
       },

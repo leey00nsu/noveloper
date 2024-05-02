@@ -1,21 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-const FILTERS = ['프로젝트 이름', '작가 이름', '시간'];
+import useFilter from '@/hooks/use-filter';
+
+import { PROJECT_ORDER_BY, ProjectOrderBy } from '@/types/project';
+
+const FILTERS = [
+  {
+    label: '프로젝트 이름',
+    value: 'title',
+  },
+  {
+    label: '작가 이름',
+    value: 'author',
+  },
+  {
+    label: '시간',
+    value: 'createdAt',
+  },
+];
 
 const ProjectFilterButton = () => {
-  const [currentFilter, setCurrentFilter] = useState(FILTERS[0]);
-  const [currentOrder, setCurrentOrder] = useState<'asc' | 'desc'>('asc');
+  const router = useRouter();
+  const { currentFilter, currentOrder } = useFilter<ProjectOrderBy>({
+    filters: PROJECT_ORDER_BY,
+  });
 
   const changeFilterHandler = (filter: string) => {
-    setCurrentFilter(filter);
+    router.push(`/dashboard/project?order-by=${filter}&order=${currentOrder}`);
   };
 
   const toggleOrderHandler = () => {
-    setCurrentOrder(currentOrder === 'asc' ? 'desc' : 'asc');
+    const order = currentOrder === 'asc' ? 'desc' : 'asc';
+
+    router.push(`/dashboard/project?order-by=${currentFilter}&order=${order}`);
   };
 
   return (

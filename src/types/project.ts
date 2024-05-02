@@ -1,7 +1,7 @@
 import { Projects } from '@prisma/client';
 import { z } from 'zod';
 
-import { ApiResponse } from './api';
+import { ApiResponse, Order } from './api';
 
 export const CreateProjectSchema = z.object({
   title: z
@@ -29,6 +29,9 @@ export const CreateProjectSchema = z.object({
     }),
 });
 
+export const PROJECT_ORDER_BY = ['title', 'author', 'createdAt'] as const;
+export type ProjectOrderBy = (typeof PROJECT_ORDER_BY)[number];
+
 export interface CreateProjectForm
   extends z.infer<typeof CreateProjectSchema> {}
 
@@ -38,8 +41,12 @@ export interface CreateProjectResponse extends ApiResponse<Projects> {}
 export interface GetProjectRequest {
   projectId: string;
 }
-export interface GetProjectsResponse extends ApiResponse<Projects[]> {}
 export interface GetProjectResponse extends ApiResponse<Projects> {}
+export interface GetProjectsRequest {
+  orderBy: ProjectOrderBy;
+  order: Order;
+}
+export interface GetProjectsResponse extends ApiResponse<Projects[]> {}
 export interface UpdateProjectRequest extends CreateProjectRequest {
   projectId: string;
 }
