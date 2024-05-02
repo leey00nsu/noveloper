@@ -11,7 +11,8 @@ import { getCharacters } from '@/services/supabase/character/get-characters';
 
 import { characterQueryKeys } from '@/hooks/character/use-character-service';
 
-import { GetCharactersResponse } from '@/types/character';
+import { ORDER } from '@/types/api';
+import { CHARACTER_ORDER_BY, GetCharactersResponse } from '@/types/character';
 
 export default async function Character({
   params,
@@ -32,6 +33,8 @@ export default async function Character({
       queryFn: async () => {
         const data = await getCharacters({
           projectId: params.projectId,
+          orderBy: CHARACTER_ORDER_BY[0],
+          order: ORDER[0],
         });
         return data;
       },

@@ -1,7 +1,7 @@
 import { Characters } from '@prisma/client';
 import { z } from 'zod';
 
-import { ApiResponse } from './api';
+import { ApiResponse, Order } from './api';
 
 export const CreateCharacterSchema = z.object({
   name: z
@@ -17,6 +17,9 @@ export const CreateCharacterSchema = z.object({
     .max(50, { message: '설명은 1자 이상 50자 이하로 입력해주세요.' }),
 });
 
+export const CHARACTER_ORDER_BY = ['name', 'createdAt'] as const;
+export type CharacterOrderBy = (typeof CHARACTER_ORDER_BY)[number];
+
 export interface CreateCharacterForm
   extends z.infer<typeof CreateCharacterSchema> {}
 
@@ -31,6 +34,8 @@ export interface GetCharacterRequest {
 export interface GetCharacterResponse extends ApiResponse<Characters> {}
 export interface GetCharactersRequest {
   projectId: string;
+  orderBy: CharacterOrderBy;
+  order: Order;
 }
 export interface GetCharactersResponse extends ApiResponse<Characters[]> {}
 export interface UpdateCharacterRequest extends CreateCharacterRequest {

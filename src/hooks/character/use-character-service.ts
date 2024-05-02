@@ -25,6 +25,12 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 
 export const characterQueryKeys = {
   characters: (projectId: string) => ['character', projectId],
+  charactersWithFilter: (projectId: string, orderBy: string, order: string) => [
+    'character',
+    projectId,
+    orderBy,
+    order,
+  ],
   character: (projectId: string, characterId: number) => [
     'character',
     projectId,
@@ -182,9 +188,16 @@ export const useGetCharacters = (request: GetCharactersRequest) => {
     isLoading,
     isFetching,
   } = useQuery<GetCharactersResponse>({
-    queryKey: characterQueryKeys.characters(request.projectId),
+    queryKey: characterQueryKeys.charactersWithFilter(
+      request.projectId,
+      request.orderBy,
+      request.order,
+    ),
     queryFn: () =>
-      fetcher({ url: `/api/character?id=${request.projectId}`, method: 'GET' }),
+      fetcher({
+        url: `/api/character?id=${request.projectId}&order-by=${request.orderBy}&order=${request.order}`,
+        method: 'GET',
+      }),
   });
 
   return { characters: result?.data, isLoading, isFetching };

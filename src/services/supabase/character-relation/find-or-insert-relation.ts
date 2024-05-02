@@ -1,6 +1,8 @@
 import prisma from '@/libs/prisma';
 import { createNodes } from '@/libs/react-flow/create-nodes';
 
+import { ORDER } from '@/types/api';
+import { CHARACTER_ORDER_BY } from '@/types/character';
 import {
   FindOrInsertRelationRequest,
   FindOrInsertRelationResponse,
@@ -38,6 +40,8 @@ export const findOrInsertRelation = async (
 
   const { data: characters } = await getCharacters({
     projectId: request.projectId,
+    orderBy: CHARACTER_ORDER_BY[0],
+    order: ORDER[0],
   });
 
   const newNodes = createNodes(characters);

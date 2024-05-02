@@ -1,21 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-const FILTERS = ['이름', '나이', '시간'];
+import useFilter from '@/hooks/use-filter';
+
+import { CHARACTER_ORDER_BY, CharacterOrderBy } from '@/types/character';
+
+const FILTERS = [
+  {
+    label: '이름',
+    value: 'name',
+  },
+  {
+    label: '시간',
+    value: 'createdAt',
+  },
+];
 
 const CharacterFilterButton = () => {
-  const [currentFilter, setCurrentFilter] = useState(FILTERS[0]);
-  const [currentOrder, setCurrentOrder] = useState<'asc' | 'desc'>('asc');
+  const { projectId } = useParams();
+  const router = useRouter();
+  const { currentFilter, currentOrder } = useFilter<CharacterOrderBy>({
+    filters: CHARACTER_ORDER_BY,
+  });
 
   const changeFilterHandler = (filter: string) => {
-    setCurrentFilter(filter);
+    router.push(
+      `/dashboard/project/${projectId}/character?order-by=${filter}&order=${currentOrder}`,
+    );
   };
 
   const toggleOrderHandler = () => {
-    setCurrentOrder(currentOrder === 'asc' ? 'desc' : 'asc');
+    const order = currentOrder === 'asc' ? 'desc' : 'asc';
+
+    router.push(
+      `/dashboard/project/${projectId}/character?order-by=${currentFilter}&order=${order}`,
+    );
   };
 
   return (

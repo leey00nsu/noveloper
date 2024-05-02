@@ -8,6 +8,9 @@ import { updateCharacter } from '@/services/supabase/character/update-character'
 
 import { catchResponseError } from '@/libs/response-catch-error';
 
+import { Order } from '@/types/api';
+import { CharacterOrderBy } from '@/types/character';
+
 export async function POST(request: Request) {
   const body = await request.json();
   const response = await catchResponseError(createCharacter(body));
@@ -39,6 +42,8 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const projectId = params.get('id');
   const characterId = Number(params.get('characterId'));
+  const orderBy = params.get('order-by');
+  const order = params.get('order');
 
   if (projectId && characterId) {
     const response = await catchResponseError(
@@ -53,10 +58,12 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  if (projectId) {
+  if (projectId && orderBy && order) {
     const response = await catchResponseError(
       getCharacters({
         projectId,
+        orderBy: orderBy as CharacterOrderBy,
+        order: order as Order,
       }),
     );
 
