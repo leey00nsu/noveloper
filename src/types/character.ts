@@ -17,8 +17,10 @@ export const CreateCharacterSchema = z.object({
     .max(50, { message: '설명은 1자 이상 50자 이하로 입력해주세요.' }),
 });
 
-export const CHARACTER_ORDER_BY = ['name', 'createdAt'] as const;
-export type CharacterOrderBy = (typeof CHARACTER_ORDER_BY)[number];
+export const CharacterOrderBySchema = z
+  .enum(['name', 'createdAt'])
+  .catch('name');
+export type CharacterOrderBy = z.infer<typeof CharacterOrderBySchema>;
 
 export interface CreateCharacterForm
   extends z.infer<typeof CreateCharacterSchema> {}
@@ -36,6 +38,7 @@ export interface GetCharactersRequest {
   projectId: string;
   orderBy: CharacterOrderBy;
   order: Order;
+  search: string;
 }
 export interface GetCharactersResponse extends ApiResponse<Characters[]> {}
 export interface UpdateCharacterRequest extends CreateCharacterRequest {

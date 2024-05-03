@@ -11,15 +11,28 @@ import { getCharacters } from '@/services/supabase/character/get-characters';
 
 import { characterQueryKeys } from '@/hooks/character/use-character-service';
 
-import { ORDER } from '@/types/api';
-import { CHARACTER_ORDER_BY, GetCharactersResponse } from '@/types/character';
+import { OrderSchema } from '@/types/api';
+import {
+  CharacterOrderBySchema,
+  GetCharactersResponse,
+} from '@/types/character';
 
 export default async function Character({
   params,
+  searchParams,
 }: {
   params: { projectId: string };
+  searchParams: {
+    'order-by': string;
+    order: string;
+    search: string;
+  };
 }) {
   const queryClient = new QueryClient();
+
+  const orderBy = CharacterOrderBySchema.parse(searchParams['order-by']);
+  const order = OrderSchema.parse(searchParams.order);
+  const search = searchParams.search || '';
 
   // character 데이터를 미리 가져와서 쿼리 캐시에 저장합니다.
   // 만약 데이터가 없다면 /dashboard 페이지로 리다이렉트합니다.
@@ -29,12 +42,18 @@ export default async function Character({
     }
 
     await queryClient.fetchQuery<GetCharactersResponse>({
-      queryKey: characterQueryKeys.characters(params.projectId),
+      queryKey: characterQueryKeys.charactersWithFilter(
+        params.projectId,
+        orderBy,
+        order,
+        search,
+      ),
       queryFn: async () => {
         const data = await getCharacters({
           projectId: params.projectId,
-          orderBy: CHARACTER_ORDER_BY[0],
-          order: ORDER[0],
+          orderBy,
+          order,
+          search,
         });
         return data;
       },

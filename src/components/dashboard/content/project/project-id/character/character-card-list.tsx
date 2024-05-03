@@ -1,5 +1,6 @@
 'use client';
 
+import { Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
 import { parseDate } from '@/libs/parse-date';
@@ -7,25 +8,32 @@ import { parseDate } from '@/libs/parse-date';
 import { useGetCharacters } from '@/hooks/character/use-character-service';
 import useSearchFilter from '@/hooks/use-search-filter';
 
-import { CHARACTER_ORDER_BY, CharacterOrderBy } from '@/types/character';
+import { CharacterOrderBy, CharacterOrderBySchema } from '@/types/character';
 
 import Card from '../../../common/card/card';
 import CardList from '../../../common/card/card-list';
 
 const CharacterCardList = () => {
   const { projectId } = useParams();
-  const { currentFilter, currentOrder } = useSearchFilter<CharacterOrderBy>({
-    filters: CHARACTER_ORDER_BY,
-  });
+  const { currentFilter, currentOrder, currentSearch } =
+    useSearchFilter<CharacterOrderBy>({
+      filterSchema: CharacterOrderBySchema,
+    });
+
   const { characters, isFetching } = useGetCharacters({
     projectId: projectId as string,
     orderBy: currentFilter,
     order: currentOrder,
+    search: currentSearch,
   });
+
+  const isNotFound = currentSearch && characters?.length === 0;
+  const isNoData = !currentSearch && characters?.length === 0;
 
   return (
     <CardList showSkeleton={isFetching}>
-      {characters?.length === 0 && (
+      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNoData && (
         <Card title="인물이 없습니다.">
           <Card.Text>새로운 인물을 생성해보세요.</Card.Text>
         </Card>

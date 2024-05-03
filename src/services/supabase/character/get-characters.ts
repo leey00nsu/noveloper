@@ -9,10 +9,21 @@ export const getCharacters = async (
 ): Promise<GetCharactersResponse> => {
   const { data: user } = await getUserData();
 
+  const nameContains = request.search
+    ? { name: { contains: request.search } }
+    : {};
+  const descriptionContains = request.search
+    ? { description: { contains: request.search } }
+    : {};
+
   const characters = await prisma.characters.findMany({
     where: {
-      userId: user.id,
-      projectId: request.projectId,
+      AND: [
+        { userId: user.id, projectId: request.projectId },
+        {
+          OR: [nameContains, descriptionContains],
+        },
+      ],
     },
     orderBy: {
       [request.orderBy]: request.order,
