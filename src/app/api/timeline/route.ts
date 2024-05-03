@@ -10,8 +10,8 @@ import { catchResponseError } from '@/libs/response-catch-error';
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const projectId = params.get('id');
-  const year = params.get('year');
-  const date = params.get('date');
+  const year = params.get('year') || '';
+  const date = params.get('date') || '';
 
   if (projectId && date) {
     const response = await catchResponseError(

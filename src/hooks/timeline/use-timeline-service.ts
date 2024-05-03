@@ -13,11 +13,8 @@ import {
 
 export const timelineQueryKeys = {
   timelines: ['timeline'],
-  timeline: (projectId: string, year: string = 'all') => [
-    'timeline',
-    projectId,
-    year,
-  ],
+  timeline: (projectId: string) => ['timeline', projectId],
+  timelineByTime : (projectId: string, time: string) => ['timeline', projectId, time],
 };
 
 export const useGetTimelines = () => {
@@ -54,7 +51,7 @@ export const useGetTimelinesByYear = (request: GetTimelinesByYearRequest) => {
     isLoading,
     isFetching,
   } = useQuery<GetTimelinesByYearResponse>({
-    queryKey: timelineQueryKeys.timeline(request.projectId, request.year),
+    queryKey: timelineQueryKeys.timelineByTime(request.projectId, request.year),
     enabled: !!request.projectId,
     queryFn: () =>
       fetcher({
@@ -72,7 +69,7 @@ export const useGetTimelinesByDate = (request: GetTimelinesByDateRequest) => {
     isLoading,
     isFetching,
   } = useQuery<GetTimelinesByDateResponse>({
-    queryKey: timelineQueryKeys.timeline(request.projectId, request.date),
+    queryKey: timelineQueryKeys.timelineByTime(request.projectId, request.date),
     enabled: !!request.projectId,
     queryFn: () =>
       fetcher({
