@@ -4,17 +4,16 @@ import { Button, Group } from '@mantine/core';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-import SearchInput from '@/components/ui/input/search-input';
-
 import PageFilterButton from './page-filter-button';
 import PageListRefreshButton from './page-list-refresh-button';
+import PageSearchInput from './page-search-input';
 
 const PageNavigation = () => {
   const { projectId } = useParams();
 
   return (
     <Group>
-      <SearchInput placeholder="페이지를 검색해보세요." />
+      <PageSearchInput />
       <PageListRefreshButton />
       <PageFilterButton />
       <Button

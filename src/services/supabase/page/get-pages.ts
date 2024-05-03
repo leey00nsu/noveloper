@@ -9,10 +9,21 @@ export const getPages = async (
 ): Promise<GetPagesResponse> => {
   const { data: user } = await getUserData();
 
+  const titleContains = request.search
+    ? { title: { contains: request.search } }
+    : {};
+  const summaryContains = request.search
+    ? { summary: { contains: request.search } }
+    : {};
+
   const pages = await prisma.pages.findMany({
     where: {
-      userId: user.id,
-      projectId: request.projectId,
+      AND: [
+        { userId: user.id, projectId: request.projectId },
+        {
+          OR: [titleContains, summaryContains],
+        },
+      ],
     },
     orderBy: {
       [request.orderBy]: request.order,

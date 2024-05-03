@@ -24,6 +24,8 @@ const useSearchFilter = <T>({ filterSchema }: UseSearchFilterProps) => {
   const changeFilter = (filter: string) => {
     const newFilter = filterSchema.parse(filter);
 
+    if (newFilter === currentFilter) return;
+
     window.history.replaceState(
       {},
       '',
@@ -42,6 +44,8 @@ const useSearchFilter = <T>({ filterSchema }: UseSearchFilterProps) => {
   };
 
   const changeSearch = (search: string) => {
+    if (search === currentSearch) return;
+
     window.history.replaceState(
       {},
       '',

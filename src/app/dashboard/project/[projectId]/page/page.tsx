@@ -11,15 +11,25 @@ import { getPages } from '@/services/supabase/page/get-pages';
 
 import { pageQueryKeys } from '@/hooks/page/use-page-service';
 
-import { ORDER } from '@/types/api';
-import { GetPagesResponse, PAGE_ORDER_BY } from '@/types/page';
+import { OrderSchema } from '@/types/api';
+import { GetPagesResponse, PageOrderBySchema } from '@/types/page';
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { projectId: string };
+  searchParams: {
+    'order-by': string;
+    order: string;
+    search: string;
+  };
 }) {
   const queryClient = new QueryClient();
+
+  const orderBy = PageOrderBySchema.parse(searchParams['order-by']);
+  const order = OrderSchema.parse(searchParams.order);
+  const search = searchParams.search || '';
 
   // page 데이터를 미리 가져와서 쿼리 캐시에 저장합니다.
   // 만약 데이터가 없다면 /dashboard 페이지로 리다이렉트합니다.
@@ -29,13 +39,20 @@ export default async function Page({
     }
 
     await queryClient.fetchQuery<GetPagesResponse>({
-      queryKey: pageQueryKeys.pages(params.projectId),
+      queryKey: pageQueryKeys.pagesWithFilter(
+        params.projectId,
+        orderBy,
+        order,
+        search,
+      ),
       queryFn: async () => {
         const data = await getPages({
           projectId: params.projectId,
-          orderBy: PAGE_ORDER_BY[0],
-          order: ORDER[0],
+          orderBy,
+          order,
+          search,
         });
+        
         return data;
       },
     });

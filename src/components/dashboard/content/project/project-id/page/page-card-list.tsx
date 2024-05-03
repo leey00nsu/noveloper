@@ -1,5 +1,6 @@
 'use client';
 
+import { Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
 import { parseDate } from '@/libs/parse-date';
@@ -7,28 +8,32 @@ import { parseDate } from '@/libs/parse-date';
 import { useGetPages } from '@/hooks/page/use-page-service';
 import useSearchFilter from '@/hooks/use-search-filter';
 
-import { PAGE_ORDER_BY, PageOrderBy } from '@/types/page';
+import { PageOrderBy, PageOrderBySchema } from '@/types/page';
 
 import Card from '../../../common/card/card';
 import CardList from '../../../common/card/card-list';
 
 const PageCardList = () => {
   const { projectId } = useParams();
-  const { currentFilter, currentOrder } = useSearchFilter<PageOrderBy>({
-    filters: PAGE_ORDER_BY,
-  });
-
-  
+  const { currentFilter, currentOrder, currentSearch } =
+    useSearchFilter<PageOrderBy>({
+      filterSchema: PageOrderBySchema,
+    });
 
   const { pages, isFetching } = useGetPages({
     projectId: projectId as string,
     orderBy: currentFilter,
     order: currentOrder,
+    search: currentSearch,
   });
+
+  const isNotFound = currentSearch && pages?.length === 0;
+  const isNoData = !currentSearch && pages?.length === 0;
 
   return (
     <CardList showSkeleton={isFetching}>
-      {pages?.length === 0 && (
+      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNoData && (
         <Card title="페이지가 없습니다.">
           <Card.Text>새로운 페이지를 생성해보세요.</Card.Text>
         </Card>

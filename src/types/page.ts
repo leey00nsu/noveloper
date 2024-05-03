@@ -17,8 +17,8 @@ export const CreatePageSchema = z.object({
   contentText: z.string(),
 });
 
-export const PAGE_ORDER_BY = ['title', 'createdAt'] as const;
-export type PageOrderBy = (typeof PAGE_ORDER_BY)[number];
+export const PageOrderBySchema = z.enum(['title', 'createdAt']).catch('title');
+export type PageOrderBy = z.infer<typeof PageOrderBySchema>;
 
 export interface CreatePageForm extends z.infer<typeof CreatePageSchema> {}
 
@@ -36,6 +36,7 @@ export interface GetPagesRequest {
   projectId: string;
   orderBy: PageOrderBy;
   order: Order;
+  search: string;
 }
 export interface GetPagesResponse extends ApiResponse<Pages[]> {}
 export interface UpdatePageRequest extends CreatePageRequest {

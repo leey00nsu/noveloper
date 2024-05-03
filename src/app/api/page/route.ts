@@ -8,8 +8,8 @@ import { updatePage } from '@/services/supabase/page/update-page';
 
 import { catchResponseError } from '@/libs/response-catch-error';
 
-import { Order } from '@/types/api';
-import { PageOrderBy } from '@/types/page';
+import { OrderSchema } from '@/types/api';
+import { PageOrderBySchema } from '@/types/page';
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -42,8 +42,9 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const projectId = params.get('id');
   const pageId = Number(params.get('pageId'));
-  const orderBy = params.get('order-by');
-  const order = params.get('order');
+  const orderBy = PageOrderBySchema.parse(params.get('order-by'));
+  const order = OrderSchema.parse(params.get('order'));
+  const search = params.get('search') || '';
 
   if (projectId && pageId) {
     const response = await catchResponseError(
@@ -62,8 +63,9 @@ export async function GET(request: NextRequest) {
     const response = await catchResponseError(
       getPages({
         projectId,
-        orderBy: orderBy as PageOrderBy,
-        order: order as Order,
+        orderBy,
+        order,
+        search,
       }),
     );
 

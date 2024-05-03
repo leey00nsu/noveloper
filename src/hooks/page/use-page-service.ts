@@ -7,6 +7,7 @@ import {
 
 import { fetcher } from '@/libs/fetcher';
 
+import { Order } from '@/types/api';
 import {
   CreatePageRequest,
   CreatePageResponse,
@@ -16,6 +17,7 @@ import {
   GetPageResponse,
   GetPagesRequest,
   GetPagesResponse,
+  PageOrderBy,
   UpdatePageRequest,
   UpdatePageResponse,
 } from '@/types/page';
@@ -25,12 +27,12 @@ import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
   pages: (projectId: string) => ['page', projectId],
-  pagesWithFilter: (projectId: string, orderBy: string, order: string) => [
-    'page',
-    projectId,
-    orderBy,
-    order,
-  ],
+  pagesWithFilter: (
+    projectId: string,
+    orderBy: PageOrderBy,
+    order: Order,
+    search: string,
+  ) => ['page', projectId, orderBy, order, search],
   page: (projectId: string, pageId: number) => ['page', projectId, pageId],
 };
 
@@ -166,10 +168,11 @@ export const useGetPages = (request: GetPagesRequest) => {
       request.projectId,
       request.orderBy,
       request.order,
+      request.search,
     ),
     queryFn: () =>
       fetcher({
-        url: `/api/page?id=${request.projectId}&order-by=${request.orderBy}&order=${request.order}`,
+        url: `/api/page?id=${request.projectId}&order-by=${request.orderBy}&order=${request.order}&search=${request.search}`,
         method: 'GET',
       }),
   });
