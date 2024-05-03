@@ -20,7 +20,9 @@ export const getTimelinesByDate = async (
         gte: new Date(`${request.date}T00:00:00.000Z`),
         lt: new Date(`${request.date}T23:59:59.999Z`),
       },
-    },
+    },orderBy: {
+      createdAt: 'desc',
+    }
   });
 
   if (!timelines) {

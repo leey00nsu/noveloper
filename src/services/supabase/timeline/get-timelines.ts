@@ -11,6 +11,9 @@ export const getTimelines = async (): Promise<GetTimelinesResponse> => {
     where: {
       userId: user.id,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 
   if (!timelines) {

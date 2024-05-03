@@ -36,9 +36,7 @@ const TimeLineList = () => {
     setSelectedTimelineId(timelineId);
   };
 
-  const showingTimelines = projectId
-    ? filteredTimelines?.toReversed()
-    : timelines?.toReversed();
+  const showingTimelines = projectId ? filteredTimelines : timelines;
 
   if (isTimelinesLoading || isFilteredTimelinesLoading) {
     return <TimeLineListSkeleton />;

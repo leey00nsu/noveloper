@@ -21,6 +21,9 @@ export const getTimelinesByYear = async (
         lt: new Date(`${request.year}-12-31T23:59:59.999Z`),
       },
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 
   if (!timelines) {

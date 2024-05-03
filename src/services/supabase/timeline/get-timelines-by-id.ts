@@ -13,7 +13,9 @@ export const getTimelinesById = async (
     where: {
       userId: user.id,
       projectId: request.projectId,
-    },
+    },orderBy: {
+      createdAt: 'desc',
+    }
   });
 
   if (!timelines) {
