@@ -6,8 +6,8 @@ import { CreatePageRequest, CreatePageResponse } from '@/types/page';
 
 import { getProjectById } from '../project/get-project-by-id';
 import { createTimeline } from '../timeline/create-timeline';
+import { consumeToken } from '../user/consume-token';
 import { getUserData } from '../user/get-user-data';
-import { consumeToken } from '../user/use-token';
 
 export const createPage = async (
   request: CreatePageRequest,
