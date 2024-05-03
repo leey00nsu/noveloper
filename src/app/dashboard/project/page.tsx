@@ -11,21 +11,34 @@ import { getProjects } from '@/services/supabase/project/get-projects';
 
 import { projectQueryKeys } from '@/hooks/project/use-project-service';
 
-import { ORDER } from '@/types/api';
-import { GetProjectsResponse, PROJECT_ORDER_BY } from '@/types/project';
+import { OrderSchema } from '@/types/api';
+import { GetProjectsResponse, ProjectOrderBySchema } from '@/types/project';
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: {
+    'order-by': string;
+    order: string;
+    search: string;
+  };
+}) {
   const queryClient = new QueryClient();
+
+  const orderBy = ProjectOrderBySchema.parse(searchParams['order-by']);
+  const order = OrderSchema.parse(searchParams.order);
+  const search = searchParams.search || '';
 
   // project 데이터를 미리 가져와서 쿼리 캐시에 저장합니다.
   // 만약 데이터가 없다면 /dashboard 페이지로 리다이렉트합니다.
   try {
     await queryClient.fetchQuery<GetProjectsResponse>({
-      queryKey: projectQueryKeys.projects,
+      queryKey: projectQueryKeys.projectsWithFilter(orderBy, order, search),
       queryFn: async () => {
         const data = await getProjects({
-          orderBy: PROJECT_ORDER_BY[0],
-          order: ORDER[0],
+          orderBy,
+          order,
+          search,
         });
 
         return data;

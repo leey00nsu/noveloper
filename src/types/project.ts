@@ -29,8 +29,10 @@ export const CreateProjectSchema = z.object({
     }),
 });
 
-export const PROJECT_ORDER_BY = ['title', 'author', 'createdAt'] as const;
-export type ProjectOrderBy = (typeof PROJECT_ORDER_BY)[number];
+export const ProjectOrderBySchema = z
+  .enum(['title', 'author', 'createdAt'])
+  .catch('title');
+export type ProjectOrderBy = z.infer<typeof ProjectOrderBySchema>;
 
 export interface CreateProjectForm
   extends z.infer<typeof CreateProjectSchema> {}
@@ -43,6 +45,7 @@ export interface GetProjectRequest {
 }
 export interface GetProjectResponse extends ApiResponse<Projects> {}
 export interface GetProjectsRequest {
+  search: string;
   orderBy: ProjectOrderBy;
   order: Order;
 }

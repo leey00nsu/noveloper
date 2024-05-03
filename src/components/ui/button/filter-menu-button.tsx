@@ -4,7 +4,7 @@ import { Button, Menu, Switch } from '@mantine/core';
 import { IoFilter } from 'react-icons/io5';
 import { TbCheck } from 'react-icons/tb';
 
-import { ORDER, Order } from '@/types/api';
+import { Order } from '@/types/api';
 
 interface FilterMenuButtonProps {
   filters: { label: string; value: string }[];
@@ -17,7 +17,7 @@ interface FilterMenuButtonProps {
 const FilterMenuButton = ({
   filters,
   currentFilter,
-  currentOrder = ORDER[0],
+  currentOrder,
   onChageFilter,
   onToggleOrder,
 }: FilterMenuButtonProps) => {

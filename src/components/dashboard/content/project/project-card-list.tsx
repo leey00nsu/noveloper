@@ -1,28 +1,36 @@
 'use client';
 
+import { Text } from '@mantine/core';
+
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetProjects } from '@/hooks/project/use-project-service';
-import useFilter from '@/hooks/use-filter';
+import useSearchFilter from '@/hooks/use-search-filter';
 
-import { PROJECT_ORDER_BY, ProjectOrderBy } from '@/types/project';
+import { ProjectOrderBy, ProjectOrderBySchema } from '@/types/project';
 
 import Card from '../common/card/card';
 import CardList from '../common/card/card-list';
 
 const ProjectCardList = () => {
-  const { currentFilter, currentOrder } = useFilter<ProjectOrderBy>({
-    filters: PROJECT_ORDER_BY,
-  });
+  const { currentFilter, currentOrder, currentSearch } =
+    useSearchFilter<ProjectOrderBy>({
+      filterSchema: ProjectOrderBySchema,
+    });
 
   const { projects, isFetching } = useGetProjects({
     orderBy: currentFilter,
     order: currentOrder,
+    search: currentSearch,
   });
+
+  const isNotFound = currentSearch && projects?.length === 0;
+  const isNoData = !currentSearch && projects?.length === 0;
 
   return (
     <CardList showSkeleton={isFetching}>
-      {projects?.length === 0 && (
+      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNoData && (
         <Card title="프로젝트가 없습니다.">
           <Card.Text>새로운 프로젝트를 생성해보세요.</Card.Text>
         </Card>

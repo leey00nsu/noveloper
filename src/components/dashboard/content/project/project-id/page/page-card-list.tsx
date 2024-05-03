@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetPages } from '@/hooks/page/use-page-service';
-import useFilter from '@/hooks/use-filter';
+import useSearchFilter from '@/hooks/use-search-filter';
 
 import { PAGE_ORDER_BY, PageOrderBy } from '@/types/page';
 
@@ -14,9 +14,11 @@ import CardList from '../../../common/card/card-list';
 
 const PageCardList = () => {
   const { projectId } = useParams();
-  const { currentFilter, currentOrder } = useFilter<PageOrderBy>({
+  const { currentFilter, currentOrder } = useSearchFilter<PageOrderBy>({
     filters: PAGE_ORDER_BY,
   });
+
+  
 
   const { pages, isFetching } = useGetPages({
     projectId: projectId as string,

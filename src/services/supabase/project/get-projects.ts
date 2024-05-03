@@ -9,9 +9,24 @@ export const getProjects = async (
 ): Promise<GetProjectsResponse> => {
   const { data: user } = await getUserData();
 
+  const titleContains = request.search
+    ? { title: { contains: request.search } }
+    : {};
+  const authorContains = request.search
+    ? { author: { contains: request.search } }
+    : {};
+  const synopsisContains = request.search
+    ? { synopsis: { contains: request.search } }
+    : {};
+
   const projects = await prisma.projects.findMany({
     where: {
-      userId: user.id,
+      AND: [
+        { userId: user.id },
+        {
+          OR: [titleContains, authorContains, synopsisContains],
+        },
+      ],
     },
     orderBy: {
       [request.orderBy]: request.order,

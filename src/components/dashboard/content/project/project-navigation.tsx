@@ -1,15 +1,14 @@
 import { Button, Group } from '@mantine/core';
 import Link from 'next/link';
 
-import SearchInput from '@/components/ui/input/search-input';
-
 import ProjectFilterButton from './project-filter-button';
 import ProjectListRefreshButton from './project-list-refresh-button';
+import ProjectSearchInput from './project-search-input';
 
 const ProjectNavigation = () => {
   return (
     <Group>
-      <SearchInput placeholder="프로젝트를 검색해보세요." />
+      <ProjectSearchInput />
       <ProjectListRefreshButton />
       <ProjectFilterButton />
       <Button component={Link} href="/dashboard/project/new">

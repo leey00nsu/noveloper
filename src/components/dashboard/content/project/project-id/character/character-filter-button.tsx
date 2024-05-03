@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-import useFilter from '@/hooks/use-filter';
+import useFilter from '@/hooks/use-search-filter';
 
 import { CHARACTER_ORDER_BY, CharacterOrderBy } from '@/types/character';
 

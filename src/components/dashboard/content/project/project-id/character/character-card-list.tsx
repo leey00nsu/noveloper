@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetCharacters } from '@/hooks/character/use-character-service';
-import useFilter from '@/hooks/use-filter';
+import useSearchFilter from '@/hooks/use-search-filter';
 
 import { CHARACTER_ORDER_BY, CharacterOrderBy } from '@/types/character';
 
@@ -14,7 +14,7 @@ import CardList from '../../../common/card/card-list';
 
 const CharacterCardList = () => {
   const { projectId } = useParams();
-  const { currentFilter, currentOrder } = useFilter<CharacterOrderBy>({
+  const { currentFilter, currentOrder } = useSearchFilter<CharacterOrderBy>({
     filters: CHARACTER_ORDER_BY,
   });
   const { characters, isFetching } = useGetCharacters({

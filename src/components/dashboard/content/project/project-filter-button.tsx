@@ -1,12 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-import useFilter from '@/hooks/use-filter';
+import useSearchFilter from '@/hooks/use-search-filter';
 
-import { PROJECT_ORDER_BY, ProjectOrderBy } from '@/types/project';
+import { ProjectOrderBy, ProjectOrderBySchema } from '@/types/project';
 
 const FILTERS = [
   {
@@ -24,28 +22,18 @@ const FILTERS = [
 ];
 
 const ProjectFilterButton = () => {
-  const router = useRouter();
-  const { currentFilter, currentOrder } = useFilter<ProjectOrderBy>({
-    filters: PROJECT_ORDER_BY,
-  });
-
-  const changeFilterHandler = (filter: string) => {
-    router.push(`/dashboard/project?order-by=${filter}&order=${currentOrder}`);
-  };
-
-  const toggleOrderHandler = () => {
-    const order = currentOrder === 'asc' ? 'desc' : 'asc';
-
-    router.push(`/dashboard/project?order-by=${currentFilter}&order=${order}`);
-  };
+  const { currentFilter, currentOrder, changeFilter, toggleOrder } =
+    useSearchFilter<ProjectOrderBy>({
+      filterSchema: ProjectOrderBySchema,
+    });
 
   return (
     <FilterMenuButton
       filters={FILTERS}
       currentFilter={currentFilter}
       currentOrder={currentOrder}
-      onChageFilter={changeFilterHandler}
-      onToggleOrder={toggleOrderHandler}
+      onChageFilter={changeFilter}
+      onToggleOrder={toggleOrder}
     />
   );
 };

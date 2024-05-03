@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface ApiResponse<T> {
   data: T;
   success: boolean;
@@ -5,5 +7,5 @@ export interface ApiResponse<T> {
   message: string;
 }
 
-export const ORDER = ['asc', 'desc'] as const;
-export type Order = (typeof ORDER)[number];
+export const OrderSchema = z.enum(['asc', 'desc']).catch('asc');
+export type Order = z.infer<typeof OrderSchema>;

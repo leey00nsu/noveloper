@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 
 import FilterMenuButton from '@/components/ui/button/filter-menu-button';
 
-import useFilter from '@/hooks/use-filter';
+import useSearchFilter from '@/hooks/use-search-filter';
 
 import { PAGE_ORDER_BY, PageOrderBy } from '@/types/page';
 
@@ -22,7 +22,7 @@ const FILTERS = [
 const PageFilterButton = () => {
   const { projectId } = useParams();
   const router = useRouter();
-  const { currentFilter, currentOrder } = useFilter<PageOrderBy>({
+  const { currentFilter, currentOrder } = useSearchFilter<PageOrderBy>({
     filters: PAGE_ORDER_BY,
   });
 

@@ -7,7 +7,7 @@ import {
 
 import { fetcher } from '@/libs/fetcher';
 
-import { ORDER, Order } from '@/types/api';
+import { Order } from '@/types/api';
 import {
   CreateProjectRequest,
   CreateProjectResponse,
@@ -16,7 +16,6 @@ import {
   GetProjectResponse,
   GetProjectsRequest,
   GetProjectsResponse,
-  PROJECT_ORDER_BY,
   ProjectOrderBy,
   UpdateProjectRequest,
   UpdateProjectResponse,
@@ -28,9 +27,10 @@ import { userQueryKeys } from '../user/use-user-service';
 export const projectQueryKeys = {
   projects: ['projects'],
   projectsWithFilter: (
-    orderBy: ProjectOrderBy = PROJECT_ORDER_BY[0],
-    order: Order = ORDER[0],
-  ) => ['projects', orderBy, order],
+    orderBy: ProjectOrderBy,
+    order: Order,
+    search: string,
+  ) => ['projects', orderBy, order, search],
   project: (projectId: string) => ['project', projectId],
 };
 
@@ -174,10 +174,11 @@ export const useGetProjects = (request: GetProjectsRequest) => {
     queryKey: projectQueryKeys.projectsWithFilter(
       request.orderBy,
       request.order,
+      request.search,
     ),
     queryFn: () =>
       fetcher({
-        url: `/api/project?order-by=${request.orderBy}&order=${request.order}`,
+        url: `/api/project?order-by=${request.orderBy}&order=${request.order}&search=${request.search}`,
         method: 'GET',
       }),
   });

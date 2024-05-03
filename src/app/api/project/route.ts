@@ -8,8 +8,8 @@ import { updateProject } from '@/services/supabase/project/update-project';
 
 import { catchResponseError } from '@/libs/response-catch-error';
 
-import { Order } from '@/types/api';
-import { ProjectOrderBy } from '@/types/project';
+import { OrderSchema } from '@/types/api';
+import { ProjectOrderBySchema } from '@/types/project';
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -41,8 +41,9 @@ export async function DELETE(request: Request) {
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const projectId = params.get('id');
-  const orderBy = params.get('order-by');
-  const order = params.get('order');
+  const orderBy = ProjectOrderBySchema.parse(params.get('order-by'));
+  const order = OrderSchema.parse(params.get('order'));
+  const search = params.get('search') || '';
 
   if (projectId) {
     const response = await catchResponseError(
@@ -59,8 +60,9 @@ export async function GET(request: NextRequest) {
   if (orderBy && order) {
     const response = await catchResponseError(
       getProjects({
-        orderBy: orderBy as ProjectOrderBy,
-        order: order as Order,
+        orderBy,
+        order,
+        search,
       }),
     );
 
