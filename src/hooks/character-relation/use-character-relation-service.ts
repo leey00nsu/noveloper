@@ -17,6 +17,7 @@ import {
 import { timelineQueryKeys } from '../timeline/use-timeline-service';
 
 export const characterRelationQueryKeys = {
+  all: ['relation'],
   relation: (projectId: string) => ['relation', projectId],
 };
 
@@ -69,12 +70,10 @@ export const useUpdateCharacterRelation = ({
 
         // character,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: characterRelationQueryKeys.relation(
-            response.data.projectId,
-          ),
+          queryKey: characterRelationQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);

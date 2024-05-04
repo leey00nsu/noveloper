@@ -25,13 +25,14 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const projectQueryKeys = {
-  projects: ['projects'],
+  all: ['project'],
+  projects: ['project', 'list'],
   projectsWithFilter: (
     orderBy: ProjectOrderBy,
     order: Order,
     search: string,
-  ) => ['projects', orderBy, order, search],
-  project: (projectId: string) => ['project', projectId],
+  ) => ['project', 'list', orderBy, order, search],
+  project: (projectId: string) => ['project', 'detail', projectId],
 };
 
 interface UseCreateProjectProps {
@@ -62,13 +63,13 @@ export const useCreateProject = ({
 
         // user,project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: userQueryKeys.user,
+          queryKey: userQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: projectQueryKeys.projects,
+          queryKey: projectQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);
@@ -108,10 +109,10 @@ export const useUpdateProject = ({
 
         // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: projectQueryKeys.projects,
+          queryKey: projectQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);
@@ -150,10 +151,10 @@ export const useDeleteProject = ({
 
         // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: projectQueryKeys.projects,
+          queryKey: projectQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);

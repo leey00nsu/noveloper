@@ -12,10 +12,12 @@ import {
 } from '@/types/timeline';
 
 export const timelineQueryKeys = {
-  timelines: ['timeline'],
-  timelinesById: (projectId: string) => ['timeline', projectId],
+  all: ['timeline'],
+  timelines: ['timeline', 'list'],
+  timelinesById: (projectId: string) => ['timeline', 'list', projectId],
   timelineByTime: (projectId: string, time: string) => [
     'timeline',
+    'list',
     projectId,
     time,
   ],

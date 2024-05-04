@@ -26,14 +26,20 @@ import { timelineQueryKeys } from '../timeline/use-timeline-service';
 import { userQueryKeys } from '../user/use-user-service';
 
 export const pageQueryKeys = {
-  pages: (projectId: string) => ['page', projectId],
+  all: ['page'],
+  pages: (projectId: string) => ['page', 'list', projectId],
   pagesWithFilter: (
     projectId: string,
     orderBy: PageOrderBy,
     order: Order,
     search: string,
-  ) => ['page', projectId, orderBy, order, search],
-  page: (projectId: string, pageId: number) => ['page', projectId, pageId],
+  ) => ['page', 'list', projectId, orderBy, order, search],
+  page: (projectId: string, pageId: number) => [
+    'page',
+    'detail',
+    projectId,
+    pageId,
+  ],
 };
 
 interface UseCreatePageProps {
@@ -61,13 +67,13 @@ export const useCreatePage = ({ onSuccess, onError }: UseCreatePageProps) => {
 
         // user,page,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: userQueryKeys.user,
+          queryKey: userQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: pageQueryKeys.pages(response.data.projectId),
+          queryKey: pageQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);
@@ -102,12 +108,12 @@ export const useUpdatePage = ({ onSuccess, onError }: UseUpdatePageProps) => {
       if (response.success) {
         onSuccess(response);
 
-        // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
+        // 변경한 page,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: pageQueryKeys.pages(response.data.projectId),
+          queryKey: pageQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);
@@ -143,10 +149,10 @@ export const useDeletePage = ({ onSuccess, onError }: UseDeletePageProps) => {
 
         // 변경한 project,timeline 쿼리 캐시를 갱신합니다.
         queryClient.invalidateQueries({
-          queryKey: pageQueryKeys.pages(response.data.projectId),
+          queryKey: pageQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: timelineQueryKeys.timelines,
+          queryKey: timelineQueryKeys.all,
         });
       } else {
         onError(response);

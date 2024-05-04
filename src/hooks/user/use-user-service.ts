@@ -5,6 +5,7 @@ import { fetcher } from '@/libs/fetcher';
 import { GetUserResponse } from '@/types/user';
 
 export const userQueryKeys = {
+  all: ['user'],
   user: ['user'],
 };
 
