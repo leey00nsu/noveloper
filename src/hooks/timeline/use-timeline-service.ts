@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { fetcher } from '@/libs/fetcher';
 
@@ -13,36 +13,41 @@ import {
 
 export const timelineQueryKeys = {
   timelines: ['timeline'],
-  timeline: (projectId: string) => ['timeline', projectId],
-  timelineByTime : (projectId: string, time: string) => ['timeline', projectId, time],
+  timelinesById: (projectId: string) => ['timeline', projectId],
+  timelineByTime: (projectId: string, time: string) => [
+    'timeline',
+    projectId,
+    time,
+  ],
 };
 
-export const useGetTimelines = () => {
+export const useGetTimelines = (request: GetTimelinesRequest) => {
   const {
     data: result,
     isLoading,
     isFetching,
-  } = useQuery<GetTimelinesResponse>({
-    queryKey: timelineQueryKeys.timelines,
-    queryFn: () => fetcher({ url: '/api/timeline', method: 'GET' }),
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<GetTimelinesResponse>({
+    queryKey: timelineQueryKeys.timelinesById(request.projectId),
+    queryFn: ({ pageParam }) =>
+      fetcher({
+        url: `/api/timeline?cursor=${pageParam}&id=${request.projectId}`,
+        method: 'GET',
+      }),
+    initialPageParam: request.cursor,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
-  return { timelines: result?.data, isLoading, isFetching };
-};
-
-export const useGetTimelinesById = (request: GetTimelinesRequest) => {
-  const {
-    data: result,
+  return {
+    timelines: result,
     isLoading,
     isFetching,
-  } = useQuery<GetTimelinesResponse>({
-    queryKey: timelineQueryKeys.timeline(request.projectId),
-    enabled: !!request.projectId,
-    queryFn: () =>
-      fetcher({ url: `/api/timeline?id=${request.projectId}`, method: 'GET' }),
-  });
-
-  return { timelines: result?.data, isLoading, isFetching };
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  };
 };
 
 export const useGetTimelinesByYear = (request: GetTimelinesByYearRequest) => {

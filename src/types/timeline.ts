@@ -9,15 +9,19 @@ export interface CreateTimelineRequest {
 }
 
 export interface CreateTimelineResponse extends ApiResponse<Timelines> {}
+
 export interface GetTimelinesRequest {
   projectId: string;
+  cursor: number;
 }
 export interface GetTimelinesResponse extends ApiResponse<Timelines[]> {}
-export interface GetTimelinesByYearRequest extends GetTimelinesRequest {
+export interface GetTimelinesByYearRequest {
+  projectId: string;
   year: string;
 }
 export interface GetTimelinesByYearResponse extends ApiResponse<Timelines[]> {}
-export interface GetTimelinesByDateRequest extends GetTimelinesRequest {
+export interface GetTimelinesByDateRequest {
+  projectId: string;
   date: string;
 }
 export interface GetTimelinesByDateResponse extends ApiResponse<Timelines[]> {}

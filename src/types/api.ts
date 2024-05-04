@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export interface ApiResponse<T> {
   data: T;
+  nextCursor?: number;
   success: boolean;
   status: number;
   message: string;
