@@ -1,8 +1,10 @@
-import { Button, Divider, Group, Select, Stack, Text } from '@mantine/core';
+import { Divider, Group, Select, Stack, Text } from '@mantine/core';
 
 import UserInfo from '@/components/ui/user-info/user-info';
 
 import { useGetUser } from '@/hooks/user/use-user-service';
+
+import SignOutButton from './sign-out-button';
 
 const SUPPORT_LANGUAGES = ['한국어', '영어'];
 
@@ -35,7 +37,7 @@ const ProfilTab = () => {
       <Divider className="my-sm border-gray-300 dark:border-gray-700" />
 
       <Group justify="flex-end">
-        <Button color="red">로그아웃</Button>
+        <SignOutButton />
       </Group>
     </Stack>
   );
