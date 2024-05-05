@@ -12,61 +12,29 @@ const Hero = () => {
       className="h-[800px] bg-cover bg-center bg-no-repeat p-20"
     >
       <Center className="h-full w-full">
-        <Stack hiddenFrom="xl" className="gap-8">
-          <Stack>
-            <Title order={2} className="text-center text-5xl">
-              AI 기반 소설 창작 플랫폼
-            </Title>
-            <Title order={2} className="text-center text-5xl">
-              Noveloper
-            </Title>
-          </Stack>
-
-          <Stack>
-            <Text className="text-xl font-medium text-gray-900">
-              AI와 함께하는 소설 쓰기, 당신의 이야기를 더욱 특별하게
-              만들어보세요.
-            </Text>
-          </Stack>
-
-          <Group justify="center">
-            <Button
-              component={Link}
-              href="/auth/signin"
-              radius="xl"
-              variant="outline"
-              color="gray.9"
-              size="lg"
-            >
-              로그인
-            </Button>
-          </Group>
-        </Stack>
-
         <Group
-          visibleFrom="xl"
           className="h-full w-full max-w-[75em]"
           wrap="nowrap"
           justify="space-between"
         >
-          <Stack gap={30}>
-            <Stack>
-              <Title order={2} className="text-5xl">
+          <Stack className="w-full gap-sm">
+            <Stack className="w-full items-center xl:items-start">
+              <Title order={2} className="text-3xl sm:text-5xl">
                 AI 기반 소설 창작 플랫폼
               </Title>
-              <Title order={2} className="text-5xl">
+              <Title order={2} className="text-3xl sm:text-5xl">
                 Noveloper
               </Title>
             </Stack>
 
-            <Stack>
-              <Text className="text-xl font-medium text-gray-900">
+            <Stack className="w-full items-center xl:items-start">
+              <Text className="text-base font-medium text-gray-900 sm:text-xl">
                 AI와 함께하는 소설 쓰기, 당신의 이야기를 더욱 특별하게
                 만들어보세요.
               </Text>
             </Stack>
 
-            <Group>
+            <Group className="w-full justify-center xl:justify-start">
               <Button
                 component={Link}
                 href="/auth/signin"
@@ -80,7 +48,7 @@ const Hero = () => {
             </Group>
           </Stack>
 
-          <Box className="relative h-full w-full max-w-[500px] overflow-hidden rounded-2xl">
+          <Box className="relative hidden h-full w-full max-w-[500px] overflow-hidden rounded-2xl xl:block ">
             <Image src="/hero.webp" alt="Hero" fill />
           </Box>
         </Group>
