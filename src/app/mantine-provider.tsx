@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Button,
   MantineProvider as OriginalProvider,
   createTheme,
 } from '@mantine/core';
@@ -8,6 +9,14 @@ import {
 import { pretendard } from './font-provider';
 
 const theme = createTheme({
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        variant: 'outline',
+        radius: 'xl',
+      },
+    }),
+  },
   headings: {
     fontFamily: pretendard.style.fontFamily,
   },

@@ -36,6 +36,7 @@ const TimeLineItem = ({
       variant="transparent"
       justify="space-between"
       color="white"
+      radius="sm"
       rightSection={
         selectedTimelineId === timeline.id && (
           <TimeLineMenu openModal={openModal} />
