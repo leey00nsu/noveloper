@@ -1,14 +1,12 @@
-import { Divider, Group, Select, Stack, Text } from '@mantine/core';
+import { Divider, Group, Stack } from '@mantine/core';
 
 import UserInfo from '@/components/ui/user-info/user-info';
 
 import { useGetUser } from '@/hooks/user/use-user-service';
 
+import LanguageSelect from './language-select';
 import SignOutButton from './sign-out-button';
 import ThemeSelect from './theme-select';
-
-const SUPPORT_LANGUAGES = ['한국어', '영어'];
-
 
 const ProfilTab = () => {
   const { user } = useGetUser();
@@ -26,17 +24,8 @@ const ProfilTab = () => {
 
       <Divider className="my-sm border-gray-300 dark:border-gray-700" />
 
-      <Group justify="space-between">
-        <Text>언어</Text>
-        <Select
-          size="sm"
-          allowDeselect={false}
-          defaultValue={SUPPORT_LANGUAGES[0]}
-          data={SUPPORT_LANGUAGES}
-        />
-      </Group>
-
-      <ThemeSelect/>
+      <LanguageSelect />
+      <ThemeSelect />
 
       <Divider className="my-sm border-gray-300 dark:border-gray-700" />
 

@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaRegCreditCard, FaRegUser } from 'react-icons/fa';
 
-import PlanTab from './plan-tab';
-import ProfileTab from './profile-tab';
+import PlanTab from './plan/plan-tab';
+import ProfileTab from './profile/profile-tab';
 
 const ProfileModal = () => {
   const [isOpen, setOpen] = useState(false);
