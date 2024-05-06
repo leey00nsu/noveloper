@@ -5,8 +5,10 @@ import UserInfo from '@/components/ui/user-info/user-info';
 import { useGetUser } from '@/hooks/user/use-user-service';
 
 import SignOutButton from './sign-out-button';
+import ThemeSelect from './theme-select';
 
 const SUPPORT_LANGUAGES = ['한국어', '영어'];
+
 
 const ProfilTab = () => {
   const { user } = useGetUser();
@@ -33,6 +35,8 @@ const ProfilTab = () => {
           data={SUPPORT_LANGUAGES}
         />
       </Group>
+
+      <ThemeSelect/>
 
       <Divider className="my-sm border-gray-300 dark:border-gray-700" />
 

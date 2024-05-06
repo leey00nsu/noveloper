@@ -5,7 +5,6 @@ import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 
 import ProjectMenu from './project-menu';
 import SystemMenu from './system-menu';
-import ThemeSwitch from './theme-switch';
 import TokenStatus from './token-status';
 import UserMenu from './user-menu';
 
@@ -23,9 +22,9 @@ const Sidebar = ({ isCollapsed }: SidebarProps) => {
       </Center>
 
       <TokenStatus />
-      <ThemeSwitch />
 
       <ThemeScrollArea ignoreTheme className="h-full" scrollbars="y">
+        <Divider className="my-sm border-gray-700" />
         <SystemMenu />
         <Divider className="my-sm border-gray-700" />
         <ProjectMenu />
