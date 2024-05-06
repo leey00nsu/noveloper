@@ -6,8 +6,8 @@ import { Button, Stack, Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import FormInput from '@/components/dashboard/content/common/form/form-input';
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
+import FormInput from '@/components/ui/form/form-input';
 
 import {
   CreateCharacterForm,

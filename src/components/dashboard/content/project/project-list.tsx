@@ -1,6 +1,7 @@
 import { Stack } from '@mantine/core';
 
-import ContentWrapper from '../common/wrapper/content-wrapper';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import ProjectCardList from './project-card-list';
 import ProjectNavigation from './project-navigation';
 

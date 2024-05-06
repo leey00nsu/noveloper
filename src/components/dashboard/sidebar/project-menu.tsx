@@ -3,9 +3,9 @@
 import { Accordion, Stack } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
-import { useGetProjectById } from '@/hooks/project/use-project-service';
+import AccordianButton from '@/components/ui/button/accordian-button';
 
-import AccordianButton from '../content/common/button/accordian-button';
+import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 const ProjectMenu = () => {
   const { projectId } = useParams();

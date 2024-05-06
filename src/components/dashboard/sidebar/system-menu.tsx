@@ -1,7 +1,7 @@
 import { Stack } from '@mantine/core';
 import { FaRegFileAlt, FaRegFolderOpen } from 'react-icons/fa';
 
-import AccordianButton from '../content/common/button/accordian-button';
+import AccordianButton from '@/components/ui/button/accordian-button';
 
 const SystemMenu = () => {
   const menus = [

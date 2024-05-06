@@ -2,15 +2,15 @@
 
 import { Text } from '@mantine/core';
 
+import Card from '@/components/ui/card/card';
+import CardList from '@/components/ui/card/card-list';
+
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetProjects } from '@/hooks/project/use-project-service';
 import useSearchFilter from '@/hooks/use-search-filter';
 
 import { ProjectOrderBy, ProjectOrderBySchema } from '@/types/project';
-
-import Card from '../common/card/card';
-import CardList from '../common/card/card-list';
 
 const ProjectCardList = () => {
   const { currentFilter, currentOrder, currentSearch } =

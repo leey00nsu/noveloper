@@ -3,13 +3,14 @@
 import { notifications } from '@mantine/notifications';
 import { useParams, useRouter } from 'next/navigation';
 
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import {
   useDeleteProject,
   useGetProjectById,
   useUpdateProject,
 } from '@/hooks/project/use-project-service';
 
-import ContentWrapper from '../../../common/wrapper/content-wrapper';
 import ProjectInfoForm from './project-info-form';
 
 const ProjectInfo = () => {

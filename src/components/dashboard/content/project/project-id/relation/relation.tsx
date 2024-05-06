@@ -2,9 +2,10 @@
 
 import { useParams } from 'next/navigation';
 
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import { useGetCharacterRelation } from '@/hooks/character-relation/use-character-relation-service';
 
-import ContentWrapper from '../../../common/wrapper/content-wrapper';
 import Canvas from './canvas/canvas';
 
 const Relation = () => {

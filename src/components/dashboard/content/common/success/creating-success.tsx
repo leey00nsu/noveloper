@@ -4,7 +4,7 @@ import { FaBook } from 'react-icons/fa';
 
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
-import LinkButton from '../button/link-button';
+import LinkButton from '../../../../ui/button/link-button';
 
 interface CreatingSuccessProps {
   title: string;

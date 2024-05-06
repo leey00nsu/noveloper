@@ -3,7 +3,7 @@ import { notifications } from '@mantine/notifications';
 import { RichTextEditor, useRichTextEditorContext } from '@mantine/tiptap';
 import { useState } from 'react';
 
-import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
+import FormGenerationButton from '@/components/ui/form/form-generation-button';
 
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 

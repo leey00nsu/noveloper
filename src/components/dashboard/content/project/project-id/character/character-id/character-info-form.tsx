@@ -7,8 +7,8 @@ import { Characters } from '@prisma/client';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import FormInput from '@/components/dashboard/content/common/form/form-input';
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
+import FormInput from '@/components/ui/form/form-input';
 
 import {
   CreateCharacterForm,

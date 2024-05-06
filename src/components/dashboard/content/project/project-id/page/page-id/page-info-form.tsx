@@ -9,9 +9,9 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import FormGenerationButton from '@/components/dashboard/content/common/form/form-generation-button';
-import FormInput from '@/components/dashboard/content/common/form/form-input';
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
+import FormGenerationButton from '@/components/ui/form/form-generation-button';
+import FormInput from '@/components/ui/form/form-input';
 
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';

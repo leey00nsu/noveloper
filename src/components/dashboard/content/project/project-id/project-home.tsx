@@ -6,9 +6,10 @@ import { BsGear, BsPersonGear, BsVectorPen } from 'react-icons/bs';
 
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
-import LinkButton from '../../common/button/link-button';
-import ContentWrapper from '../../common/wrapper/content-wrapper';
+
 import ProjectTimelineChart from './project-timeline-chart';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+import LinkButton from '@/components/ui/button/link-button';
 
 const ProjectHome = () => {
   const { projectId } = useParams();

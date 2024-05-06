@@ -1,6 +1,7 @@
 import { Stack } from '@mantine/core';
 
-import ContentWrapper from '../../../common/wrapper/content-wrapper';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import CharacterCardList from './character-card-list';
 import CharacterNavigation from './character-navigation';
 

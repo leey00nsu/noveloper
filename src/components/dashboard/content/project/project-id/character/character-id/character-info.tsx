@@ -3,7 +3,7 @@
 import { notifications } from '@mantine/notifications';
 import { useParams, useRouter } from 'next/navigation';
 
-import ContentWrapper from '@/components/dashboard/content/common/wrapper/content-wrapper';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 import {
   useDeleteCharacter,

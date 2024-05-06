@@ -3,15 +3,15 @@
 import { Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
+import Card from '@/components/ui/card/card';
+import CardList from '@/components/ui/card/card-list';
+
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetPages } from '@/hooks/page/use-page-service';
 import useSearchFilter from '@/hooks/use-search-filter';
 
 import { PageOrderBy, PageOrderBySchema } from '@/types/page';
-
-import Card from '../../../common/card/card';
-import CardList from '../../../common/card/card-list';
 
 const PageCardList = () => {
   const { projectId } = useParams();

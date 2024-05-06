@@ -3,8 +3,8 @@
 import { Stack, Title } from '@mantine/core';
 import { BsDiagram3, BsPersonGear, BsVectorPen } from 'react-icons/bs';
 
-import LinkButton from '../common/button/link-button';
-import ContentWrapper from '../common/wrapper/content-wrapper';
+import LinkButton from '@/components/ui/button/link-button';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 const GUIDE_CONTENTS = [
   {

@@ -3,11 +3,12 @@
 import { notifications } from '@mantine/notifications';
 import { useState } from 'react';
 
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import { useCreateProject } from '@/hooks/project/use-project-service';
 import useFunnel from '@/hooks/use-funnel';
 
 import CreatingSuccess from '../../common/success/creating-success';
-import ContentWrapper from '../../common/wrapper/content-wrapper';
 import NewProjectForm from './new-project-form';
 
 const NewProject = () => {

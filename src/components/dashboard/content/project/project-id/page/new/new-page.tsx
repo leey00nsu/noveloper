@@ -4,7 +4,7 @@ import { notifications } from '@mantine/notifications';
 import { useParams } from 'next/navigation';
 
 import CreatingSuccess from '@/components/dashboard/content/common/success/creating-success';
-import ContentWrapper from '@/components/dashboard/content/common/wrapper/content-wrapper';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 import { useCreatePage } from '@/hooks/page/use-page-service';
 import useFunnel from '@/hooks/use-funnel';

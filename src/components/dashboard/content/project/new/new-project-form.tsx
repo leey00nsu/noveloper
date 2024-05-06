@@ -4,14 +4,13 @@ import { Button, Stack, Title } from '@mantine/core';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
+import FormInput from '@/components/ui/form/form-input';
 
 import {
   CreateProjectForm,
   CreateProjectRequest,
   CreateProjectSchema,
 } from '@/types/project';
-
-import FormInput from '../../common/form/form-input';
 
 const MOCK_JANRES = [
   '판타지',

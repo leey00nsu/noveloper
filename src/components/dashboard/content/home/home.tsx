@@ -1,8 +1,9 @@
+import LinkButton from '@/components/ui/button/link-button';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 import { Stack, Text, Title } from '@mantine/core';
 import { BsFolderPlus, BsLightbulb } from 'react-icons/bs';
 
-import LinkButton from '../common/button/link-button';
-import ContentWrapper from '../common/wrapper/content-wrapper';
+
 
 const Home = () => {
   const MOCK_CONTENTS = [

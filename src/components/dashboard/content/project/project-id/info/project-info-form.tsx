@@ -12,8 +12,9 @@ import {
   CreateProjectSchema,
   UpdateProjectRequest,
 } from '@/types/project';
+import FormInput from '@/components/ui/form/form-input';
 
-import FormInput from '../../../common/form/form-input';
+
 
 const MOCK_JANRES = [
   '판타지',

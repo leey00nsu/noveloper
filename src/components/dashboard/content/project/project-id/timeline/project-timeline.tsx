@@ -5,12 +5,11 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import ThemeSkeleton from '@/components/ui/mantine-ui/theme-skeleton';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 import { parseDate } from '@/libs/parse-date';
 
 import { useGetTimelinesByDate } from '@/hooks/timeline/use-timeline-service';
-
-import ContentWrapper from '../../../common/wrapper/content-wrapper';
 
 const ProjectTimelineSkeleton = () => {
   return (
