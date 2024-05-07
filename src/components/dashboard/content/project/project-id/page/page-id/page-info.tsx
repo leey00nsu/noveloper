@@ -40,7 +40,7 @@ const PageInfo = () => {
 
   const { mutate: deletePage, isPending: isDeletePending } = useDeletePage({
     onSuccess: (response) => {
-      router.push(`/dashboard/project/${projectId}/page`);
+      router.replace(`/dashboard/project/${projectId}/page`);
 
       notifications.show({
         title: '페이지 삭제 성공',

@@ -39,7 +39,7 @@ const ProjectInfo = () => {
   const { mutate: deleteProject, isPending: isDeletePending } =
     useDeleteProject({
       onSuccess: (response) => {
-        router.push('/dashboard');
+        router.replace('/dashboard');
 
         notifications.show({
           title: '프로젝트 삭제 성공',

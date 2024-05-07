@@ -42,7 +42,7 @@ const CharacterInfo = () => {
   const { mutate: deleteCharacter, isPending: isDeletePending } =
     useDeleteCharacter({
       onSuccess: (response) => {
-        router.push(`/dashboard/project/${projectId}/character`);
+        router.replace(`/dashboard/project/${projectId}/character`);
 
         notifications.show({
           title: '인물 삭제 성공',
