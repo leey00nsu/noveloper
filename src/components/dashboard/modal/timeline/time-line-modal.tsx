@@ -3,6 +3,7 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Modal, Text } from '@mantine/core';
 import { Timelines } from '@prisma/client';
+import { useEffect, useState } from 'react';
 
 import { parseDate } from '@/libs/parse-date';
 
@@ -12,7 +13,15 @@ interface TimeLineModalProps {
 
 const TimeLineModal = NiceModal.create(
   ({ selectedTimeline }: TimeLineModalProps) => {
+    const [visible, setVisible] = useState(false);
     const modal = useModal();
+
+    useEffect(() => {
+      setTimeout(() => {
+        setVisible(modal.visible);
+      }, 0);
+    }, [modal.visible]);
+    
     if (!selectedTimeline) return null;
 
     const contents = selectedTimeline.content.split('\\n');
@@ -22,7 +31,7 @@ const TimeLineModal = NiceModal.create(
       <Modal.Root
         size="80%"
         centered
-        opened={modal.visible}
+        opened={visible}
         onClose={() => modal.hide()}
       >
         <Modal.Overlay />

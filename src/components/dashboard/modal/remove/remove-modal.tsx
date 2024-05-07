@@ -2,6 +2,7 @@
 
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Group, Modal, Stack, Text } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
 interface RemoveModalProps {
   remove: (...args: any) => any;
@@ -15,10 +16,17 @@ interface RemoveModalProps {
 
 const RemoveModal = NiceModal.create(
   ({ remove, title, contents, label }: RemoveModalProps) => {
+    const [visible, setVisible] = useState(false);
     const modal = useModal();
 
+    useEffect(() => {
+      setTimeout(() => {
+        setVisible(modal.visible);
+      }, 0);
+    }, [modal.visible]);
+
     return (
-      <Modal.Root centered opened={modal.visible} onClose={() => modal.hide()}>
+      <Modal.Root centered opened={visible} onClose={() => modal.hide()}>
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header className="border-b-2 border-gray-300 dark:border-gray-700 ">
