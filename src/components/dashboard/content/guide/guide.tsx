@@ -2,11 +2,17 @@
 
 import { Stack, Title } from '@mantine/core';
 import { BsDiagram3, BsPersonGear, BsVectorPen } from 'react-icons/bs';
+import { FaRegFolderOpen } from 'react-icons/fa';
 
 import LinkButton from '@/components/ui/button/link-button';
 import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 const GUIDE_CONTENTS = [
+  {
+    label: '프로젝트 추가하기',
+    icon: <FaRegFolderOpen />,
+    href: `/dashboard/guide/add-project`,
+  },
   {
     label: '인물 추가하기',
     icon: <BsPersonGear />,

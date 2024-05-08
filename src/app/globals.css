@@ -1,6 +1,14 @@
 @layer {
   @tailwind base;
 }
+@layer base {
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+}
 @tailwind components;
 @tailwind utilities;
 @import '@mantine/core/styles.css';

@@ -21,7 +21,7 @@ const TimeLineModal = NiceModal.create(
         setVisible(modal.visible);
       }, 0);
     }, [modal.visible]);
-    
+
     if (!selectedTimeline) return null;
 
     const contents = selectedTimeline.content.split('\\n');
