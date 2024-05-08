@@ -1,6 +1,5 @@
 'use client';
 
-import { Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
 import Card from '@/components/ui/card/card';
@@ -32,7 +31,11 @@ const PageCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
-      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNotFound && (
+        <Card title="검색 결과가 없습니다.">
+          <Card.Text>새로운 페이지를 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {isNoData && (
         <Card title="페이지가 없습니다.">
           <Card.Text>새로운 페이지를 생성해보세요.</Card.Text>

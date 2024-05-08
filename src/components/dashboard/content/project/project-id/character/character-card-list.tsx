@@ -1,6 +1,5 @@
 'use client';
 
-import { Text } from '@mantine/core';
 import { useParams } from 'next/navigation';
 
 import Card from '@/components/ui/card/card';
@@ -32,7 +31,11 @@ const CharacterCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
-      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNotFound && (
+        <Card title="검색 결과가 없습니다.">
+          <Card.Text>새로운 인물을 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {isNoData && (
         <Card title="인물이 없습니다.">
           <Card.Text>새로운 인물을 생성해보세요.</Card.Text>

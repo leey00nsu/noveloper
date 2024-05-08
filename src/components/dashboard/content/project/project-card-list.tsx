@@ -1,7 +1,5 @@
 'use client';
 
-import { Text } from '@mantine/core';
-
 import Card from '@/components/ui/card/card';
 import CardList from '@/components/ui/card/card-list';
 
@@ -29,7 +27,11 @@ const ProjectCardList = () => {
 
   return (
     <CardList showSkeleton={isFetching}>
-      {isNotFound && <Text>검색 결과가 없습니다.</Text>}
+      {isNotFound && (
+        <Card title="검색 결과가 없습니다.">
+          <Card.Text>새로운 프로젝트를 생성해보세요.</Card.Text>
+        </Card>
+      )}
       {isNoData && (
         <Card title="프로젝트가 없습니다.">
           <Card.Text>새로운 프로젝트를 생성해보세요.</Card.Text>
