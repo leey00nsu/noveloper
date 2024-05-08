@@ -15,11 +15,11 @@ const DashboardHeader = ({
   return (
     <Container className="h-[60px]" size="lg">
       <Group justify="space-between" align="center" className="h-full">
-        <ActionIcon onClick={openSidebar}>
+        <ActionIcon variant="outline" onClick={openSidebar}>
           <IoSettingsOutline />
         </ActionIcon>
         <Logo color="black" />
-        <ActionIcon onClick={openToolbar}>
+        <ActionIcon variant="outline" onClick={openToolbar}>
           <IoMenuOutline />
         </ActionIcon>
       </Group>
