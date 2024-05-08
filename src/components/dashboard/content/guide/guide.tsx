@@ -9,24 +9,24 @@ import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 const GUIDE_CONTENTS = [
   {
-    label: '프로젝트 추가하기',
+    label: '프로젝트 생성하기',
     icon: <FaRegFolderOpen />,
     href: `/dashboard/guide/add-project`,
   },
   {
-    label: '인물 추가하기',
+    label: '인물 생성하기',
     icon: <BsPersonGear />,
-    href: `/dashboard/guide/character`,
+    href: `/dashboard/guide/add-character`,
   },
   {
-    label: '인물 관계도 만들기',
+    label: '인물 관계도 설정하기',
     icon: <BsDiagram3 />,
     href: `/dashboard/guide/relation`,
   },
   {
-    label: '스토리 관리하기',
+    label: '페이지 생성하기',
     icon: <BsVectorPen />,
-    href: `/dashboard/guide/story`,
+    href: `/dashboard/guide/add-page`,
   },
 ];
 

@@ -4,12 +4,12 @@ import { Stack, Text, Title } from '@mantine/core';
 import { useParams } from 'next/navigation';
 import { BsGear, BsPersonGear, BsVectorPen } from 'react-icons/bs';
 
+import LinkButton from '@/components/ui/button/link-button';
+import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
+
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
-
 import ProjectTimelineChart from './project-timeline-chart';
-import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
-import LinkButton from '@/components/ui/button/link-button';
 
 const ProjectHome = () => {
   const { projectId } = useParams();
