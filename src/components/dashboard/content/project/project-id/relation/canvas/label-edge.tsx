@@ -1,4 +1,4 @@
-import { Textarea } from '@mantine/core';
+import { Box, Textarea } from '@mantine/core';
 import { useCallback } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import {
@@ -11,6 +11,7 @@ import {
 } from 'reactflow';
 
 import { getEdgeParams } from '@/libs/react-flow/utils';
+import tw from '@/libs/tw';
 
 const LabelEdge = ({ id, source, target, markerEnd, data }: EdgeProps) => {
   const sourceNode = useStore(
@@ -19,7 +20,11 @@ const LabelEdge = ({ id, source, target, markerEnd, data }: EdgeProps) => {
   const targetNode = useStore(
     useCallback((store) => store.nodeInternals.get(target), [target]),
   );
-  const { setEdges } = useReactFlow();
+  const { setEdges, getEdge } = useReactFlow();
+
+  const currentEdge = getEdge(id);
+
+  const selected = currentEdge?.selected || false;
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -65,30 +70,41 @@ const LabelEdge = ({ id, source, target, markerEnd, data }: EdgeProps) => {
     <>
       <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} />
       <EdgeLabelRenderer>
-        <Textarea
-          autosize
-          placeholder="관계를 입력하세요."
-          defaultValue={data.label}
-          onChange={(event) => changeLabelHandler(event.currentTarget.value)}
-          size="xs"
+        <Box
           style={{
             position: 'absolute',
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
             pointerEvents: 'all',
           }}
-          className="nodrag nopan "
-          classNames={{
-            wrapper: 'group',
-            input: 'flex grow min-w-2',
-          }}
-          rightSectionPointerEvents="all"
-          rightSection={
-            <FaTrash
-              onClick={removeEdgeHandler}
-              className="hidden hover:cursor-pointer hover:text-red-600 group-hover:block"
-            />
-          }
-        />
+        >
+          <Box
+            className={tw(
+              'nodrag nopan whitespace-pre rounded-xl border border-blue-600 bg-blue-500 p-sm text-white',
+              selected ? 'hidden' : 'block',
+            )}
+          >
+            {data.label || '관계'}
+          </Box>
+          <Textarea
+            autosize
+            placeholder="관계를 입력하세요."
+            defaultValue={data.label}
+            onChange={(event) => changeLabelHandler(event.currentTarget.value)}
+            size="xs"
+            className={tw('nodrag nopan', selected ? 'block' : 'hidden')}
+            classNames={{
+              wrapper: 'group',
+              input: 'flex grow min-w-2',
+            }}
+            rightSectionPointerEvents="all"
+            rightSection={
+              <FaTrash
+                onClick={removeEdgeHandler}
+                className="hidden hover:cursor-pointer hover:text-red-600 group-hover:block"
+              />
+            }
+          />
+        </Box>
       </EdgeLabelRenderer>
     </>
   );
