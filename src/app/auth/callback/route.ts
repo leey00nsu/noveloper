@@ -5,7 +5,7 @@ import { findOrInsertUser } from '@/services/supabase/user/find-or-insert-user';
 import { createClient } from '@/libs/supabase/server';
 
 export const GET = async (request: Request) => {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
 
   const code = searchParams.get('code');
 
@@ -20,16 +20,16 @@ export const GET = async (request: Request) => {
 
     if (exchageCodeError) {
       // TODO: exchage code error
-      return NextResponse.redirect(`${origin}`);
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}`);
     }
 
     const { data: user } = await findOrInsertUser(data.user);
 
     if (!user) {
       // TODO: find or insert user error
-      return NextResponse.redirect(`${origin}`);
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}`);
     }
   }
 
-  return NextResponse.redirect(`${origin}${next}`);
+  return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}${next}`);
 };
