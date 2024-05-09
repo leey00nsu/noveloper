@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  
   "overrides": {
     "restructure": "3.0.0"
   },
