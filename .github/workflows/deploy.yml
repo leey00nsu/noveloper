@@ -1,0 +1,24 @@
+name: deploy
+on:
+  push:
+    branches: ['main']
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: execute remote ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_SSH_HOST }}
+          username: ${{ secrets.REMOTE_SSH_USERNAME }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          script: |
+            cd noveloper
+            git pull origin main
+            docker build -t noveloper .
+            docker compose down
+            docker compose up -d
+            docker rmi $(docker images -f "dangling=true" -q)
