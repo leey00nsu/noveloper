@@ -1,17 +1,21 @@
 import { Box, Button, Center, Group, Stack, Text, Title } from '@mantine/core';
-import Image from 'next/image';
+import grid from '@public/grid.webp';
+import hero from '@public/hero.webp';
 import Link from 'next/link';
+
+import FadeImage from '../ui/image/fade-image';
 
 const Hero = () => {
   return (
     <Box
       style={{
         backgroundImage:
-          'linear-gradient(to top,rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8)),url(/grid.jpg)',
+          'linear-gradient(to top,rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7))',
       }}
-      className="h-[800px] bg-cover bg-center bg-no-repeat p-20"
+      className="relative h-[800px] "
     >
-      <Center className="h-full w-full">
+      <FadeImage src={grid} alt="grid" fill className="-z-10 object-cover" />
+      <Center className="h-full w-full p-20">
         <Group
           className="h-full w-full max-w-[75em]"
           wrap="nowrap"
@@ -49,7 +53,7 @@ const Hero = () => {
           </Stack>
 
           <Box className="relative hidden h-full w-full max-w-[500px] overflow-hidden rounded-2xl xl:block ">
-            <Image src="/hero.webp" alt="Hero" fill />
+            <FadeImage src={hero} alt="hero" fill className="object-cover" />
           </Box>
         </Group>
       </Center>
