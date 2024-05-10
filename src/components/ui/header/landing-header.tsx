@@ -8,10 +8,6 @@ const LandingHeader = () => {
     <Container className="h-[60px]" size="lg">
       <Group justify="space-between" align="center" className="h-full">
         <Logo color="black" />
-        <Group visibleFrom="xs">
-          <Link href="/about">서비스 소개</Link>
-          <Link href="/pricing">요금제</Link>
-        </Group>
         <Group>
           <Button
             component={Link}
