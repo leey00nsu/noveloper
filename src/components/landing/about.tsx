@@ -5,8 +5,8 @@ import FadeImage from '../ui/image/fade-image';
 
 const About = () => {
   return (
-    <Box className="h-[800px] ">
-      <Center className="h-full w-full p-20">
+    <Box className="h-[400px] ">
+      <Center className="h-full w-full ">
         <Group
           className="h-full w-full max-w-[75em]"
           wrap="nowrap"
@@ -23,7 +23,7 @@ const About = () => {
           </Box>
           <Stack className="w-full gap-sm">
             <Stack className="w-full text-center xl:text-end">
-              <Title order={2} className="text-3xl sm:text-5xl">
+              <Title order={3} className="text-xl sm:text-3xl">
                 AI 기반 소설 창작 플랫폼
               </Title>
             </Stack>
