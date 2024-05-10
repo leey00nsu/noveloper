@@ -9,6 +9,7 @@ import {
 import { pretendard } from './font-provider';
 
 const theme = createTheme({
+  fontFamily: pretendard.style.fontFamily,
   components: {
     Button: Button.extend({
       defaultProps: {
@@ -16,9 +17,6 @@ const theme = createTheme({
         radius: 'xl',
       },
     }),
-  },
-  headings: {
-    fontFamily: pretendard.style.fontFamily,
   },
   fontSizes: {
     xs: '0.75rem',

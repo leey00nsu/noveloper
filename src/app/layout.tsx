@@ -16,11 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={pretendard.className}>
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={pretendard.className}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
