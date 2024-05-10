@@ -3,6 +3,7 @@ import { Stack } from '@mantine/core';
 import About from './about';
 import Hero from './hero';
 import Relation from './relation';
+import Story from './story';
 
 const Landing = () => {
   return (
@@ -10,6 +11,7 @@ const Landing = () => {
       <Hero />
       <About />
       <Relation />
+      <Story />
     </Stack>
   );
 };
