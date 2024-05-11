@@ -1,6 +1,6 @@
 import { Stack, Text } from '@mantine/core';
 import { BsGear, BsPersonGear, BsVectorPen } from 'react-icons/bs';
-import { FaBook } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
@@ -33,7 +33,7 @@ const CreatingSuccess = ({ title, projectId }: CreatingSuccessProps) => {
   ];
   return (
     <Stack justify="center" align="center" className="w-full max-w-xl">
-      <FaBook className="h-32 w-32" />
+      <FaCheck className="h-32 w-32 text-green-500" />
       <Text className="text-xl">{title}</Text>
       <Stack className="w-full gap-sm">
         {contents.map((content) => (
