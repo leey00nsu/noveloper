@@ -2,6 +2,7 @@
 
 import { AppShell } from '@mantine/core';
 
+import AppFooter from '../footer/app-footer';
 import LandingHeader from '../header/landing-header';
 
 interface AppContainerProps {
@@ -19,7 +20,10 @@ const AppContainer = ({ children }: AppContainerProps) => {
         <LandingHeader />
       </AppShell.Header>
 
-      <AppShell.Main className="h-dvh">{children}</AppShell.Main>
+      <AppShell.Main className="h-dvh">
+        {children}
+        <AppFooter />
+      </AppShell.Main>
     </AppShell>
   );
 };
