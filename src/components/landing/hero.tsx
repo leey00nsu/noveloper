@@ -41,9 +41,7 @@ const Hero = () => {
             <Group className="w-full justify-center xl:justify-start">
               <Button
                 component={Link}
-                href="/auth/signin"
-                radius="xl"
-                variant="outline"
+                href="/auth/sign-in"
                 color="gray.9"
                 size="lg"
               >

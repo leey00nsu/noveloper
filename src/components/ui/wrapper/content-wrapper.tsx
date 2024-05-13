@@ -1,6 +1,6 @@
 import { Box, Center } from '@mantine/core';
 
-import LoaderModal from '@/components/dashboard/modal/loader/loader-modal';
+import LoaderModal from '@/components/ui/loader/loader-modal';
 import ThemeScrollArea from '@/components/ui/mantine-ui/theme-scroll-area';
 
 interface ContentWrapperProps {

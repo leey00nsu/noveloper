@@ -2,7 +2,7 @@ import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
 const WITH_AUTH_LIST = ['/dashboard']; // 로그인이 되어있을 때 접근 가능한 루트
-const WITHOUT_AUTH_LIST = ['/', '/auth/signin']; // 로그인이 되어있지 않을 때 접근 가능한 루트
+const WITHOUT_AUTH_LIST = ['/', '/auth/sign-in', 'auth/sign-up']; // 로그인이 되어있지 않을 때 접근 가능한 루트
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({

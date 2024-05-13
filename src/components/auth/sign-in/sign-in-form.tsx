@@ -1,43 +1,71 @@
 'use client';
 
-import {
-  Button,
-  Center,
-  Divider,
-  PasswordInput,
-  Stack,
-  Text,
-  TextInput,
-  Title,
-} from '@mantine/core';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Center, Divider, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaGithub } from 'react-icons/fa';
+
+import FormInput from '@/components/ui/form/form-input';
 
 import { signInWithGithub } from '@/services/supabase/user/sign-in-with-github';
 
-const SignInForm = () => {
+import {
+  SignInWithEmailForm,
+  SignInWithEmailRequest,
+  SignInWithEmailSchema,
+} from '@/types/user';
+
+interface SignInFormProps {
+  onNext: (data: SignInWithEmailRequest) => void;
+  errorMessage?: string;
+}
+
+const SignInForm = ({ onNext, errorMessage }: SignInFormProps) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInWithEmailForm>({
+    resolver: zodResolver(SignInWithEmailSchema),
+  });
+
+  const submitHandler: SubmitHandler<SignInWithEmailForm> = (data) => {
+    const newUser = {
+      ...data,
+    };
+
+    onNext(newUser);
+  };
+
   return (
     <Center className="h-full">
-      <Stack className="p-8">
+      <Stack component="form" className="w-[500px] p-8">
         <Title order={2} className="mb-8 text-center">
-          Welcome back to Noveloper!
+          Noveloper에 오신 것을 환영합니다!
         </Title>
 
-        <TextInput
+        <FormInput
+          control={control}
+          name="email"
           label="이메일 주소"
+          description="이메일을 입력해주세요."
           placeholder="noveloper@gmail.com"
-          size="md"
+          errorMessage={errorMessage || errors.email?.message}
         />
-        <PasswordInput
+
+        <FormInput
+          isPassword
+          control={control}
+          name="password"
           label="비밀번호"
-          placeholder="비밀번호를 입력해주세요"
-          size="md"
-          className="mt-md"
+          description="비밀번호를 입력해주세요."
+          placeholder="********"
+          errorMessage={errorMessage || errors.password?.message}
         />
+
         <Button
-          radius="xl"
-          variant="outline"
-          color="gray.9"
+          onClick={handleSubmit(submitHandler)}
           fullWidth
           size="lg"
           className="mt-md"
@@ -49,7 +77,7 @@ const SignInForm = () => {
           계정이 없으신가요?{' '}
           <Text
             component={Link}
-            href="/auth/signup"
+            href="/auth/sign-up"
             className="mt-md text-center font-bold"
           >
             가입하기

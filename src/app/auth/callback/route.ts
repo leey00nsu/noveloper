@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 
-import { findOrInsertUser } from '@/services/supabase/user/find-or-insert-user';
-
 import { createClient } from '@/libs/supabase/server';
 
 export const GET = async (request: Request) => {
@@ -18,17 +16,12 @@ export const GET = async (request: Request) => {
     const { data, error: exchageCodeError } =
       await supabase.auth.exchangeCodeForSession(code);
 
-    if (exchageCodeError) {
+    if (!data.session || !data.user || exchageCodeError) {
       // TODO: exchage code error
       return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}`);
     }
 
-    const { data: user } = await findOrInsertUser(data.user);
-
-    if (!user) {
-      // TODO: find or insert user error
-      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}`);
-    }
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}`);
   }
 
   return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST}${next}`);

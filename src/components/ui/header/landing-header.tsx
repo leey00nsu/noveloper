@@ -9,13 +9,7 @@ const LandingHeader = () => {
       <Group justify="space-between" align="center" className="h-full">
         <Logo color="black" />
         <Group>
-          <Button
-            component={Link}
-            href="/auth/signin"
-            radius="xl"
-            variant="outline"
-            color="gray.9"
-          >
+          <Button component={Link} href="/auth/sign-in" color="gray.9">
             로그인
           </Button>
         </Group>

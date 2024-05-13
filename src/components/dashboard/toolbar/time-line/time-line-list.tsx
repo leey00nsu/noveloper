@@ -51,7 +51,7 @@ const TimeLineList = () => {
       <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
       {timelines?.pages.map((page, index) => (
         <Fragment key={index}>
-          {page.data.map((timeline) => (
+          {page.data?.map((timeline) => (
             <TimeLineItem
               key={timeline.id}
               timeline={timeline}
