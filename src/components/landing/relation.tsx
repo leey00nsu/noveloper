@@ -1,7 +1,7 @@
 import { Box, Center, Group, Stack, Text, Title } from '@mantine/core';
 import relation from '@public/relation.webp';
 
-import FadeImage from '../ui/image/fade-image';
+import FadeNextImage from '../ui/image/fade-next-image';
 
 const Relation = () => {
   return (
@@ -29,7 +29,7 @@ const Relation = () => {
 
           <Box className="relative hidden h-full w-full max-w-[500px] overflow-hidden rounded-2xl xl:block ">
             {/* TODO: 이미지 교체 */}
-            <FadeImage
+            <FadeNextImage
               src={relation}
               alt="relation"
               fill

@@ -11,7 +11,7 @@ const MdxWrapper = ({ children }: MdxWrapperProps) => {
     <Box className="h-full w-full p-sm">
       <ThemeScrollArea className="h-full" scrollbars="y">
         <Center className="h-full w-full ">
-          <TypographyStylesProvider className="h-full w-full max-w-2xl">
+          <TypographyStylesProvider className="h-full w-full max-w-2xl p-sm">
             {children}
           </TypographyStylesProvider>
         </Center>

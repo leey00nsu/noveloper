@@ -1,4 +1,5 @@
 import createMDX from '@next/mdx';
+import remarkGFM from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,6 +7,11 @@ const nextConfig = {
   output: 'standalone',
 };
 
-const withMDX = createMDX({});
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remarkGFM],
+    rehypePlugins: [],
+  },
+});
 
 export default withMDX(nextConfig);

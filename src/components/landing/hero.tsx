@@ -3,7 +3,7 @@ import grid from '@public/grid.webp';
 import hero from '@public/hero.webp';
 import Link from 'next/link';
 
-import FadeImage from '../ui/image/fade-image';
+import FadeNextImage from '../ui/image/fade-next-image';
 
 const Hero = () => {
   return (
@@ -14,7 +14,7 @@ const Hero = () => {
       }}
       className="relative h-[800px] "
     >
-      <FadeImage src={grid} alt="grid" fill className="-z-10 object-cover" />
+      <FadeNextImage src={grid} alt="grid" fill className="-z-10 object-cover" />
       <Center className="h-full w-full p-20">
         <Group
           className="h-full w-full max-w-[75em]"
@@ -51,7 +51,7 @@ const Hero = () => {
           </Stack>
 
           <Box className="relative hidden h-full w-full max-w-[500px] overflow-hidden rounded-2xl xl:block ">
-            <FadeImage src={hero} alt="hero" fill className="object-cover" />
+            <FadeNextImage src={hero} alt="hero" fill className="object-cover" />
           </Box>
         </Group>
       </Center>
