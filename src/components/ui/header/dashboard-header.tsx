@@ -13,7 +13,7 @@ const DashboardHeader = ({
   openToolbar,
 }: DashboardHeaderProps) => {
   return (
-    <Container className="h-[60px]" size="lg">
+    <Container className="h-full" size="lg">
       <Group justify="space-between" align="center" className="h-full">
         <ActionIcon variant="outline" onClick={openSidebar}>
           <IoSettingsOutline />
