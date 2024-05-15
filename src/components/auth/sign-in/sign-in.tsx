@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import LoaderModal from '@/components/ui/loader/loader-modal';
+import AppWrapper from '@/components/ui/wrapper/app-wrapper';
 
 import { useSignInWithEmail } from '@/hooks/user/use-user-service';
 
@@ -18,10 +18,9 @@ const SignIn = () => {
   });
 
   return (
-    <>
-      <LoaderModal showLoader={isPending} />
-      <SignInForm onNext={mutate} errorMessage={errorMessage}/>
-    </>
+    <AppWrapper showLoader={isPending}>
+      <SignInForm onNext={mutate} errorMessage={errorMessage} />
+    </AppWrapper>
   );
 };
 
