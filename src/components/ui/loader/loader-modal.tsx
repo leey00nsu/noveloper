@@ -9,6 +9,9 @@ interface LoaderModalProps {
 const LoaderModal = ({ showLoader }: LoaderModalProps) => {
   return (
     <Modal
+      removeScrollProps={{
+        removeScrollBar: false,
+      }}
       centered
       size="auto"
       opened={showLoader}
