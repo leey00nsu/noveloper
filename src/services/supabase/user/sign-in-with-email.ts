@@ -11,7 +11,15 @@ export const signInWithEmail = async (request: SignInWithEmailForm) => {
   });
 
   if (!data || error) {
-    if (error?.status === 400) {
+    if (error?.message === 'Email not confirmed') {
+      return {
+        data: null,
+        success: false,
+        status: 400,
+        message: '이메일이 인증되지 않았습니다.',
+      };
+    }
+    if (error?.message === 'Invalid login credentials') {
       return {
         data: null,
         success: false,

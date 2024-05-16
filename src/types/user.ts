@@ -31,13 +31,13 @@ export const SignUpWithEmailSchema = z
 export interface SignInWithEmailForm
   extends z.infer<typeof SignInWithEmailSchema> {}
 export interface SignInWithEmailRequest extends SignInWithEmailForm {}
-export interface SignInWithEmailResponse extends ApiResponse<Users | null> {}
+export interface SignInWithEmailResponse extends ApiResponse<null> {}
 
 export interface SignUpWithEmailForm
   extends z.infer<typeof SignUpWithEmailSchema> {}
 
 export interface SignUpWithEmailRequest extends SignUpWithEmailForm {}
-export interface SignUpWithEmailResponse extends ApiResponse<Users | null> {}
+export interface SignUpWithEmailResponse extends ApiResponse<null> {}
 
 export interface GetUserResponse extends ApiResponse<Users> {}
 

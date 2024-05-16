@@ -23,10 +23,19 @@ export const signUpWithEmail = async (request: SignUpWithEmailForm) => {
     throw new Error('이메일로 회원가입하는 도중 오류가 발생했습니다.');
   }
 
+  if (data.user?.identities?.length === 0) {
+    return {
+      data: null,
+      success: false,
+      status: 409,
+      message: '이미 존재하는 사용자입니다.',
+    };
+  }
+
   return {
-    data: data.user,
+    data: null,
     success: true,
     status: 201,
-    message: '유저가 생성되었습니다.',
+    message: '인증 이메일을 확인해주세요.',
   };
 };
