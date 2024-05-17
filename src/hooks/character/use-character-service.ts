@@ -163,7 +163,7 @@ export const useDeleteCharacter = ({
           queryKey: characterQueryKeys.all,
         });
         queryClient.invalidateQueries({
-          queryKey: characterRelationQueryKeys.all
+          queryKey: characterRelationQueryKeys.all,
         });
         queryClient.invalidateQueries({
           queryKey: timelineQueryKeys.all,
