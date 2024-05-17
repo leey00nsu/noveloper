@@ -2,7 +2,7 @@
 
 # Noveloper
 
-AI 기반 소설 창작 플랫폼, [Noveloper]((https://noveloper.store))
+AI 기반 소설 창작 플랫폼, [Noveloper]((https://noveloper.store)
 
 ## Tech
 
