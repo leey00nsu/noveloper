@@ -1,5 +1,4 @@
 import { Box, Menu } from '@mantine/core';
-import { FaTrash } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
 import { IoChatboxEllipses } from 'react-icons/io5';
 
@@ -19,12 +18,6 @@ const TimeLineMenu = ({ openModal }: TimeLineMenuProps) => {
       <Menu.Dropdown>
         <Menu.Item onClick={openModal} leftSection={<IoChatboxEllipses />}>
           자세히
-        </Menu.Item>
-
-        <Menu.Divider />
-
-        <Menu.Item color="red" leftSection={<FaTrash />}>
-          삭제
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
