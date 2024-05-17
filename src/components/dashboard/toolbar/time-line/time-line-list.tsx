@@ -28,6 +28,7 @@ const TimeLineList = () => {
 
   const {
     timelines,
+    isLoading: isTimelinesLoading,
     isFetching: isTimelinesFetching,
     isFetchingNextPage,
     fetchNextPage,
@@ -49,7 +50,9 @@ const TimeLineList = () => {
   return (
     <Stack className="p-sm">
       <Text className="px-md text-sm font-bold text-gray-600">타임라인</Text>
-      {isTimelinesFetching && !isFetchingNextPage && <TimeLineItem.Skeleton />}
+      {isTimelinesFetching && !isTimelinesLoading && !isFetchingNextPage && (
+        <TimeLineItem.Skeleton />
+      )}
       {timelines?.pages.map((page, index) => (
         <Fragment key={index}>
           {page.data?.map((timeline) => (
@@ -62,7 +65,7 @@ const TimeLineList = () => {
           ))}
         </Fragment>
       ))}
-      {isFetchingNextPage && <TimeLineListSkeleton />}
+      {(isTimelinesFetching || isFetchingNextPage) && <TimeLineListSkeleton />}
       <Box ref={ref} className="h-9" />
     </Stack>
   );
