@@ -1,4 +1,4 @@
-import { Stack } from '@mantine/core';
+import { Stack, Title } from '@mantine/core';
 
 import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
@@ -9,6 +9,7 @@ const CharacterList = () => {
   return (
     <ContentWrapper>
       <Stack className="h-full w-full p-sm">
+        <Title order={2}>인물 목록</Title>
         <CharacterNavigation />
         <CharacterCardList />
       </Stack>
