@@ -2,7 +2,7 @@
 
 # Noveloper
 
-AI 기반 소설 창작 플랫폼, [Noveloper]((https://noveloper.store)
+AI 기반 소설 창작 플랫폼, [Noveloper](https://noveloper.store)
 
 ## Tech
 
@@ -30,7 +30,7 @@ AI 기반 소설 창작 플랫폼, [Noveloper]((https://noveloper.store)
 ### 디자인 시스템
 
 - Noveloper는 Mantine 라이브러리와 Tailwind를 연결한 구조를 사용하고 있습니다.
-- 재사용되는 Mantine 컴포넌트를 UI로 구분지어 재사용성을 높이기위해 노력했습니다. 
+- 재사용되는 Mantine 컴포넌트를 UI로 구분지어 재사용성을 높이기위해 노력했습니다.
 
 ### 회원 인증
 
