@@ -6,6 +6,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 import FormInput from '@/components/ui/form/form-input';
 
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
+
 import {
   CreateProjectForm,
   CreateProjectRequest,
@@ -51,6 +53,8 @@ const NewProjectForm = ({ onNext }: NewProjectFormProps) => {
       label: { confirm: '생성', cancel: '취소' },
     });
   };
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

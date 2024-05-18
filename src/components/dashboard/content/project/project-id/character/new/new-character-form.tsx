@@ -9,6 +9,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 import FormInput from '@/components/ui/form/form-input';
 
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
+
 import {
   CreateCharacterForm,
   CreateCharacterRequest,
@@ -20,7 +22,7 @@ interface NewCharacterFormProps {
 }
 
 const NewCharacterForm = ({ onNext }: NewCharacterFormProps) => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   const {
     control,
@@ -33,7 +35,7 @@ const NewCharacterForm = ({ onNext }: NewCharacterFormProps) => {
   const submitHandler: SubmitHandler<CreateCharacterForm> = (data) => {
     const newCharacter = {
       ...data,
-      projectId: projectId as string,
+      projectId,
     };
 
     NiceModal.show(ConfirmModal, {
@@ -43,6 +45,8 @@ const NewCharacterForm = ({ onNext }: NewCharacterFormProps) => {
       label: { confirm: '생성', cancel: '취소' },
     });
   };
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

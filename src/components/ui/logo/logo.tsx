@@ -1,5 +1,6 @@
 import { Group, Text } from '@mantine/core';
-import Link from 'next/link';
+
+import { Link } from '../navigation/link';
 
 interface LogoProps {
   color: 'white' | 'black';

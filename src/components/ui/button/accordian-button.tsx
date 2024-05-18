@@ -1,5 +1,6 @@
 import { Button, Text } from '@mantine/core';
-import Link from 'next/link';
+
+import { Link } from '../navigation/link';
 
 interface AccordianButtonProps {
   label: string;

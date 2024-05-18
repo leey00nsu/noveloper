@@ -12,6 +12,7 @@ import ConfirmModal from '@/components/dashboard/modal/confirm/confirm-modal';
 import FormGenerationButton from '@/components/ui/form/form-generation-button';
 import FormInput from '@/components/ui/form/form-input';
 
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
@@ -76,6 +77,8 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
       label: { confirm: '생성', cancel: '취소' },
     });
   };
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

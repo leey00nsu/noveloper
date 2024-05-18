@@ -12,7 +12,8 @@ import useFunnel from '@/hooks/use-funnel';
 import NewCharacterForm from './new-character-form';
 
 const NewCharacter = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
+
   const { Funnel, setStep } = useFunnel(['form', 'success']);
   const { mutate, isPending } = useCreateCharacter({
     onSuccess: (response) => {
@@ -41,7 +42,7 @@ const NewCharacter = () => {
         <Funnel.Step name="success">
           <CreatingSuccess
             title="인물이 생성되었습니다."
-            projectId={projectId as string}
+            projectId={projectId}
           />
         </Funnel.Step>
       </Funnel>

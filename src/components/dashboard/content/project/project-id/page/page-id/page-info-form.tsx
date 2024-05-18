@@ -13,6 +13,7 @@ import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 import FormGenerationButton from '@/components/ui/form/form-generation-button';
 import FormInput from '@/components/ui/form/form-input';
 
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
 import { useGenerateMessage } from '@/hooks/openai/use-ai-service';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
@@ -104,6 +105,8 @@ const PageInfoForm = ({
       label: { remove: '삭제', cancel: '취소' },
     });
   };
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

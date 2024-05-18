@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import ContentWrapper from '@/components/ui/wrapper/content-wrapper';
 
 import { useGetCharacterRelation } from '@/hooks/character-relation/use-character-relation-service';
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
 
 import Canvas from './canvas/canvas';
 
@@ -13,6 +14,8 @@ const Relation = () => {
   const { relation, isLoading } = useGetCharacterRelation({
     projectId,
   });
+
+  usePreventNavigation();
 
   return (
     <ContentWrapper showLoader={isLoading}>

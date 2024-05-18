@@ -6,15 +6,15 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
+import FormInput from '@/components/ui/form/form-input';
+
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
 
 import {
   CreateProjectForm,
   CreateProjectSchema,
   UpdateProjectRequest,
 } from '@/types/project';
-import FormInput from '@/components/ui/form/form-input';
-
-
 
 const MOCK_JANRES = [
   '판타지',
@@ -79,6 +79,8 @@ const ProjectInfoForm = ({
 
     onNext(newProject);
   };
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">

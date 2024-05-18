@@ -10,6 +10,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import RemoveModal from '@/components/dashboard/modal/remove/remove-modal';
 import FormInput from '@/components/ui/form/form-input';
 
+import usePreventNavigation from '@/hooks/navigation/use-prevent-navigation';
+
 import {
   CreateCharacterForm,
   CreateCharacterSchema,
@@ -65,6 +67,8 @@ const CharacterInfoForm = ({
   useEffect(() => {
     reset(character);
   }, [character, reset]);
+
+  usePreventNavigation();
 
   return (
     <Stack component="form" className="h-full w-full p-sm">
