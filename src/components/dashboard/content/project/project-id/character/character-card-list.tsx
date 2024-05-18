@@ -13,14 +13,14 @@ import useSearchFilter from '@/hooks/use-search-filter';
 import { CharacterOrderBy, CharacterOrderBySchema } from '@/types/character';
 
 const CharacterCardList = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const { currentFilter, currentOrder, currentSearch } =
     useSearchFilter<CharacterOrderBy>({
       filterSchema: CharacterOrderBySchema,
     });
 
   const { characters, isFetching } = useGetCharacters({
-    projectId: projectId as string,
+    projectId,
     orderBy: currentFilter,
     order: currentOrder,
     search: currentSearch,

@@ -15,10 +15,13 @@ import CharacterInfoForm from './character-info-form';
 
 const CharacterInfo = () => {
   const router = useRouter();
-  const { projectId, characterId } = useParams();
+  const { projectId, characterId } = useParams<{
+    projectId: string;
+    characterId: string;
+  }>();
 
   const { character, isFetching } = useGetCharacterById({
-    projectId: projectId as string,
+    projectId,
     characterId: Number(characterId),
   });
 

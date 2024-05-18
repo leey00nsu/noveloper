@@ -14,10 +14,10 @@ import {
 import ProjectInfoForm from './project-info-form';
 
 const ProjectInfo = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const router = useRouter();
 
-  const { project, isFetching } = useGetProjectById(projectId as string);
+  const { project, isFetching } = useGetProjectById(projectId);
 
   const { mutate: updateProject, isPending: isUpdatePending } =
     useUpdateProject({
@@ -57,7 +57,7 @@ const ProjectInfo = () => {
 
   const removeHandler = () => {
     deleteProject({
-      projectId: projectId as string,
+      projectId,
     });
   };
 

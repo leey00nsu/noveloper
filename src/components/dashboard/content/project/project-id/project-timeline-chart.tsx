@@ -24,10 +24,10 @@ const ProjectTimelineChart = () => {
     new Date().getFullYear().toString(),
   );
   const router = useRouter();
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   const { timelines, isLoading } = useGetTimelinesByYear({
-    projectId: projectId as string,
+    projectId,
     year: selectedYear,
   });
 

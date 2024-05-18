@@ -12,7 +12,7 @@ interface CreatingSuccessProps {
 }
 
 const CreatingSuccess = ({ title, projectId }: CreatingSuccessProps) => {
-  const { project } = useGetProjectById(projectId as string);
+  const { project } = useGetProjectById(projectId);
 
   const contents = [
     {

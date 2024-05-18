@@ -8,9 +8,9 @@ import AccordianButton from '@/components/ui/button/accordian-button';
 import { useGetProjectById } from '@/hooks/project/use-project-service';
 
 const ProjectMenu = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
-  const { project } = useGetProjectById(projectId as string);
+  const { project } = useGetProjectById(projectId);
 
   if (!project) return null;
 

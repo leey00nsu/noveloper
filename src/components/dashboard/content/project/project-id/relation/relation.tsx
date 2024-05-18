@@ -9,9 +9,9 @@ import { useGetCharacterRelation } from '@/hooks/character-relation/use-characte
 import Canvas from './canvas/canvas';
 
 const Relation = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const { relation, isLoading } = useGetCharacterRelation({
-    projectId: projectId as string,
+    projectId,
   });
 
   return (

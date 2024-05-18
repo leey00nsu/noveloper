@@ -39,8 +39,8 @@ const PageInfoForm = ({
   onNext,
   removeHandler,
 }: PageInfoFormProps) => {
-  const { projectId } = useParams();
-  const { project } = useGetProjectById(projectId as string);
+  const { projectId } = useParams<{ projectId: string }>();
+  const { project } = useGetProjectById(projectId);
   const [content, setContent] = useState(page.content);
 
   const {
@@ -89,7 +89,7 @@ const PageInfoForm = ({
     const newPage = {
       ...data,
       content,
-      projectId: projectId as string,
+      projectId,
       pageId: page.id,
     };
 

@@ -9,7 +9,7 @@ import PageListRefreshButton from './page-list-refresh-button';
 import PageSearchInput from './page-search-input';
 
 const PageNavigation = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   return (
     <Group>

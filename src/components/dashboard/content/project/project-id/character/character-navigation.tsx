@@ -9,7 +9,7 @@ import CharacterListRefreshButton from './character-list-refresh-button';
 import CharacterSearchInput from './character-search-input';
 
 const CharacterNavigation = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   return (
     <Group>

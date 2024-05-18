@@ -14,11 +14,14 @@ import {
 import PageInfoForm from './page-info-form';
 
 const PageInfo = () => {
-  const { projectId, pageId } = useParams();
+  const { projectId, pageId } = useParams<{
+    projectId: string;
+    pageId: string;
+  }>();
   const router = useRouter();
 
   const { page, isFetching } = useGetPageById({
-    projectId: projectId as string,
+    projectId,
     pageId: Number(pageId),
   });
 
@@ -58,7 +61,7 @@ const PageInfo = () => {
 
   const removeHandler = () => {
     deletePage({
-      projectId: projectId as string,
+      projectId,
       pageId: Number(pageId),
     });
   };

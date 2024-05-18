@@ -12,7 +12,7 @@ import useFunnel from '@/hooks/use-funnel';
 import NewPageForm from './new-page-form';
 
 const NewPage = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const { Funnel, setStep } = useFunnel(['form', 'success']);
   const { mutate: createPage, isPending } = useCreatePage({
     onSuccess: (response) => {
@@ -41,7 +41,7 @@ const NewPage = () => {
         <Funnel.Step name="success">
           <CreatingSuccess
             title="페이지가 생성되었습니다."
-            projectId={projectId as string}
+            projectId={projectId}
           />
         </Funnel.Step>
       </Funnel>

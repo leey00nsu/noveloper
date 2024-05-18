@@ -8,12 +8,12 @@ import RefreshButton from '@/components/ui/button/refresh-button';
 import { characterQueryKeys } from '@/hooks/character/use-character-service';
 
 const CharacterListRefreshButton = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const queryClient = useQueryClient();
 
   const refreshHandler = () => {
     queryClient.resetQueries({
-      queryKey: characterQueryKeys.characters(projectId as string),
+      queryKey: characterQueryKeys.characters(projectId),
     });
   };
 

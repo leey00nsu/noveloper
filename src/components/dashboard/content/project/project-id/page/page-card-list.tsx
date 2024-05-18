@@ -13,14 +13,14 @@ import useSearchFilter from '@/hooks/use-search-filter';
 import { PageOrderBy, PageOrderBySchema } from '@/types/page';
 
 const PageCardList = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const { currentFilter, currentOrder, currentSearch } =
     useSearchFilter<PageOrderBy>({
       filterSchema: PageOrderBySchema,
     });
 
   const { pages, isFetching } = useGetPages({
-    projectId: projectId as string,
+    projectId,
     orderBy: currentFilter,
     order: currentOrder,
     search: currentSearch,

@@ -12,9 +12,9 @@ import { useGetProjectById } from '@/hooks/project/use-project-service';
 import ProjectTimelineChart from './project-timeline-chart';
 
 const ProjectHome = () => {
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
-  const { project } = useGetProjectById(projectId as string);
+  const { project } = useGetProjectById(projectId);
 
   const contents = [
     {

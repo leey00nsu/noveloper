@@ -31,8 +31,8 @@ interface NewPageFormProps {
 
 const NewPageForm = ({ onNext }: NewPageFormProps) => {
   const [content, setContent] = useState({});
-  const { projectId } = useParams();
-  const { project } = useGetProjectById(projectId as string);
+  const { projectId } = useParams<{ projectId: string }>();
+  const { project } = useGetProjectById(projectId);
 
   const {
     getValues,
@@ -66,7 +66,7 @@ const NewPageForm = ({ onNext }: NewPageFormProps) => {
     const newPage = {
       ...data,
       content,
-      projectId: projectId as string,
+      projectId,
     };
 
     NiceModal.show(ConfirmModal, {

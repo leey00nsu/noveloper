@@ -25,12 +25,12 @@ const ProjectTimelineSkeleton = () => {
 };
 
 const ProjectTimeline = () => {
-  const { projectId, date } = useParams();
+  const { projectId, date } = useParams<{ projectId: string; date: string }>();
   const router = useRouter();
 
   const { timelines, isFetching } = useGetTimelinesByDate({
-    projectId: projectId as string,
-    date: date as string,
+    projectId,
+    date,
   });
 
   useEffect(() => {
