@@ -25,6 +25,10 @@ AI 기반 소설 창작 플랫폼, [Noveloper](https://noveloper.store)
 - Oracle cloud
 - Docker
 
+## Structure
+
+<img width="5491" alt="noveloper 구조" src="https://github.com/leey00nsu/noveloper/assets/101182523/44a9f683-4fdc-44e0-9675-1c2380d8d689">
+
 ## Feature
 
 ### 디자인 시스템
@@ -68,3 +72,18 @@ AI 기반 소설 창작 플랫폼, [Noveloper](https://noveloper.store)
 ### OpenAI
 
 - 현재 gpt-3.5-turbo-0125 를 사용한 AI 응답을 통해 소설을 자동으로 작성하도록 구성하였습니다.
+
+
+## Demo
+
+### AI 소설 작성 
+[PDF 내보내기 결과](https://drive.google.com/file/d/1r8OsqcUn7q7ttdfnf0M9F4P_ws8_ta-5/view?usp=sharing)
+
+https://github.com/leey00nsu/noveloper/assets/101182523/b7a54eff-87c1-4985-80b7-29b070fa64c6
+
+### 관계도 추가
+https://github.com/leey00nsu/noveloper/assets/101182523/be59b79d-bab4-4546-9f22-3efce5b2ca83
+
+
+
+
